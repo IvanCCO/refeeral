@@ -12,12 +12,18 @@ import {
   Affiliate,
 } from './components';
 
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
+
 export const ReferralLandingPage = () => {
   const searchParams = useSearchParams();
   const [referralCode, setReferralCode] = useState<string | null>(null);
   const [affiliate, setAffiliate] = useState<Affiliate | null>(null);
 
   useEffect(() => {
+    // Skip during SSR
+    if (typeof window === 'undefined') return;
+    
     const ref = searchParams.get('ref');
 
     if (ref) {
