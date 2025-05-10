@@ -1,7 +1,9 @@
+// remove eslint-disable-next-line
+/* eslint-disable */
 export function scrollToSmoothly(
   el: any,
   time: any,
-  hasSignal: boolean = false,
+  hasSignal: boolean = false
 ) {
   const targetElement = document.getElementById(el);
   if (!targetElement) {
@@ -9,10 +11,10 @@ export function scrollToSmoothly(
   }
 
   if (hasSignal) {
-    targetElement.style.transition = "box-shadow 0.3s ease-in-out";
-    targetElement.style.boxShadow = "inset 0 0 0 3px #FFB32F";
+    targetElement.style.transition = 'box-shadow 0.3s ease-in-out';
+    targetElement.style.boxShadow = 'inset 0 0 0 3px #FFB32F';
     setTimeout(() => {
-      targetElement.style.boxShadow = "none";
+      targetElement.style.boxShadow = 'none';
     }, 1000 * 5);
   }
 
@@ -36,7 +38,7 @@ export function scrollToSmoothly(
       window.scrollTo(0, pos);
 
       setTimeout(() => {
-        targetElement.style.backgroundColor = "";
+        targetElement.style.backgroundColor = '';
       }, 1000);
     }
   });

@@ -11,27 +11,30 @@ export interface IAfiliado extends Document {
 }
 
 // Schema definition
-const AfiliadoSchema = new Schema<IAfiliado>({
-  name: {
-    type: String,
-    required: true,
+const AfiliadoSchema = new Schema<IAfiliado>(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
+    linkId: {
+      type: String,
+      required: true,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  phone: {
-    type: String,
-    required: true,
-  },
-  linkId: {
-    type: String,
-    required: true,
+  {
+    timestamps: true,
+    versionKey: false,
   }
-}, {
-  timestamps: true, 
-  versionKey: false 
-});
+);
 
 // Add indexes
 AfiliadoSchema.index({ email: 1 }, { unique: true });
@@ -39,4 +42,6 @@ AfiliadoSchema.index({ phone: 1 }, { unique: true });
 AfiliadoSchema.index({ linkId: 1 }, { unique: true });
 
 // Create and export the model
-export const Afiliado = (mongoose.models.Afiliado as Model<IAfiliado>) || mongoose.model<IAfiliado>('Afiliado', AfiliadoSchema); 
+export const Afiliado =
+  (mongoose.models.Afiliado as Model<IAfiliado>) ||
+  mongoose.model<IAfiliado>('Afiliado', AfiliadoSchema);

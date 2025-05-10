@@ -26,7 +26,7 @@ interface ReferralFormProps {
   referralCode: string | null;
 }
 
-export const ReferralForm = ({ referralCode }: ReferralFormProps) => {
+export const ReferralForm = ({}: ReferralFormProps) => {
   const [formData, setFormData] = useState<FormData>({
     referrerName: '',
     userName: '',
@@ -86,7 +86,8 @@ export const ReferralForm = ({ referralCode }: ReferralFormProps) => {
               Preencha o form e ganhe R$50 de desconto
             </Heading>
             <Text fontSize={{ base: 'md', md: 'lg' }} color="gray.600">
-              Realize sua matrícula com a gente e aproveite um desconto especial de R$50 na primeira mensalidade.
+              Realize sua matrícula com a gente e aproveite um desconto especial
+              de R$50 na primeira mensalidade.
             </Text>
           </VStack>
 
@@ -100,7 +101,7 @@ export const ReferralForm = ({ referralCode }: ReferralFormProps) => {
               maxWidth: '100%',
               display: 'block',
               marginLeft: 'auto',
-              marginRight: 'auto'
+              marginRight: 'auto',
             }}
           >
             <Button
@@ -119,12 +120,7 @@ export const ReferralForm = ({ referralCode }: ReferralFormProps) => {
           </a>
 
           <Box w="full" pt={6}>
-            <Text
-              fontSize="lg"
-              fontWeight="medium"
-              mb={6}
-              textAlign="center"
-            >
+            <Text fontSize="lg" fontWeight="medium" mb={6} textAlign="center">
               Preencha o formulário abaixo para garantir o desconto:
             </Text>
 
@@ -141,11 +137,14 @@ export const ReferralForm = ({ referralCode }: ReferralFormProps) => {
                   Obrigado por se cadastrar!
                 </Heading>
                 <Text textAlign="center">
-                  Recebemos seus dados e entraremos em contato em breve para confirmar seu desconto de R$50.
+                  Recebemos seus dados e entraremos em contato em breve para
+                  confirmar seu desconto de R$50.
                 </Text>
                 <Button
                   colorScheme="green"
-                  onClick={() => window.location.href = "https://wa.me/SEUNUMERODOWHATSAPP"}
+                  onClick={() =>
+                    (window.location.href = 'https://wa.me/SEUNUMERODOWHATSAPP')
+                  }
                   display="flex"
                   alignItems="center"
                   gap={2}
@@ -240,4 +239,4 @@ export const ReferralForm = ({ referralCode }: ReferralFormProps) => {
       </Container>
     </Box>
   );
-}; 
+};

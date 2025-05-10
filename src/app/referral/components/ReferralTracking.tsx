@@ -32,4 +32,4 @@ const trackReferralVisit = async (referralCode: string) => {
   } catch (error) {
     console.error('Error tracking referral visit:', error);
   }
-}; 
+};

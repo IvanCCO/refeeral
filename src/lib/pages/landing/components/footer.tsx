@@ -19,10 +19,7 @@ const ListHeader = ({ children }: { children: React.ReactNode }) => {
 
 export const Footer = () => {
   return (
-    <Box
-      bg="gray.50"
-      color="gray.700"
-    >
+    <Box bg="gray.50" color="gray.700">
       <Container as={Stack} maxW="7xl" py={10}>
         <SimpleGrid
           templateColumns={{ sm: '1fr 1fr', md: '2fr 1fr 1fr 1fr' }}
@@ -66,4 +63,4 @@ export const Footer = () => {
       </Container>
     </Box>
   );
-}; 
+};

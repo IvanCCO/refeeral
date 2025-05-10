@@ -19,9 +19,11 @@ export async function connectToDatabase() {
       ...mongoConfig.options,
     };
 
-    cached.promise = mongoose.connect(mongoConfig.uri, opts).then((mongoose) => {
-      return mongoose;
-    });
+    cached.promise = mongoose
+      .connect(mongoConfig.uri, opts)
+      .then((mongoose) => {
+        return mongoose;
+      });
   }
 
   try {
@@ -32,4 +34,4 @@ export async function connectToDatabase() {
   }
 
   return cached.conn;
-} 
+}

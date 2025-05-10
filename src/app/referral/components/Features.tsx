@@ -7,19 +7,22 @@ import { FeatureCard } from './FeatureCard';
 const FEATURE_ITEMS = [
   {
     title: 'Cashback Garantido',
-    description: 'Receba parte do valor das suas compras de volta automaticamente.',
-    icon: FaGift
+    description:
+      'Receba parte do valor das suas compras de volta automaticamente.',
+    icon: FaGift,
   },
   {
     title: 'Recompensas Personalizadas',
-    description: 'Ofertas especiais baseadas nos seus interesses e histórico de compras.',
-    icon: FaGift
+    description:
+      'Ofertas especiais baseadas nos seus interesses e histórico de compras.',
+    icon: FaGift,
   },
   {
     title: 'Programa de Referência',
-    description: 'Indique amigos e ganhe bônus exclusivos a cada nova indicação.',
-    icon: FaGift
-  }
+    description:
+      'Indique amigos e ganhe bônus exclusivos a cada nova indicação.',
+    icon: FaGift,
+  },
 ];
 
 export const Features = () => {
@@ -35,10 +38,10 @@ export const Features = () => {
               Descubra todas as vantagens que nosso programa oferece
             </Text>
           </Stack>
-          
-          <Stack 
-            direction={{ base: 'column', lg: 'row' }} 
-            gap={8} 
+
+          <Stack
+            direction={{ base: 'column', lg: 'row' }}
+            gap={8}
             justify="center"
           >
             {FEATURE_ITEMS.map((feature, index) => (
@@ -54,4 +57,4 @@ export const Features = () => {
       </Container>
     </Box>
   );
-}; 
+};

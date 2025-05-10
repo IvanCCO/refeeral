@@ -17,10 +17,10 @@ interface HeroProps {
 
 export const Hero = ({ referralCode }: HeroProps) => {
   return (
-    <Box 
-      bg="blue.600" 
-      color="white" 
-      py={{ base: 16, md: 24 }} 
+    <Box
+      bg="blue.600"
+      color="white"
+      py={{ base: 16, md: 24 }}
       position="relative"
       overflow="hidden"
     >
@@ -35,45 +35,46 @@ export const Hero = ({ referralCode }: HeroProps) => {
         bgImage="url('/pattern.svg')"
         zIndex="0"
       />
-      
+
       <Container maxW="container.xl" position="relative" zIndex="1">
-        <Stack 
-          direction={{ base: 'column', lg: 'row' }} 
+        <Stack
+          direction={{ base: 'column', lg: 'row' }}
           gap={{ base: 10, lg: 20 }}
           align="center"
         >
           <Stack gap={6} maxW={{ base: 'full', lg: '50%' }}>
             {referralCode && (
-              <Badge 
-                colorScheme="green" 
-                alignSelf="flex-start" 
-                fontSize="sm" 
-                px={3} 
-                py={1} 
+              <Badge
+                colorScheme="green"
+                alignSelf="flex-start"
+                fontSize="sm"
+                px={3}
+                py={1}
                 rounded="full"
               >
                 Indicado por um parceiro
               </Badge>
             )}
-            
-            <Heading 
-              as="h1" 
-              fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }} 
+
+            <Heading
+              as="h1"
+              fontSize={{ base: '3xl', md: '4xl', lg: '5xl' }}
               fontWeight="bold"
               lineHeight="shorter"
             >
               Você foi indicado à Brio Educa!
             </Heading>
-            
+
             <Text fontSize={{ base: 'lg', md: 'xl' }} opacity="0.9">
-              Matricule-se agora e ganhe R$50 de desconto na primeira mensalidade.
+              Matricule-se agora e ganhe R$50 de desconto na primeira
+              mensalidade.
             </Text>
-            
+
             <Stack direction={{ base: 'column', sm: 'row' }} gap={4} pt={4}>
-              <Button 
-                size="lg" 
-                colorScheme="white" 
-                bg="white" 
+              <Button
+                size="lg"
+                colorScheme="white"
+                bg="white"
                 color="blue.600"
                 _hover={{ bg: 'gray.100' }}
                 px={8}
@@ -82,9 +83,9 @@ export const Hero = ({ referralCode }: HeroProps) => {
               >
                 Comece Agora
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 colorScheme="white"
                 px={8}
                 rounded="full"
@@ -94,19 +95,19 @@ export const Hero = ({ referralCode }: HeroProps) => {
               </Button>
             </Stack>
           </Stack>
-          
+
           {/* YouTube Video */}
-          <Box 
-            w={{ base: 'full', lg: '50%' }} 
-            display="flex" 
+          <Box
+            w={{ base: 'full', lg: '50%' }}
+            display="flex"
             justifyContent="center"
             order={{ base: 2, lg: 1 }}
           >
-            <AspectRatio 
-              w="full" 
-              maxW="560px" 
-              ratio={16/9}
-              rounded="xl" 
+            <AspectRatio
+              w="full"
+              maxW="560px"
+              ratio={16 / 9}
+              rounded="xl"
               overflow="hidden"
               boxShadow="2xl"
             >
@@ -122,4 +123,4 @@ export const Hero = ({ referralCode }: HeroProps) => {
       </Container>
     </Box>
   );
-}; 
+};

@@ -3,7 +3,13 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Box } from '@chakra-ui/react';
-import { Hero, Features, CTA, ReferralTracking, ReferralForm } from './components';
+import {
+  Hero,
+  Features,
+  CTA,
+  ReferralTracking,
+  ReferralForm,
+} from './components';
 
 const ReferralLandingPage = () => {
   const searchParams = useSearchParams();
@@ -11,34 +17,34 @@ const ReferralLandingPage = () => {
 
   useEffect(() => {
     const ref = searchParams.get('ref');
-    
+
     if (ref) {
       setReferralCode(ref);
-      
+
       localStorage.setItem('referralCode', ref);
     }
   }, [searchParams]);
 
-  const bgColor = "var(--chakra-colors-gray-50)";
+  const bgColor = 'var(--chakra-colors-gray-50)';
 
   return (
     <Box bg={bgColor} minH="100vh">
       {/* Invisible component that handles tracking */}
       <ReferralTracking referralCode={referralCode} />
-      
+
       {/* Hero Section */}
       <Hero referralCode={referralCode} />
-      
+
       {/* Features Section */}
       <Features />
 
       {/* Referral Form */}
       <ReferralForm referralCode={referralCode} />
-      
+
       {/* CTA Section */}
       <CTA referralCode={referralCode} />
     </Box>
   );
 };
 
-export default ReferralLandingPage; 
+export default ReferralLandingPage;

@@ -1,13 +1,6 @@
 'use client';
 
-import { 
-  Box, 
-  Flex, 
-  Heading, 
-  Icon, 
-  Stack, 
-  Text 
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, Icon, Stack, Text } from '@chakra-ui/react';
 import { IconType } from 'react-icons';
 
 export interface FeatureCardProps {
@@ -18,11 +11,11 @@ export interface FeatureCardProps {
 
 export const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {
   return (
-    <Box 
-      bg="white" 
-      p={8} 
-      rounded="xl" 
-      shadow="md" 
+    <Box
+      bg="white"
+      p={8}
+      rounded="xl"
+      shadow="md"
       borderWidth="1px"
       flex="1"
       maxW={{ base: 'full', lg: '30%' }}
@@ -44,10 +37,8 @@ export const FeatureCard = ({ title, description, icon }: FeatureCardProps) => {
         <Heading as="h3" fontSize="xl">
           {title}
         </Heading>
-        <Text color="gray.600">
-          {description}
-        </Text>
+        <Text color="gray.600">{description}</Text>
       </Stack>
     </Box>
   );
-}; 
+};

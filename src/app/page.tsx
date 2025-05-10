@@ -1,3 +1,3 @@
 import { LandingPage } from '@/lib/pages/landing';
 
-export default LandingPage; 
+export default LandingPage;

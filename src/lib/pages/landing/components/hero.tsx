@@ -1,14 +1,7 @@
 'use client';
 
 import { scrollToSmoothly } from '@/utils/commons';
-import {
-  Box,
-  Button,
-  Container,
-  Heading,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
+import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
 
 export const Hero = () => {
   return (
@@ -25,11 +18,7 @@ export const Hero = () => {
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
           >
-            <Text
-              as="span"
-              position="relative"
-              color="blue.600"
-            >
+            <Text as="span" position="relative" color="blue.600">
               Transform Your Learning
             </Text>
             <br />
@@ -46,11 +35,7 @@ export const Hero = () => {
             Join our community of learners and unlock your full potential with
             personalized education that adapts to your unique needs.
           </Text>
-          <Stack
-            direction={{ base: 'column', sm: 'row' }}
-            gap={4}
-            mt={8}
-          >
+          <Stack direction={{ base: 'column', sm: 'row' }} gap={4} mt={8}>
             <Button
               size="lg"
               colorScheme="blue"
@@ -82,4 +67,4 @@ export const Hero = () => {
       </Stack>
     </Container>
   );
-}; 
+};

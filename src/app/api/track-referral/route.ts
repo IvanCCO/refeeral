@@ -44,14 +44,13 @@ export async function POST(req: Request) {
     // For now, just logging the visit
     console.log(`Referral visit tracked for code: ${referralCode}`);
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       success: true,
-      message: 'Visita registrada com sucesso'
+      message: 'Visita registrada com sucesso',
     });
-    
   } catch (error) {
     console.error('Error tracking referral visit:', error);
-    
+
     if (error instanceof mongoose.Error) {
       return NextResponse.json(
         { message: 'Erro de banco de dados ao registrar visita' },
@@ -64,4 +63,4 @@ export async function POST(req: Request) {
       { status: 500 }
     );
   }
-} 
+}

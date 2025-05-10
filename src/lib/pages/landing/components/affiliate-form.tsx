@@ -14,7 +14,6 @@ import {
   Clipboard,
   HStack,
   Icon,
-  Link,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
 import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
@@ -85,9 +84,9 @@ export const AffiliateForm = () => {
       if (!response.ok) {
         // Handle specific field errors from API
         if (data.field) {
-          setErrors(prev => ({
+          setErrors((prev) => ({
             ...prev,
-            [data.field]: data.message
+            [data.field]: data.message,
           }));
           toaster.error({
             title: 'Erro de Validação',
@@ -110,7 +109,10 @@ export const AffiliateForm = () => {
     } catch (error) {
       toaster.error({
         title: 'Erro',
-        description: error instanceof Error ? error.message : 'Erro ao gerar link de afiliado',
+        description:
+          error instanceof Error
+            ? error.message
+            : 'Erro ao gerar link de afiliado',
         duration: 5000,
         meta: { closable: true },
       });
@@ -123,7 +125,7 @@ export const AffiliateForm = () => {
     let value = e.target.value.replace(/\D/g, '');
     if (value.length <= 11) {
       value = value.replace(/^(\d{2})(\d{5})(\d{4})?/, '($1) $2-$3');
-      setFormData(prev => ({ ...prev, phone: value }));
+      setFormData((prev) => ({ ...prev, phone: value }));
     }
   };
 
@@ -137,7 +139,7 @@ export const AffiliateForm = () => {
       width="100%"
     >
       <Container
-        maxW={{ base: "95%", sm: "85%", md: "container.md" }}
+        maxW={{ base: '95%', sm: '85%', md: 'container.md' }}
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -157,7 +159,8 @@ export const AffiliateForm = () => {
               textAlign="center"
               color="gray.600"
             >
-              Preencha o formulário abaixo para receber seu link de afiliado exclusivo
+              Preencha o formulário abaixo para receber seu link de afiliado
+              exclusivo
             </Text>
           </Stack>
 
@@ -184,11 +187,16 @@ export const AffiliateForm = () => {
                       name="name"
                       value={formData.name}
                       onChange={(e) =>
-                        setFormData((prev) => ({ ...prev, name: e.target.value }))
+                        setFormData((prev) => ({
+                          ...prev,
+                          name: e.target.value,
+                        }))
                       }
                       placeholder="Seu nome completo"
                     />
-                    {errors.name && <Field.ErrorText>{errors.name}</Field.ErrorText>}
+                    {errors.name && (
+                      <Field.ErrorText>{errors.name}</Field.ErrorText>
+                    )}
                   </Field.Root>
 
                   <Field.Root invalid={!!errors.email}>
@@ -198,11 +206,16 @@ export const AffiliateForm = () => {
                       type="email"
                       value={formData.email}
                       onChange={(e) =>
-                        setFormData((prev) => ({ ...prev, email: e.target.value }))
+                        setFormData((prev) => ({
+                          ...prev,
+                          email: e.target.value,
+                        }))
                       }
                       placeholder="seu@email.com"
                     />
-                    {errors.email && <Field.ErrorText>{errors.email}</Field.ErrorText>}
+                    {errors.email && (
+                      <Field.ErrorText>{errors.email}</Field.ErrorText>
+                    )}
                   </Field.Root>
 
                   <Field.Root invalid={!!errors.phone}>
@@ -213,7 +226,9 @@ export const AffiliateForm = () => {
                       onChange={handlePhoneChange}
                       placeholder="(99) 99999-9999"
                     />
-                    {errors.phone && <Field.ErrorText>{errors.phone}</Field.ErrorText>}
+                    {errors.phone && (
+                      <Field.ErrorText>{errors.phone}</Field.ErrorText>
+                    )}
                   </Field.Root>
 
                   <Button
@@ -257,7 +272,7 @@ export const AffiliateForm = () => {
                       fontSize="sm"
                       fontFamily="mono"
                       flex="1"
-                      textWrap={"wrap"}
+                      textWrap={'wrap'}
                     >
                       {affiliateLink}
                     </Text>
@@ -270,16 +285,20 @@ export const AffiliateForm = () => {
                           _hover={{ transform: 'scale(1.05)' }}
                           transition="all 0.2s"
                         >
-                          <Clipboard.Indicator
-                            copied="Copiado!"
-                          />
+                          <Clipboard.Indicator copied="Copiado!" />
                         </Button>
                       </Clipboard.Trigger>
                     </HStack>
                   </HStack>
                 </Clipboard.Root>
                 <Button
-                  onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent('Confira meu link de afiliado: ' + affiliateLink)}`, '_blank', 'noopener,noreferrer')}
+                  onClick={() =>
+                    window.open(
+                      `https://wa.me/?text=${encodeURIComponent('Confira meu link de afiliado: ' + affiliateLink)}`,
+                      '_blank',
+                      'noopener,noreferrer'
+                    )
+                  }
                   colorPalette="green"
                   size="xl"
                   px={10}
@@ -296,4 +315,4 @@ export const AffiliateForm = () => {
       </Container>
     </Box>
   );
-}; 
+};

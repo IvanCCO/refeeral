@@ -20,9 +20,9 @@ export const CTA = ({ referralCode }: CTAProps) => {
   return (
     <Box py={{ base: 16, md: 20 }} bg="blue.50">
       <Container maxW="container.lg">
-        <Stack 
-          direction={{ base: 'column', md: 'row' }} 
-          gap={10} 
+        <Stack
+          direction={{ base: 'column', md: 'row' }}
+          gap={10}
           align="center"
           justify="space-between"
           bg="white"
@@ -35,9 +35,10 @@ export const CTA = ({ referralCode }: CTAProps) => {
               Pronto para começar sua jornada?
             </Heading>
             <Text color="gray.600">
-              Registre-se agora e comece a aproveitar todos os benefícios do nosso programa!
+              Registre-se agora e comece a aproveitar todos os benefícios do
+              nosso programa!
             </Text>
-            
+
             {referralCode && (
               <HStack gap={2} color="green.600">
                 <Icon as={FaCheck} />
@@ -47,10 +48,10 @@ export const CTA = ({ referralCode }: CTAProps) => {
               </HStack>
             )}
           </Stack>
-          
-          <Button 
-            colorScheme="blue" 
-            size="lg" 
+
+          <Button
+            colorScheme="blue"
+            size="lg"
             px={10}
             rounded="full"
             fontWeight="bold"
@@ -63,4 +64,4 @@ export const CTA = ({ referralCode }: CTAProps) => {
       </Container>
     </Box>
   );
-}; 
+};
