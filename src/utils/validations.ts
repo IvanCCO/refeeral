@@ -13,3 +13,17 @@ export const affiliateSchema = z.object({
 });
 
 export type AffiliateInput = z.infer<typeof affiliateSchema>;
+
+// Referral form validation schema
+export const referralFormSchema = z.object({
+  referrerName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
+  userName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
+  phone: z
+    .string()
+    .min(1, 'Telefone é obrigatório')
+    .regex(phoneRegex, 'Formato de telefone inválido'),
+  knowledge: z.string().optional(),
+  referralCode: z.string().optional(),
+});
+
+export type ReferralFormInput = z.infer<typeof referralFormSchema>;

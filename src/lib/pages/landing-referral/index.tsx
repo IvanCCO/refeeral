@@ -48,7 +48,7 @@ export const ReferralLandingPage = () => {
 
       {/* Referral Form */}
       <ReferralForm 
-        referralCode={referralCode} 
+        referralCode={referralCode}
         affiliate={affiliate}
       />
 

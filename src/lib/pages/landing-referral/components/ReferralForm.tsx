@@ -15,20 +15,13 @@ import {
   Icon,
   Textarea,
   Link,
+  Badge,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
 import { FaWhatsapp } from 'react-icons/fa';
-import { z } from 'zod';
+import { referralFormSchema, ReferralFormInput } from '@/utils/validations';
 import { Affiliate } from './ReferralTracking';
-
-const referralFormSchema = z.object({
-  referrerName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
-  userName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
-  interest: z.string().min(2, 'Informe seu interesse'),
-  knowledge: z.string().optional(),
-});
-
-type ReferralFormInput = z.infer<typeof referralFormSchema>;
+import { z } from 'zod';
 
 type FormErrors = {
   [K in keyof ReferralFormInput]?: string;
@@ -43,8 +36,9 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
   const [formData, setFormData] = useState<ReferralFormInput>({
     referrerName: '',
     userName: '',
-    interest: '',
+    phone: '',
     knowledge: '',
+    referralCode: referralCode || undefined,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -59,6 +53,14 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
       }));
     }
   }, [affiliate]);
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, '');
+    if (value.length <= 11) {
+      value = value.replace(/^(\d{2})(\d{5})(\d{4})?/, '($1) $2-$3');
+      setFormData((prev) => ({ ...prev, phone: value }));
+    }
+  };
 
   const validateForm = (): boolean => {
     try {
@@ -96,20 +98,31 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
     setIsSubmitting(true);
 
     try {
-      // Here you would typically send the form data to your backend
-      // const response = await fetch('/api/submit-referral-form', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     ...formData,
-      //     referralCode,
-      //   }),
-      // });
+      const response = await fetch('/api/submit-referral', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-      // For now, we'll just simulate a successful submission
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const data = await response.json();
+
+      if (!response.ok) {
+        if (data.errors) {
+          setErrors(data.errors);
+          toaster.error({
+            title: 'Erro de Validação',
+            description: data.message || 'Por favor, verifique os campos do formulário.',
+            duration: 5000,
+            meta: { closable: true },
+          });
+          return;
+        }
+        
+        throw new Error(data.message || 'Erro ao enviar formulário');
+      }
+
       setIsSubmitted(true);
       toaster.success({
         title: 'Sucesso!',
@@ -120,7 +133,7 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
     } catch (error) {
       toaster.error({
         title: 'Erro',
-        description: 'Erro ao enviar formulário. Tente novamente.',
+        description: error instanceof Error ? error.message : 'Erro ao enviar formulário. Tente novamente.',
         duration: 5000,
         meta: { closable: true },
       });
@@ -212,7 +225,8 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
                   _hover={{ textDecoration: 'none' }}
                 >
                   <Button
-                    colorScheme="green"
+                    colorPalette="green"
+                    size="lg"
                     display="flex"
                     alignItems="center"
                     gap={2}
@@ -281,26 +295,26 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
                         )}
                       </Field.Root>
 
-                      <Field.Root invalid={!!errors.interest}>
-                        <Field.Label>Qual é o seu interesse na Brio?</Field.Label>
+                      <Field.Root invalid={!!errors.phone}>
+                        <Field.Label>Telefone</Field.Label>
                         <Input
-                          name="interest"
-                          value={formData.interest}
-                          onChange={(e) =>
-                            setFormData((prev) => ({
-                              ...prev,
-                              interest: e.target.value,
-                            }))
-                          }
-                          placeholder="Ex: Curso específico, área de estudo..."
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handlePhoneChange}
+                          placeholder="(99) 99999-9999"
                         />
-                        {errors.interest && (
-                          <Field.ErrorText>{errors.interest}</Field.ErrorText>
+                        {errors.phone && (
+                          <Field.ErrorText>{errors.phone}</Field.ErrorText>
                         )}
                       </Field.Root>
 
                       <Field.Root invalid={!!errors.knowledge}>
-                        <Field.Label>O que você sabe sobre a Brio?</Field.Label>
+                        <Field.Label>
+                          O que você sabe sobre a Brio?
+                          <Badge ml={2} colorScheme="gray" fontSize="xs" variant="subtle">
+                            Opcional
+                          </Badge>
+                        </Field.Label>
                         <Textarea
                           name="knowledge"
                           value={formData.knowledge}
