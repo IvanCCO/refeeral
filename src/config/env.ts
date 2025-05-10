@@ -42,7 +42,6 @@ export const mongoConfig = {
   uri: env?.MONGODB_URI,
   dbName: env?.MONGODB_DB_NAME,
   options: {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
+    // Modern MongoDB driver (4.0+) doesn't need these options anymore
   },
 } as const;

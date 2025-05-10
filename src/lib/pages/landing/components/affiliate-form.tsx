@@ -13,21 +13,15 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
+import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
+import { ZodError } from 'zod';
 
-interface FormData {
-  name: string;
-  email: string;
-  phone: string;
-}
-
-interface FormErrors {
-  name?: string;
-  email?: string;
-  phone?: string;
-}
+type FormErrors = {
+  [K in keyof AffiliateInput]?: string;
+};
 
 export const AffiliateForm = () => {
-  const [formData, setFormData] = useState<FormData>({
+  const [formData, setFormData] = useState<AffiliateInput>({
     name: '',
     email: '',
     phone: '',
@@ -37,44 +31,29 @@ export const AffiliateForm = () => {
   const [affiliateLink, setAffiliateLink] = useState<string>('');
 
   const validateForm = (): boolean => {
-    console.log('validateForm');
-    const newErrors: FormErrors = {};
-    let isValid = true;
-
-    // Name validation
-    if (!formData.name.trim()) {
-      newErrors.name = 'Nome é obrigatório';
-      isValid = false;
+    try {
+      affiliateSchema.parse(formData);
+      setErrors({});
+      return true;
+    } catch (error) {
+      if (error instanceof ZodError) {
+        const newErrors: FormErrors = {};
+        error.errors.forEach((err) => {
+          const field = err.path[0] as keyof AffiliateInput;
+          newErrors[field] = err.message;
+        });
+        setErrors(newErrors);
+      }
+      return false;
     }
-
-    // Email validation
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email é obrigatório';
-      isValid = false;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Email inválido';
-      isValid = false;
-    }
-
-    // Phone validation
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Telefone é obrigatório';
-      isValid = false;
-    } else if (!/^\(\d{2}\) \d{5}-\d{4}$/.test(formData.phone)) {
-      newErrors.phone = 'Telefone inválido. Use o formato (99) 99999-9999';
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+    
     // Clear previous errors
     setErrors({});
-
+    
     if (!validateForm()) {
       toaster.error({
         title: 'Erro de Validação',
@@ -99,6 +78,20 @@ export const AffiliateForm = () => {
       const data = await response.json();
 
       if (!response.ok) {
+        // Handle specific field errors from API
+        if (data.field) {
+          setErrors(prev => ({
+            ...prev,
+            [data.field]: data.message
+          }));
+          toaster.error({
+            title: 'Erro de Validação',
+            description: data.message,
+            duration: 5000,
+            meta: { closable: true },
+          });
+          return;
+        }
         throw new Error(data.message || 'Erro ao gerar link de afiliado');
       }
 
