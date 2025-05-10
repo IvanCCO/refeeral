@@ -62,7 +62,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
               fontWeight="bold"
               lineHeight="shorter"
             >
-              Você foi indicado à Brio Educação!
+              Você foi indicado à Brio Educa!
             </Heading>
             
             <Text fontSize={{ base: 'lg', md: 'xl' }} opacity="0.9">
