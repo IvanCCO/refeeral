@@ -37,6 +37,7 @@ export const AffiliateForm = () => {
   const [affiliateLink, setAffiliateLink] = useState<string>('');
 
   const validateForm = (): boolean => {
+    console.log('validateForm');
     const newErrors: FormErrors = {};
     let isValid = true;
 
@@ -70,10 +71,10 @@ export const AffiliateForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Clear previous errors
     setErrors({});
-    
+
     if (!validateForm()) {
       toaster.error({
         title: 'Erro de Validação',
@@ -150,74 +151,74 @@ export const AffiliateForm = () => {
             </Text>
           </Stack>
 
-          <Fieldset.Root
-            as="form"
-            onSubmit={handleSubmit}
-            bg="white"
-            p={8}
-            rounded="xl"
-            boxShadow="lg"
-          >
-            <Stack>
-              <Fieldset.Legend>Dados de Contato</Fieldset.Legend>
-              <Fieldset.HelperText>
-                Preencha seus dados para receber seu link de afiliado.
-              </Fieldset.HelperText>
-            </Stack>
-
-            <Fieldset.Content>
-              <Stack gap={6}>
-                <Field.Root invalid={!!errors.name}>
-                  <Field.Label>Nome</Field.Label>
-                  <Input
-                    name="name"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, name: e.target.value }))
-                    }
-                    placeholder="Seu nome completo"
-                  />
-                  {errors.name && <Field.ErrorText>{errors.name}</Field.ErrorText>}
-                </Field.Root>
-
-                <Field.Root invalid={!!errors.email}>
-                  <Field.Label>Email</Field.Label>
-                  <Input
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData((prev) => ({ ...prev, email: e.target.value }))
-                    }
-                    placeholder="seu@email.com"
-                  />
-                  {errors.email && <Field.ErrorText>{errors.email}</Field.ErrorText>}
-                </Field.Root>
-
-                <Field.Root invalid={!!errors.phone}>
-                  <Field.Label>Telefone</Field.Label>
-                  <Input
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handlePhoneChange}
-                    placeholder="(99) 99999-9999"
-                  />
-                  {errors.phone && <Field.ErrorText>{errors.phone}</Field.ErrorText>}
-                </Field.Root>
-
-                <Button
-                  type="submit"
-                  colorScheme="blue"
-                  size="lg"
-                  width="full"
-                  loading={isLoading}
-                  loadingText="Gerando link..."
-                >
-                  Gerar Link de Afiliado
-                </Button>
+          <form onSubmit={handleSubmit}>
+            <Fieldset.Root
+              bg="white"
+              p={8}
+              rounded="xl"
+              boxShadow="lg"
+            >
+              <Stack>
+                <Fieldset.Legend>Dados de Contato</Fieldset.Legend>
+                <Fieldset.HelperText>
+                  Preencha seus dados para receber seu link de afiliado.
+                </Fieldset.HelperText>
               </Stack>
-            </Fieldset.Content>
-          </Fieldset.Root>
+
+              <Fieldset.Content>
+                <Stack gap={6}>
+                  <Field.Root invalid={!!errors.name}>
+                    <Field.Label>Nome</Field.Label>
+                    <Input
+                      name="name"
+                      value={formData.name}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, name: e.target.value }))
+                      }
+                      placeholder="Seu nome completo"
+                    />
+                    {errors.name && <Field.ErrorText>{errors.name}</Field.ErrorText>}
+                  </Field.Root>
+
+                  <Field.Root invalid={!!errors.email}>
+                    <Field.Label>Email</Field.Label>
+                    <Input
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, email: e.target.value }))
+                      }
+                      placeholder="seu@email.com"
+                    />
+                    {errors.email && <Field.ErrorText>{errors.email}</Field.ErrorText>}
+                  </Field.Root>
+
+                  <Field.Root invalid={!!errors.phone}>
+                    <Field.Label>Telefone</Field.Label>
+                    <Input
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handlePhoneChange}
+                      placeholder="(99) 99999-9999"
+                    />
+                    {errors.phone && <Field.ErrorText>{errors.phone}</Field.ErrorText>}
+                  </Field.Root>
+
+                  <Button
+                    type="submit"
+                    colorScheme="blue"
+                    size="lg"
+                    width="full"
+                    loading={isLoading}
+                    loadingText="Gerando link..."
+                  >
+                    Gerar Link de Afiliado
+                  </Button>
+                </Stack>
+              </Fieldset.Content>
+            </Fieldset.Root>
+          </form>
 
           {affiliateLink && (
             <Box

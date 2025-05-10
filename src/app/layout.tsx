@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 
 import { Provider } from '@/components/ui/provider';
 import { Layout } from '@/lib/layout';
+import { Toaster } from '@/components/ui/toaster';
 
 type RootLayoutProps = {
   children: React.ReactNode;
@@ -48,6 +49,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
       <body>
         <Provider>
           <Layout>{children}</Layout>
+          <Toaster />
         </Provider>
       </body>
     </html>
