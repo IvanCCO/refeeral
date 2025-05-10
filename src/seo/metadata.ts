@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 
 const APP_NAME = 'Refeeral';
-const APP_DESCRIPTION = 'O sistema de referral marketing inteligente para o seu negócio';
+const APP_DESCRIPTION =
+  'O sistema de referral marketing inteligente para o seu negócio';
 const BASE_URL = 'https://refeeral.com.br';
 
 export const defaultMetadata: Metadata = {
@@ -93,4 +94,4 @@ export const generatePageMetadata = (
       images: imagePath ? [imagePath] : defaultMetadata.twitter?.images,
     },
   };
-}; 
+};

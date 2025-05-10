@@ -13,35 +13,43 @@ interface ReferralTrackingProps {
   onAffiliateLoad?: (affiliate: Affiliate | null) => void;
 }
 
-export const ReferralTracking = ({ referralCode, onAffiliateLoad }: ReferralTrackingProps) => {
+export const ReferralTracking = ({
+  referralCode,
+  onAffiliateLoad,
+}: ReferralTrackingProps) => {
   const hasTrackedRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (referralCode && !hasTrackedRef.current && onAffiliateLoad) {
       hasTrackedRef.current = true;
-      
+
       trackReferralVisit(referralCode)
-        .then(affiliate => {
+        .then((affiliate) => {
           onAffiliateLoad(affiliate);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error tracking visit:', error);
           onAffiliateLoad(null);
         });
     }
   }, [referralCode, onAffiliateLoad]);
 
-  return null; 
+  return null;
 };
 
-const trackReferralVisit = async (referralCode: string): Promise<Affiliate | null> => {
+const trackReferralVisit = async (
+  referralCode: string
+): Promise<Affiliate | null> => {
   try {
-    const response = await fetch(`/api/track-referral?code=${encodeURIComponent(referralCode)}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await fetch(
+      `/api/track-referral?code=${encodeURIComponent(referralCode)}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
 
     if (!response.ok) {
       console.error('Failed to track referral visit');

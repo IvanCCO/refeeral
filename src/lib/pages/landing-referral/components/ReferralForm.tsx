@@ -32,7 +32,10 @@ interface ReferralFormProps {
   affiliate: Affiliate | null;
 }
 
-export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => {
+export const ReferralForm = ({
+  referralCode,
+  affiliate,
+}: ReferralFormProps) => {
   const [formData, setFormData] = useState<ReferralFormInput>({
     referrerName: '',
     userName: '',
@@ -46,7 +49,7 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
 
   // Update referralCode and referrerName when props change
   useEffect(() => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       referralCode: referralCode || affiliate?.linkId || undefined,
     }));
@@ -55,9 +58,9 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
   // Set referrer name from affiliate data when it becomes available
   useEffect(() => {
     if (affiliate?.name) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        referrerName: affiliate.name
+        referrerName: affiliate.name,
       }));
     }
   }, [affiliate]);
@@ -90,7 +93,7 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     setErrors({});
 
     if (!validateForm()) {
@@ -106,11 +109,12 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
     // Ensure the referralCode is explicitly set before submission
     const submitData = {
       ...formData,
-      referralCode: formData.referralCode || referralCode || affiliate?.linkId || '',
+      referralCode:
+        formData.referralCode || referralCode || affiliate?.linkId || '',
     };
 
     console.log('Submitting form data:', submitData);
-    
+
     setIsSubmitting(true);
 
     try {
@@ -129,27 +133,32 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
           setErrors(data.errors);
           toaster.error({
             title: 'Erro de Validação',
-            description: data.message || 'Por favor, verifique os campos do formulário.',
+            description:
+              data.message || 'Por favor, verifique os campos do formulário.',
             duration: 5000,
             meta: { closable: true },
           });
           return;
         }
-        
+
         throw new Error(data.message || 'Erro ao enviar formulário');
       }
 
       setIsSubmitted(true);
       toaster.success({
         title: 'Sucesso!',
-        description: 'Formulário enviado com sucesso! Entraremos em contato em breve.',
+        description:
+          'Formulário enviado com sucesso! Entraremos em contato em breve.',
         duration: 5000,
         meta: { closable: true },
       });
     } catch (error) {
       toaster.error({
         title: 'Erro',
-        description: error instanceof Error ? error.message : 'Erro ao enviar formulário. Tente novamente.',
+        description:
+          error instanceof Error
+            ? error.message
+            : 'Erro ao enviar formulário. Tente novamente.',
         duration: 5000,
         meta: { closable: true },
       });
@@ -163,8 +172,8 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
 
   return (
-    <Box 
-      py={{ base: 12, md: 16 }} 
+    <Box
+      py={{ base: 12, md: 16 }}
       bg="white"
       display="flex"
       justifyContent="center"
@@ -191,7 +200,7 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
             </Text>
           </VStack>
 
-          <Link 
+          <Link
             href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
@@ -234,7 +243,7 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
                   Recebemos seus dados e entraremos em contato em breve para
                   confirmar seu desconto de R$50.
                 </Text>
-                <Link 
+                <Link
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -283,13 +292,17 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
                           }
                           placeholder="Digite o nome completo"
                           disabled={!!affiliate?.name}
-                          bg={affiliate?.name ? "gray.100" : "white"}
+                          bg={affiliate?.name ? 'gray.100' : 'white'}
                         />
                         {errors.referrerName && (
-                          <Field.ErrorText>{errors.referrerName}</Field.ErrorText>
+                          <Field.ErrorText>
+                            {errors.referrerName}
+                          </Field.ErrorText>
                         )}
                         {affiliate?.name && (
-                          <Field.HelperText>Você foi indicado por este afiliado</Field.HelperText>
+                          <Field.HelperText>
+                            Você foi indicado por este afiliado
+                          </Field.HelperText>
                         )}
                       </Field.Root>
 
@@ -327,7 +340,12 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
                       <Field.Root invalid={!!errors.knowledge}>
                         <Field.Label>
                           O que você sabe sobre a Brio?
-                          <Badge ml={2} colorScheme="gray" fontSize="xs" variant="subtle">
+                          <Badge
+                            ml={2}
+                            colorScheme="gray"
+                            fontSize="xs"
+                            variant="subtle"
+                          >
                             Opcional
                           </Badge>
                         </Field.Label>

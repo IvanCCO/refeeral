@@ -26,18 +26,21 @@ export const ReferralLandingPage = () => {
     }
   }, [searchParams]);
 
-  const handleAffiliateLoad = useCallback((loadedAffiliate: Affiliate | null) => {
-    setAffiliate(loadedAffiliate);
-  }, []);
+  const handleAffiliateLoad = useCallback(
+    (loadedAffiliate: Affiliate | null) => {
+      setAffiliate(loadedAffiliate);
+    },
+    []
+  );
 
   const bgColor = 'var(--chakra-colors-gray-50)';
 
   return (
     <Box bg={bgColor} minH="100vh">
       {/* Invisible component that handles tracking */}
-      <ReferralTracking 
-        referralCode={referralCode} 
-        onAffiliateLoad={handleAffiliateLoad} 
+      <ReferralTracking
+        referralCode={referralCode}
+        onAffiliateLoad={handleAffiliateLoad}
       />
 
       {/* Hero Section */}
@@ -47,10 +50,7 @@ export const ReferralLandingPage = () => {
       <Features />
 
       {/* Referral Form */}
-      <ReferralForm 
-        referralCode={referralCode}
-        affiliate={affiliate}
-      />
+      <ReferralForm referralCode={referralCode} affiliate={affiliate} />
 
       {/* CTA Section */}
       <CTA referralCode={referralCode} />

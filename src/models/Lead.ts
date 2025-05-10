@@ -52,4 +52,4 @@ LeadSchema.index({ phone: 1 }, { unique: true });
 // Create and export the model
 export const Lead =
   (mongoose.models.Lead as Model<ILead>) ||
-  mongoose.model<ILead>('Lead', LeadSchema); 
+  mongoose.model<ILead>('Lead', LeadSchema);

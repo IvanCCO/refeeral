@@ -44,3 +44,8 @@ export const mongoConfig = {
     // Modern MongoDB driver (4.0+) doesn't need these options anymore
   },
 } as const;
+
+// Microsoft Clarity configuration
+export const clarityConfig = {
+  projectId: process.env.NEXT_PUBLIC_MICROSOFT_CLARITY || '',
+} as const;

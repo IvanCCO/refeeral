@@ -36,8 +36,8 @@ export async function GET(req: Request) {
       affiliate: {
         name: affiliate.name,
         email: affiliate.email,
-        linkId: affiliate.linkId
-      }
+        linkId: affiliate.linkId,
+      },
     });
   } catch (error) {
     console.error('Error tracking referral visit:', error);
