@@ -18,7 +18,7 @@ import {
   Badge,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp, FaShoppingCart  } from 'react-icons/fa';
 import { referralFormSchema, ReferralFormInput } from '@/utils/validations';
 import { Affiliate } from './ReferralTracking';
 import { z } from 'zod';
@@ -208,7 +208,7 @@ export const ReferralForm = ({
             w="full"
           >
             <Button
-              colorScheme="green"
+              colorPalette="blue"
               size="lg"
               w="full"
               fontWeight="bold"
@@ -217,8 +217,8 @@ export const ReferralForm = ({
               alignItems="center"
               gap={2}
             >
-              <Icon as={FaWhatsapp} />
-              ENTRE EM CONTATO PELO WHATSAPP
+              <Icon as={FaShoppingCart} />
+              Matricule-se agora
             </Button>
           </Link>
 
