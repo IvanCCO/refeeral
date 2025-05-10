@@ -1,0 +1,183 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Rules Organization Guidelines
+
+## Directory Structure
+
+### Root Rules Directory (`.cursor/rules/`)
+- Contains general development and project-wide rules
+- Examples of rules that belong here:
+  - `cleancode.mdc` - Clean code practices
+  - `typescript.mdc` - TypeScript standards
+  - `testing.mdc` - Testing guidelines
+  - `git.mdc` - Git workflow rules
+  - `security.mdc` - Security best practices
+
+### Chakra UI Rules Directory (`.cursor/rules/chakra/`)
+- Contains all Chakra UI component-specific rules
+- Each component should have its own rule file
+- Examples of rules that belong here:
+  - `toast.mdc` - Toast notifications
+  - `form.mdc` - Form components
+  - `button.mdc` - Button components
+  - `layout.mdc` - Layout components
+  - `theme.mdc` - Theming guidelines
+
+## Rule File Structure
+
+### Required Sections
+```markdown
+---
+description: Clear, one-line description of what the rule enforces
+globs: path/to/files/*.ext, other/path/**/*
+---
+
+# Rule Title
+
+## Overview
+Brief explanation of the rule's purpose
+
+## Guidelines
+Main points and requirements
+
+## Examples
+Code examples showing correct usage
+```
+
+## Naming Conventions
+
+### General Rules
+- Use lowercase with hyphens
+- Be descriptive but concise
+- Examples:
+  - `clean-code.mdc`
+  - `error-handling.mdc`
+  - `state-management.mdc`
+
+### Chakra Component Rules
+- Use the component name in lowercase
+- Group related components when appropriate
+- Examples:
+  - `toast.mdc`
+  - `form-controls.mdc`
+  - `data-display.mdc`
+
+## Rule Management
+
+### Adding New Rules
+1. Determine appropriate directory (root vs chakra)
+2. Create file with proper naming convention
+3. Include required sections
+4. Add examples from actual codebase
+5. Cross-reference related rules
+
+### Updating Rules
+1. Keep examples synchronized with current code
+2. Update when patterns or requirements change
+3. Add new sections as needed
+4. Remove outdated information
+5. Maintain links between related rules
+
+### Rule Quality Standards
+1. Rules should be actionable and specific
+2. Include both DO and DON'T examples
+3. Use real code examples from the project
+4. Keep documentation up to date
+5. Ensure proper formatting and structure
+
+## Best Practices
+
+### Rule Writing
+- Use clear, concise language
+- Provide practical examples
+- Include rationale for guidelines
+- Reference official documentation
+- Cross-reference related rules
+
+### Rule Organization
+- Keep related rules together
+- Avoid duplicate guidelines
+- Maintain consistent formatting
+- Use proper linking between rules
+- Regular review and updates
+
+### Documentation
+- Keep examples current
+- Update for new patterns
+- Remove obsolete rules
+- Maintain version history
+- Document breaking changes
+
+## Example Rule Structure
+
+### General Rule Example
+```markdown
+---
+description: Guidelines for writing clean, maintainable code
+globs: **/*.{ts,tsx}
+---
+
+# Clean Code Guidelines
+
+## Overview
+Standards for writing clear, maintainable code...
+
+## Guidelines
+1. Naming Conventions
+2. Function Structure
+3. Error Handling...
+```
+
+### Chakra Component Rule Example
+```markdown
+---
+description: Guidelines for using Chakra UI Toast component
+globs: **/*.{ts,tsx}
+---
+
+# Toast Component Guidelines
+
+## Overview
+Standards for consistent toast notifications...
+
+## Usage
+1. Basic Implementation
+2. Configuration Options
+3. Best Practices...
+```
+
+## Rule Validation
+
+### Required Elements
+- Clear description
+- Appropriate globs
+- Practical examples
+- Current documentation
+- Proper cross-references
+
+### Quality Checks
+- Actionable guidelines
+- Clear examples
+- Up-to-date information
+- Consistent formatting
+- Proper linking
+
+## Maintenance
+
+### Regular Updates
+- Review quarterly
+- Update for new patterns
+- Remove obsolete rules
+- Add emerging practices
+- Maintain cross-references
+
+### Version Control
+- Track rule changes
+- Document updates
+- Note deprecations
+- Maintain history
+- Plan migrations
+

@@ -1,0 +1,310 @@
+---
+description: Payload CMS Next.js TypeScript Best Practices
+globs: 
+alwaysApply: false
+---
+You are an expert in Fullstack TypeScript development with deep knowledge of Payload CMS, MongoDB, and Node.js.
+    You understand how to architect scalable backend services that can power multiple frontend applications (React Native, Remix.js, Next.js).
+    You excel at connecting Payload CMS to third-party APIs and services to enrich data experiences.
+
+    Technologies:
+    - Backend: Payload CMS, MongoDB, Node.js, Express, TypeScript
+    - Frontend: Next.js, React, React Native, Remix.js, TypeScript
+    - Database: MongoDB, Mongoose, MongoDB Atlas, MongoDB aggregation pipelines
+    - APIs: RESTful APIs, GraphQL, Webhook integrations
+
+    Payload CMS Patterns:
+    - Structure collections with clear relationships and field validation
+    - Implement proper access control with field-level permissions
+    - Create reusable field groups and blocks for content modeling
+    - Follow the Payload hooks pattern for extending functionality
+    - Implement custom endpoints when necessary instead of overriding core functionality
+    - Use migrations for database schema changes
+    - Organize collections by domain or feature
+    - Implement proper upload handling and image processing
+
+    File Structure:
+    - Collections: src/collections/{feature}.ts
+    - Globals: src/globals/{feature}.ts
+    - Fields: src/fields/{type}.ts
+    - Hooks: src/hooks/{collection}/{operation}.ts
+    - Endpoints: src/endpoints/{feature}.ts
+    - Utilities: src/utilities/{function}.ts
+
+    MongoDB Patterns:
+    - Design schemas with proper indexing for performance
+    - Use MongoDB aggregation pipelines for complex data transformations
+    - Implement proper error handling for database operations
+    - Follow data validation patterns at both application and database levels
+    - Consider document size limits when designing schemas
+    - Use MongoDB transactions for operations that require atomicity
+    - Implement pagination for large datasets
+
+    TypeScript Code Style:
+    - Use TypeScript for all code; prefer types over interfaces except for public APIs
+    - Create precise types that reflect your data models
+    - Avoid using 'any' or 'unknown' types; look for type definitions in the codebase
+    - Avoid type assertions with 'as' or '!' operators unless absolutely necessary
+    - Use mapped and conditional types for advanced type transformations
+    - Export types from a central location for reuse
+
+    Code Structure:
+    - Write concise, technical TypeScript code
+    - Use functional and declarative programming patterns; avoid classes
+    - Prefer iteration and modularization over code duplication
+    - Use descriptive variable names with auxiliary verbs (e.g., isLoaded, hasError)
+    - Structure files: exported page/component, GraphQL queries, helpers, static content, types
+    - Use constants for magic numbers and repeated values
+
+    Naming Conventions:
+    - Prefer named exports for components and utilities
+    - Use PascalCase for components, interfaces, and types
+    - Use camelCase for variables, functions, and methods
+    - Prefix GraphQL query files with 'use' (e.g., useSiteMetadata.ts)
+    - Use meaningful names that describe the purpose of functions and variables
+
+    Syntax Preferences:
+    - Use the 'function' keyword for pure functions
+    - Avoid unnecessary curly braces in conditionals; use concise syntax for simple statements
+    - Use destructuring for cleaner code
+    - Prefer async/await over raw Promises for better readability
+    - Use optional chaining and nullish coalescing when appropriate
+
+    Security Best Practices:
+    - Implement proper authentication and authorization
+    - Sanitize user inputs to prevent injection attacks
+    - Use environment variables for sensitive configuration
+    - Implement rate limiting to prevent abuse
+    - Follow the principle of least privilege for API access
+    - Use HTTPS for all communications
+    - Validate and sanitize all inputs, especially from external sources
+
+    Performance Optimization:
+    - Optimize database queries with proper indexing
+    - Implement caching strategies for frequently accessed data
+    - Use lazy loading and pagination for large datasets
+    - Optimize image and asset delivery
+    - Use server-side rendering or static generation when appropriate
+    - Monitor and optimize API response times
+
+    Testing Approach:
+    - Write unit tests for business logic
+    - Implement integration tests for API endpoints
+    - Use mocking for external dependencies
+    - Write end-to-end tests for critical user flows
+    - Follow test-driven development when appropriate
+
+    AI Reasoning:
+    - Ask clarifying questions when multiple implementation paths are available and the best choice isn't obvious
+    - Present trade-offs between different approaches with their pros and cons
+    - Confirm understanding of requirements before implementing complex features
+    - Suggest alternatives when a requested approach might lead to performance or security issues
+    - Request context about existing patterns in the codebase when implementing new features
+    - Prioritize consistency with existing codebase patterns
+    - Consider scalability implications for database schema design
+    - Balance between performance optimization and code maintainability
+    - Evaluate security implications of implementation choices
+    - Consider Payload CMS best practices when designing content models
+
+# Environment Variables Management
+├── .env # Local development variables (gitignored)
+├── .env.example # Example variables template (committed)
+├── src/
+├── config/
+├── env.ts # Environment variables validation and typing
+└── env.public.ts # Public environment variables
+
+## Overview
+Guidelines for declaring, validating, and using environment variables in Next.js applications with TypeScript. This ensures type safety, runtime validation, and proper separation of public and private variables.
+
+## Directory Structure
+
+### 1. Environment Files
+- **DO** create separate env files for different environments:
+  ```plaintext
+  .env                # Local development
+  .env.production    # Production environment
+  .env.staging       # Staging environment
+  .env.test         # Testing environment
+  ```
+
+- **DO** maintain an `.env.example` template:
+  ```plaintext
+  # API Configuration
+  API_URL=http://localhost:3000
+  API_KEY=your-api-key-here
+
+  # Database Configuration
+  DATABASE_URL=mongodb://localhost:27017/dbname
+
+  # Public Variables
+  NEXT_PUBLIC_APP_NAME=MyApp
+  NEXT_PUBLIC_API_URL=http://localhost:3000
+  ```
+
+### 2. Variable Naming
+
+- **DO** prefix public variables with `NEXT_PUBLIC_`
+  ```plaintext
+  NEXT_PUBLIC_API_URL=https://api.example.com
+  NEXT_PUBLIC_APP_NAME=MyApp
+  ```
+
+- **DO** use SCREAMING_SNAKE_CASE for all environment variables
+  ```plaintext
+  DATABASE_URL=mongodb://localhost:27017
+  JWT_SECRET=your-secret-here
+  ```
+
+### 3. TypeScript Configuration
+
+- **DO** create a type-safe environment configuration:
+
+```typescript:src/config/env.ts
+import { z } from 'zod';
+
+// Schema for private environment variables
+const envSchema = z.object({
+  // API Configuration
+  API_KEY: z.string().min(1),
+  DATABASE_URL: z.string().url(),
+  
+  // Auth Configuration
+  JWT_SECRET: z.string().min(32),
+  
+  // Other private variables...
+});
+
+// Validate and export private environment variables
+export const env = envSchema.parse({
+  API_KEY: process.env.API_KEY,
+  DATABASE_URL: process.env.DATABASE_URL,
+  JWT_SECRET: process.env.JWT_SECRET,
+});
+```
+
+```typescript:src/config/env.public.ts
+import { z } from 'zod';
+
+// Schema for public environment variables
+const publicEnvSchema = z.object({
+  NEXT_PUBLIC_APP_NAME: z.string().min(1),
+  NEXT_PUBLIC_API_URL: z.string().url(),
+  // Other public variables...
+});
+
+// Validate and export public environment variables
+export const publicEnv = publicEnvSchema.parse({
+  NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
+  NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
+});
+```
+
+## Guidelines
+
+### 4. Usage in Code
+
+- **DO** import environment variables from the config files:
+```typescript
+// Server-side code
+import { env } from '@/config/env';
+
+async function serverAction() {
+  const apiKey = env.API_KEY;
+  // Use private variables...
+}
+
+// Client-side code
+import { publicEnv } from '@/config/env.public';
+
+function ClientComponent() {
+  const apiUrl = publicEnv.NEXT_PUBLIC_API_URL;
+  // Use public variables...
+}
+```
+
+- **DON'T** access `process.env` directly in components or utilities:
+```typescript
+// ❌ Bad - Direct access
+const apiKey = process.env.API_KEY;
+
+// ✅ Good - Using typed config
+import { env } from '@/config/env';
+const apiKey = env.API_KEY;
+```
+
+### 5. Error Handling
+
+- **DO** implement proper error handling for environment validation:
+```typescript:src/config/env.ts
+try {
+  envSchema.parse(process.env);
+} catch (error) {
+  if (error instanceof z.ZodError) {
+    const missingVars = error.errors.map(err => err.path.join('.'));
+    throw new Error(
+      `❌ Invalid environment variables: ${missingVars.join(', ')}\n` +
+      'See .env.example for required variables.'
+    );
+  }
+}
+```
+
+### 6. Type Safety
+
+- **DO** export types for environment configurations:
+```typescript:src/config/env.ts
+export type Env = z.infer<typeof envSchema>;
+export type PublicEnv = z.infer<typeof publicEnvSchema>;
+```
+
+## Best Practices
+
+1. **Security**
+   - Never commit real environment files (`.env`, `.env.production`, etc.)
+   - Always use `.gitignore` to exclude environment files
+   - Regularly rotate sensitive values in production
+
+2. **Documentation**
+   - Keep `.env.example` up to date
+   - Document required variables and their purposes
+   - Include validation requirements in comments
+
+3. **Validation**
+   - Validate all environment variables at startup
+   - Use strict types for all variables
+   - Implement proper error messages for missing/invalid variables
+
+4. **Organization**
+   - Group related variables in config files
+   - Separate public and private variables
+   - Use constants for commonly used values
+
+## Example Implementation
+
+```typescript:src/config/constants.ts
+export const ENV_CONFIG = {
+  APP: {
+    MIN_NAME_LENGTH: 1,
+    MIN_SECRET_LENGTH: 32,
+  },
+  VALIDATION: {
+    MESSAGES: {
+      INVALID_URL: 'Must be a valid URL',
+      MISSING_VALUE: 'Value is required',
+    },
+  },
+} as const;
+```
+
+```typescript:src/config/env.validation.ts
+import { z } from 'zod';
+import { ENV_CONFIG } from './constants';
+
+export const baseEnvValidation = {
+  string: () => z.string().min(1, ENV_CONFIG.VALIDATION.MESSAGES.MISSING_VALUE),
+  url: () => z.string().url(ENV_CONFIG.VALIDATION.MESSAGES.INVALID_URL),
+};
+```
+
+This rule ensures consistent, type-safe, and secure handling of environment variables across your Next.js application.

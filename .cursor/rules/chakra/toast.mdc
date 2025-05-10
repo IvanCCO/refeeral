@@ -1,0 +1,234 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Toast Notification Guidelines
+
+## Basic Usage
+
+### Import and Setup
+```tsx
+// ✅ DO: Import from the shared toaster component
+import { toaster } from "@/components/ui/toaster"
+
+// ❌ DON'T: Create new toast instances or import directly from Chakra
+import { useToast } from "@chakra-ui/react" // ❌ Wrong
+```
+
+### Showing Toasts
+```tsx
+// ✅ DO: Use the shared toaster instance
+toaster.show({
+  title: "Success",
+  description: "Operation completed successfully",
+})
+
+// ❌ DON'T: Create new toast instances
+const toast = useToast() // ❌ Wrong
+toast({ title: "Success" })
+```
+
+## Toast Types
+
+### Success Toast
+```tsx
+// ✅ DO: Use consistent success toast pattern
+toaster.success({
+  title: "Success",
+  description: "Operation completed successfully",
+})
+```
+
+### Error Toast
+```tsx
+// ✅ DO: Use consistent error toast pattern
+toaster.error({
+  title: "Error",
+  description: error.message,
+})
+```
+
+### Loading Toast
+```tsx
+// ✅ DO: Use loading toast for async operations
+const loadingToast = toaster.loading({
+  title: "Processing",
+  description: "Please wait...",
+})
+
+// Update or dismiss when done
+loadingToast.dismiss()
+// or
+loadingToast.success({
+  title: "Complete",
+  description: "Process finished successfully",
+})
+```
+
+### Promise Toast
+```tsx
+// ✅ DO: Use promise toast for automatic loading states
+toaster.promise(asyncOperation(), {
+  loading: { title: "Processing", description: "Please wait..." },
+  success: { title: "Success", description: "Operation complete" },
+  error: { title: "Error", description: "Something went wrong" },
+})
+```
+
+## Toast Configuration
+
+### Duration
+```tsx
+// ✅ DO: Set appropriate durations
+toaster.show({
+  title: "Note",
+  description: "This will auto-dismiss",
+  duration: 5000, // 5 seconds
+})
+
+// For important messages that shouldn't auto-dismiss
+toaster.show({
+  title: "Important",
+  description: "Please take action",
+  duration: null, // Won't auto-dismiss
+})
+```
+
+### Placement
+The default placement is bottom-end. Only override if absolutely necessary for specific cases:
+
+```tsx
+// ✅ DO: Use default placement when possible
+toaster.show({
+  title: "Normal notification",
+  description: "Uses default bottom-end placement",
+})
+
+// Only override placement when necessary
+toaster.show({
+  title: "Special case",
+  description: "Custom placement needed",
+  placement: "top", // Only use when required
+})
+```
+
+### Closable Toasts
+```tsx
+// ✅ DO: Make important or long-duration toasts closable
+toaster.show({
+  title: "Important",
+  description: "User should be able to dismiss this",
+  meta: { closable: true },
+  duration: null,
+})
+```
+
+### Action Buttons
+```tsx
+// ✅ DO: Add action buttons for interactive toasts
+toaster.show({
+  title: "Action required",
+  description: "Please confirm this action",
+  action: {
+    label: "Confirm",
+    onClick: () => handleConfirmation(),
+  },
+  meta: { closable: true },
+})
+```
+
+## Best Practices
+
+1. **Consistent Messaging**
+   - Use clear, concise titles
+   - Provide helpful descriptions
+   - Be consistent with message tone and style
+
+2. **Duration Guidelines**
+   - Success messages: 3000ms
+   - Error messages: 5000ms or null (user dismissal)
+   - Info messages: 4000ms
+   - Loading states: null (until complete)
+
+3. **Error Handling**
+   - Always include error description
+   - Make error messages dismissable
+   - Provide recovery actions when possible
+
+4. **Accessibility**
+   - Ensure messages are screen-reader friendly
+   - Use appropriate ARIA labels
+   - Consider reduced motion preferences
+
+5. **Mobile Considerations**
+   - Keep messages brief on mobile
+   - Ensure touch targets are adequate
+   - Consider mobile viewports in placement
+
+## Examples
+
+### Form Submission
+```tsx
+const handleSubmit = async (data: FormData) => {
+  const loadingToast = toaster.loading({
+    title: "Submitting",
+    description: "Processing your request...",
+  })
+  
+  try {
+    await submitForm(data)
+    loadingToast.success({
+      title: "Success",
+      description: "Form submitted successfully",
+      duration: 3000,
+    })
+  } catch (error) {
+    loadingToast.error({
+      title: "Error",
+      description: error.message,
+      meta: { closable: true },
+      duration: null,
+    })
+  }
+}
+```
+
+### Data Updates
+```tsx
+const updateData = async () => {
+  return toaster.promise(performUpdate(), {
+    loading: {
+      title: "Updating",
+      description: "Applying changes...",
+    },
+    success: {
+      title: "Updated",
+      description: "Changes saved successfully",
+      duration: 3000,
+    },
+    error: {
+      title: "Error",
+      description: "Failed to save changes",
+      meta: { closable: true },
+      duration: null,
+    },
+  })
+}
+```
+
+### Interactive Toast
+```tsx
+const showUndoToast = (action: () => void) => {
+  toaster.show({
+    title: "Item deleted",
+    description: "The item has been removed",
+    action: {
+      label: "Undo",
+      onClick: action,
+    },
+    meta: { closable: true },
+    duration: 5000,
+  })
+}
+```

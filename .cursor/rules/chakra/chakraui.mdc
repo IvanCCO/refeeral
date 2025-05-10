@@ -1,0 +1,238 @@
+---
+description: 
+globs: *.tsx
+alwaysApply: false
+---
+---
+description: Chakra UI implementation guidelines and best practices
+globs: **/*.tsx, **/*.ts
+---
+
+# Chakra UI Best Practices
+
+## Component Usage
+- Use Chakra UI components instead of HTML elements when possible
+- Leverage Chakra's built-in responsive styles using array syntax or object syntax
+- Use semantic Chakra components (e.g., `Button` instead of `div` with button styles)
+- Utilize Chakra's built-in color modes for dark/light theming
+- Take advantage of Chakra's built-in spacing scale
+
+## Styling
+- Use Chakra's style props instead of custom CSS
+- Follow the 4px/0.25rem spacing scale
+- Use theme tokens for colors, spacing, and other design values
+- Implement responsive design using Chakra's breakpoint utilities
+- Use Chakra's layout components (Box, Flex, Grid, Stack) for consistent spacing
+
+## Theme Customization
+- Extend the default theme instead of overriding it completely
+- Define custom components in the theme for consistent styling
+- Use semantic color names in the theme
+- Define commonly used variants in the theme
+- Keep color palette aligned with brand guidelines
+
+## Forms
+- Use Chakra's form components (Input, Select, Checkbox, etc.)
+- Implement form validation using FormControl and FormErrorMessage
+- Use FormLabel for accessible form labels
+- Leverage InputGroup for complex input combinations
+- Utilize Chakra's built-in form states (focused, invalid, disabled)
+
+## Layout Components
+- Use Stack for vertical/horizontal spacing
+- Implement Grid for complex layouts
+- Use Flex for flexible layouts
+- Leverage Container for content width constraints
+- Use Box as the fundamental building block
+
+## Accessibility
+- Use Chakra's built-in accessibility features
+- Implement proper ARIA labels where needed
+- Use Chakra's focus management utilities
+- Ensure proper color contrast using theme tokens
+- Utilize Chakra's motion-safe animations
+
+## Performance
+- Use dynamic imports for large components
+- Implement proper code splitting
+- Avoid unnecessary re-renders with useMemo and useCallback
+- Use proper image optimization with Chakra's Image component
+- Leverage Chakra's built-in performance optimizations
+
+## Best Practices
+- Keep components small and focused
+- Use composition over complex single components
+- Implement proper TypeScript types for custom components
+- Follow consistent naming conventions
+- Document custom component props
+
+## Modal and Overlay Components
+- Use Chakra's Modal component for dialogs
+- Implement proper focus management in modals
+- Use Drawer for side panels
+- Leverage Popover for contextual information
+- Use Toast for notifications
+
+## State Management
+- Use Chakra's useDisclosure hook for show/hide states
+- Implement proper loading states using Spinner
+- Use Skeleton for content loading
+- Leverage useToast for notifications
+
+- Implement proper error states
+
+# Chakra UI v3 Best Practices
+
+## Form Components
+
+### Fieldset Pattern
+Use the new Fieldset component for form groups:
+
+```tsx
+import {
+  Button,
+  Field,
+  Fieldset,
+  For,
+  Input,
+  NativeSelect,
+  Stack,
+} from "@chakra-ui/react"
+
+// ✅ DO: Use Fieldset for form groups
+const GoodForm = () => {
+  return (
+    <Fieldset.Root size="lg" maxW="md">
+      <Stack>
+        <Fieldset.Legend>Contact details</Fieldset.Legend>
+        <Fieldset.HelperText>Helper text here</Fieldset.HelperText>
+      </Stack>
+
+      <Fieldset.Content>
+        <Field.Root>
+          <Field.Label>Name</Field.Label>
+          <Input name="name" />
+          <Field.ErrorText>Error message</Field.ErrorText>
+        </Field.Root>
+      </Fieldset.Content>
+    </Fieldset.Root>
+  )
+}
+
+// ❌ DON'T: Use old FormControl pattern
+const BadForm = () => {
+  return (
+    <FormControl>
+      <FormLabel>Name</FormLabel>
+      <Input name="name" />
+      <FormErrorMessage>Error message</FormErrorMessage>
+    </FormControl>
+  )
+}
+```
+
+### Field Pattern
+Use Field components for individual form controls:
+
+```tsx
+// ✅ DO: Use Field components
+<Field.Root>
+  <Field.Label>Email</Field.Label>
+  <Input name="email" type="email" />
+  <Field.HelperText>Enter your email address</Field.HelperText>
+  <Field.ErrorText>Invalid email</Field.ErrorText>
+</Field.Root>
+
+// ❌ DON'T: Use direct Input with FormLabel
+<FormLabel>Email</FormLabel>
+<Input name="email" type="email" />
+```
+
+### Select Fields
+Use NativeSelect for dropdown menus:
+
+```tsx
+// ✅ DO: Use NativeSelect
+<Field.Root>
+  <Field.Label>Country</Field.Label>
+  <NativeSelect.Root>
+    <NativeSelect.Field name="country">
+      <For each={options}>
+        {(item) => (
+          <option key={item} value={item}>{item}</option>
+        )}
+      </For>
+    </NativeSelect.Field>
+    <NativeSelect.Indicator />
+  </NativeSelect.Root>
+</Field.Root>
+
+// ❌ DON'T: Use Select directly
+<Select name="country">
+  {options.map(item => (
+    <option key={item} value={item}>{item}</option>
+  ))}
+</Select>
+```
+
+## Layout Components
+
+### Stack Pattern
+Use Stack for layout with gap:
+
+```tsx
+// ✅ DO: Use Stack with gap
+<Stack gap={4}>
+  <Box>Item 1</Box>
+  <Box>Item 2</Box>
+</Stack>
+
+// ❌ DON'T: Use VStack/HStack with spacing
+<VStack spacing={4}>
+  <Box>Item 1</Box>
+  <Box>Item 2</Box>
+</VStack>
+```
+
+### Container Pattern
+Use Container for centered content:
+
+```tsx
+// ✅ DO: Use Container with maxW
+<Container maxW="container.xl">
+  <Box>Content</Box>
+</Container>
+
+// ❌ DON'T: Use fixed widths
+<Box width="1200px">
+  <Box>Content</Box>
+</Box>
+```
+
+## Button States
+
+### Loading State
+Use loading prop for buttons:
+
+```tsx
+// ✅ DO: Use loading prop
+<Button loading loadingText="Saving...">
+  Save
+</Button>
+
+// ❌ DON'T: Use isLoading
+<Button isLoading loadingText="Saving...">
+  Save
+</Button>
+```
+
+## Best Practices
+
+1. Always use semantic HTML elements
+2. Prefer composition over props
+3. Use theme tokens for consistent styling
+4. Implement proper form validation
+5. Handle loading and error states appropriately
+6. Use proper aria labels for accessibility
+
+7. Implement responsive design using theme breakpoints

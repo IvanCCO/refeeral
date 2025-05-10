@@ -1,0 +1,184 @@
+<context>
+
+# Overview
+
+The **Brio Education Referral Program (V1)** is a simple, shareable referral system designed to let existing customers (parents) refer other families to Brio Education in exchange for rewards.
+
+It solves the problem of **organic customer acquisition** by leveraging trust-based word-of-mouth marketing. The program is designed to be easy-to-use and low-friction: no login required, no dashboards — just links and forms.
+
+It is valuable because:
+
+* **Referrers** (existing parents) get tangible rewards for helping others.
+* **Referees** (new parents) receive a R\$50 discount when enrolling.
+* **Brio** gains qualified leads that convert at higher rates than cold traffic.
+
+# Core Features
+
+1. **Referral Link Generation**
+
+   * **What it does:** Generates a personalized referral link for the referrer to share.
+   * **Why it's important:** Makes sharing easy and tracks who referred whom.
+   * **How it works:** After entering their email on Landing Page 1, the system generates a link with a unique referral ID (`?ref=K7P9XZ`) and saves the referrer’s data in MongoDB.
+
+2. **Referral Landing Page (LP2)**
+
+   * **What it does:** Captures the information of the referee and applies the referral benefit (R\$50 discount).
+   * **Why it's important:** Converts new users into paying customers while tracking the referral source.
+   * **How it works:** The referee visits the link (which contains the ref code), fills out a form, and their info is linked to the referrer in the database.
+
+3. **Reward Tracking**
+
+   * **What it does:** Tracks the number of confirmed referrals per referrer.
+   * **Why it's important:** Ensures accurate reward distribution and builds trust in the program.
+   * **How it works:** When a referee completes enrollment (and meets criteria), their data is marked as a "confirmed referral" under the referrer’s record.
+
+4. **Automated Message Generation (Optional)**
+
+   * **What it does:** Provides ready-to-share WhatsApp/Email messages with pre-filled links.
+   * **Why it's important:** Makes it even easier for users to share.
+   * **How it works:** A "Copy Link + Message" button generates a referral message ready for pasting into social apps.
+
+# User Experience
+
+## User Personas
+
+* **Parent Referrer:** Existing Brio customer, wants to help friends and earn rewards.
+* **Parent Referee:** New to Brio, interested in enrolling their child with a discount.
+* **Customer Success Team:** Brio staff who manually verify referrals and dispatch rewards.
+
+## Key User Flows
+
+### Referrer Journey
+
+1. Visits LP1 → Fills out email → Gets referral link.
+2. Shares link via WhatsApp or social.
+3. Sees referral count grow (via email updates or future dashboard in V2).
+4. Receives rewards as referrals are confirmed.
+
+### Referee Journey
+
+1. Clicks shared link → Lands on LP2.
+2. Fills out form → Gets R\$50 discount and instructions to enroll.
+3. Completes enrollment → Becomes a valid referral.
+
+## UI/UX Considerations
+
+* Clean, minimal LPs focused on **actionable CTAs**.
+* **Copy link** and **share buttons** for WhatsApp should be prominent.
+* Visual display of rewards ladder to motivate sharing.
+* Forms should be **short and friendly**, with clear benefit explanations.
+
+</context>
+
+---
+
+<PRD>
+
+# Technical Architecture
+
+## System Components
+
+* **Landing Page 1 (LP1)**: Form + Link generator.
+* **Landing Page 2 (LP2)**: Form + Discount delivery.
+* **MongoDB Database**: Stores referrers, referees, and referral status.
+* **Optional Automation Tool (Zapier/n8n)**: Handles notifications and updates.
+
+## Data Models
+
+### Referrer
+
+```json
+{
+  "email": "carla@email.com",
+  "ref_code": "K7P9XZ",
+  "referrals": [
+    { "email": "joao@email.com", "confirmed": false }
+  ]
+}
+```
+
+### Referee
+
+```json
+{
+  "email": "joao@email.com",
+  "referrer_code": "K7P9XZ",
+  "form_data": {...},
+  "enrollment_status": "pending" // or "confirmed"
+}
+```
+
+## APIs and Integrations
+
+* **Form submissions** (POST): LP1 and LP2 save data to MongoDB.
+* **Referral validation webhook** (optional): Triggered when an enrollment is confirmed.
+* **WhatsApp deep links**: Pre-filled messages (`wa.me/?text=...`).
+
+## Infrastructure Requirements
+
+* **Next.js / Static Hosting** (Vercel, Netlify)
+* **MongoDB Atlas**
+* **Automation tool** (optional, e.g., Zapier or n8n)
+
+# Development Roadmap
+
+## Phase 1 – MVP Requirements
+
+* Landing Page 1 (LP1)
+
+  * Email form
+  * Unique referral link generator
+  * Copy/share buttons
+* Landing Page 2 (LP2)
+
+  * Referral form with hidden ref\_code
+  * R\$50 discount display
+  * Data capture and storage
+* MongoDB Database schema
+* Manual rewards tracking (using a spreadsheet)
+
+## Phase 2 – Future Enhancements
+
+* Referral dashboard for referrers (to see referral count)
+* Automated notification to referrers about reward status
+* API for enrollment confirmation (integrate with Brio systems)
+* Fraud detection (duplicate referral prevention)
+
+# Logical Dependency Chain
+
+| Build Order                                             | Why?                                         |
+| ------------------------------------------------------- | -------------------------------------------- |
+| 1. MongoDB setup                                        | Foundational — all data flows depend on this |
+| 2. LP1 (email form + link generation)                   | Enables link sharing                         |
+| 3. LP2 (form capture + discount flow)                   | Enables data capture from referees           |
+| 4. Manual validation process (spreadsheet + CS ops)     | Allows us to confirm enrollments             |
+| 5. Optional automations (Zapier/n8n)                    | Reduces manual work                          |
+| 6. Future: Referrer dashboard + automated notifications | Improves user experience later               |
+
+> The focus is to get **LP1 → LP2 → data tracking working end-to-end quickly**, even if reward tracking is manual at first.
+
+# Risks and Mitigations
+
+| Risk                                                | Mitigation                                                            |
+| --------------------------------------------------- | --------------------------------------------------------------------- |
+| Referral abuse (fake emails / duplicate refs)       | Validate emails/phones; cross-check with existing user base           |
+| Lost referral tracking (ref\_code removed from URL) | Capture ref\_code as hidden input in LP2 form                         |
+| Low adoption (users don’t share)                    | Provide compelling pre-written messages + clear reward ladder visuals |
+| Database errors / data inconsistency                | Use robust validation and atomic writes in MongoDB                    |
+| Resource constraints (small dev team)               | Prioritize LP1, LP2, and minimal tracking in MVP                      |
+
+# Appendix
+
+* **PDF Reference:** "V1 Canal de Indicação Brio Educação"
+
+* **Example WhatsApp Message:**
+
+  > “Hi! I enrolled my child at Brio Education and it’s been great. As my referral, you get R\$50 off. Check it out: [https://brioeducacao.com.br/chegou?ref=K7P9XZ”](https://brioeducacao.com.br/chegou?ref=K7P9XZ”)
+
+* **Reward Ladder (Escadinha de Prêmios):**
+
+  * 1 confirmed referral → Welcome Kit (mug + thank-you card)
+  * 2 → T-shirt + stationery kit
+  * 3 → Headphones + notebook + R\$100 voucher
+  * 4 → Educational experience pack
+  * 5 → Premium gift worth R\$350 (choice)

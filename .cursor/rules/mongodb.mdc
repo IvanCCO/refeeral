@@ -1,0 +1,207 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Guidelines for MongoDB schema design and Mongoose usage
+globs: src/models/*.ts, src/schemas/*.ts, src/database/*.ts
+---
+
+# MongoDB and Mongoose Guidelines
+
+## Overview
+Standards for implementing robust MongoDB schemas and models using Mongoose, ensuring data consistency and type safety.
+
+## Schema Design Principles
+
+### Strong Schema Enforcement
+- **Always Define Explicit Schemas**
+  - Use Mongoose Schema for all collections
+  - Define types for all fields
+  - Avoid using `Mixed` type unless absolutely necessary
+  - Document any dynamic fields in comments
+
+```typescript
+// ✅ DO: Define explicit schema with types
+const UserSchema = new Schema({
+  email: { 
+    type: String, 
+    required: true, 
+    unique: true,
+    validate: [isEmail, 'Invalid email address'] 
+  },
+  createdAt: { 
+    type: Date, 
+    default: Date.now,
+    immutable: true 
+  }
+});
+
+// ❌ DON'T: Use loose typing
+const UserSchema = new Schema({
+  email: String,  // Missing validation and requirements
+  data: Schema.Types.Mixed  // Avoid unless necessary
+});
+```
+
+### Validation Rules
+- **Implement Field-Level Validation**
+  - Use built-in validators where possible
+  - Create custom validators for complex rules
+  - Add meaningful error messages
+  - Validate data before saving
+
+```typescript
+// ✅ DO: Implement comprehensive validation
+const ProductSchema = new Schema({
+  price: {
+    type: Number,
+    required: [true, 'Price is required'],
+    min: [0, 'Price cannot be negative'],
+    validate: {
+      validator: (v: number) => Number.isFinite(v),
+      message: 'Price must be a valid number'
+    }
+  }
+});
+
+// ❌ DON'T: Skip validation
+const ProductSchema = new Schema({
+  price: Number
+});
+```
+
+### Indexes and Performance
+- **Define Appropriate Indexes**
+  - Add indexes for frequently queried fields
+  - Use compound indexes for multi-field queries
+  - Consider unique indexes where appropriate
+  - Document index rationale in comments
+
+```typescript
+// ✅ DO: Define strategic indexes
+const OrderSchema = new Schema({
+  userId: { type: Schema.Types.ObjectId, ref: 'User' },
+  orderDate: Date,
+  status: String
+});
+
+// Add indexes with clear purpose
+OrderSchema.index({ userId: 1, orderDate: -1 }); // For user's order history
+OrderSchema.index({ status: 1 }); // For status-based queries
+```
+
+### Type Safety
+- **Use TypeScript Interfaces**
+  - Define interfaces for all schemas
+  - Export types for use in application code
+  - Use strict TypeScript configuration
+  - Leverage Mongoose's type system
+
+```typescript
+// ✅ DO: Define and use TypeScript interfaces
+interface IUser {
+  email: string;
+  firstName: string;
+  lastName: string;
+  createdAt: Date;
+}
+
+const UserSchema = new Schema<IUser>({
+  email: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
+// Export both model and interface
+export const User = model<IUser>('User', UserSchema);
+export type { IUser };
+```
+
+### Database Connection
+- **Implement Robust Connection Handling**
+  - Use environment variables for connection strings
+  - Implement connection error handling
+  - Set appropriate connection options
+  - Use connection pooling
+
+```typescript
+// ✅ DO: Implement proper connection handling
+import mongoose from 'mongoose';
+
+export async function connectDB() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI!, {
+      // Set recommended options
+      maxPoolSize: 10,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
+    console.log('Connected to MongoDB');
+  } catch (error) {
+    console.error('MongoDB connection error:', error);
+    process.exit(1);
+  }
+}
+
+// Handle connection events
+mongoose.connection.on('error', err => {
+  console.error('MongoDB error:', err);
+});
+```
+
+### Model Organization
+- **Structure Models Consistently**
+  - One model per file
+  - Use clear naming conventions
+  - Group related models in directories
+  - Implement model methods appropriately
+
+```typescript
+// ✅ DO: Organize models clearly
+// src/models/User.ts
+export interface IUser {
+  email: string;
+  // ... other fields
+}
+
+const UserSchema = new Schema<IUser>({
+  // ... schema definition
+});
+
+// Add methods to schema
+UserSchema.methods.fullName = function() {
+  return `${this.firstName} ${this.lastName}`;
+};
+
+export const User = model<IUser>('User', UserSchema);
+```
+
+## Best Practices
+
+### Schema Updates
+- Document all schema changes
+- Implement migration strategies
+- Version schema changes
+- Test schema updates thoroughly
+
+### Error Handling
+- Implement proper error handling
+- Use custom error classes
+- Log database errors appropriately
+- Provide meaningful error messages
+
+### Performance
+- Monitor query performance
+- Use lean queries when appropriate
+- Implement pagination
+- Optimize indexes regularly
+
+### Security
+- Sanitize all inputs
+- Implement access control
+- Use secure connection strings
+- Follow security best practices
+
