@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     await connectToDatabase();
     
     const body = await req.json();
-    
+
     // Validate the request data
     const validationResult = referralFormSchema.safeParse(body);
     
@@ -25,6 +25,8 @@ export async function POST(req: Request) {
     }
     
     const data = validationResult.data;
+
+    console.log(data);
     
     // Create a new lead
     const lead = await Lead.create({

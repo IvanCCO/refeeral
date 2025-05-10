@@ -38,11 +38,19 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
     userName: '',
     phone: '',
     knowledge: '',
-    referralCode: referralCode || undefined,
+    referralCode: referralCode || affiliate?.linkId || undefined,
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Update referralCode and referrerName when props change
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      referralCode: referralCode || affiliate?.linkId || undefined,
+    }));
+  }, [referralCode, affiliate?.linkId]);
 
   // Set referrer name from affiliate data when it becomes available
   useEffect(() => {
@@ -95,6 +103,14 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
       return;
     }
 
+    // Ensure the referralCode is explicitly set before submission
+    const submitData = {
+      ...formData,
+      referralCode: formData.referralCode || referralCode || affiliate?.linkId || '',
+    };
+
+    console.log('Submitting form data:', submitData);
+    
     setIsSubmitting(true);
 
     try {
@@ -103,7 +119,7 @@ export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => 
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submitData),
       });
 
       const data = await response.json();
