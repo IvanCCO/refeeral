@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // Interface for the Afiliado document
 export interface IAfiliado extends Document {
@@ -39,4 +39,4 @@ AfiliadoSchema.index({ phone: 1 }, { unique: true });
 AfiliadoSchema.index({ linkId: 1 }, { unique: true });
 
 // Create and export the model
-export const Afiliado = mongoose.model<IAfiliado>('Afiliado', AfiliadoSchema); 
+export const Afiliado = (mongoose.models.Afiliado as Model<IAfiliado>) || mongoose.model<IAfiliado>('Afiliado', AfiliadoSchema); 

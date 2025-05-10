@@ -13,10 +13,13 @@ import {
   Text,
   Clipboard,
   HStack,
+  Icon,
+  Link,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
 import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
 import { ZodError } from 'zod';
+import { FaWhatsapp } from 'react-icons/fa';
 
 type FormErrors = {
   [K in keyof AffiliateInput]?: string;
@@ -52,10 +55,10 @@ export const AffiliateForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Clear previous errors
     setErrors({});
-    
+
     if (!validateForm()) {
       toaster.error({
         title: 'Erro de Validação',
@@ -125,14 +128,14 @@ export const AffiliateForm = () => {
   };
 
   return (
-    <Box 
-      py={{ base: 12, md: 20 }} 
+    <Box
+      py={{ base: 12, md: 20 }}
       bg="white"
       display="flex"
       justifyContent="center"
       width="100%"
     >
-      <Container 
+      <Container
         maxW={{ base: "95%", sm: "85%", md: "container.md" }}
         display="flex"
         flexDirection="column"
@@ -247,29 +250,44 @@ export const AffiliateForm = () => {
                     rounded="md"
                     justify="space-between"
                     align="center"
+                    gap={2}
                   >
                     <Text
                       fontSize="sm"
                       fontFamily="mono"
                       flex="1"
+                      textWrap={"wrap"}
                     >
                       {affiliateLink}
                     </Text>
-                    <Clipboard.Trigger asChild>
-                      <Button
-                        colorScheme="blue"
-                        size="sm"
-                        px={6}
-                        _hover={{ transform: 'scale(1.05)' }}
-                        transition="all 0.2s"
-                      >
-                        <Clipboard.Indicator
-                          copied="Copiado!"
-                        />
-                      </Button>
-                    </Clipboard.Trigger>
+                    <HStack gap={2}>
+                      <Clipboard.Trigger asChild>
+                        <Button
+                          colorScheme="blue"
+                          size="sm"
+                          px={6}
+                          _hover={{ transform: 'scale(1.05)' }}
+                          transition="all 0.2s"
+                        >
+                          <Clipboard.Indicator
+                            copied="Copiado!"
+                          />
+                        </Button>
+                      </Clipboard.Trigger>
+                    </HStack>
                   </HStack>
                 </Clipboard.Root>
+                <Button
+                  onClick={() => window.open(`https://wa.me/?text=${encodeURIComponent('Confira meu link de afiliado: ' + affiliateLink)}`, '_blank', 'noopener,noreferrer')}
+                  colorPalette="green"
+                  size="xl"
+                  px={10}
+                  _hover={{ transform: 'scale(1.05)' }}
+                  transition="all 0.2s"
+                >
+                  <Icon as={FaWhatsapp} boxSize={4} mr={2} />
+                  Compartilhar
+                </Button>
               </Stack>
             </Box>
           )}
