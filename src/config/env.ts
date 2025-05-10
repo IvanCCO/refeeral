@@ -39,7 +39,7 @@ import { z } from 'zod';
 // MongoDB configuration object
 export const mongoConfig = {
   uri: process.env.MONGODB_URI,
-  dbName: process.env?.MONGODB_DB_NAME,
+  dbName: process.env.MONGODB_DB_NAME,
   options: {
     // Modern MongoDB driver (4.0+) doesn't need these options anymore
   },
