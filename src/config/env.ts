@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 // // Schema for all environment variables
 // const envSchema = z.object({
 //   MONGODB_URI: z.string().url({
