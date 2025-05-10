@@ -123,9 +123,20 @@ export const AffiliateForm = () => {
   };
 
   return (
-    <Box py={{ base: 12, md: 20 }} bg="white">
-      <Container maxW="container.md">
-        <Stack gap={8}>
+    <Box 
+      py={{ base: 12, md: 20 }} 
+      bg="white"
+      display="flex"
+      justifyContent="center"
+      width="100%"
+    >
+      <Container 
+        maxW={{ base: "95%", sm: "85%", md: "container.md" }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Stack gap={8} width="100%" maxW="600px">
           <Stack gap={4} align="center">
             <Heading
               as="h2"
@@ -144,12 +155,13 @@ export const AffiliateForm = () => {
             </Text>
           </Stack>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} style={{ width: '100%' }}>
             <Fieldset.Root
               bg="white"
-              p={8}
+              p={{ base: 4, sm: 6, md: 8 }}
               rounded="xl"
               boxShadow="lg"
+              width="100%"
             >
               <Stack>
                 <Fieldset.Legend>Dados de Contato</Fieldset.Legend>
@@ -220,6 +232,7 @@ export const AffiliateForm = () => {
               rounded="lg"
               borderWidth={1}
               borderColor="green.200"
+              width="100%"
             >
               <Stack gap={3}>
                 <Text fontWeight="bold" color="green.700">
