@@ -129,6 +129,7 @@ export const AffiliateForm = () => {
 
   return (
     <Box
+      id="affiliate-form"
       py={{ base: 12, md: 20 }}
       bg="white"
       display="flex"

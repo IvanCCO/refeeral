@@ -1,5 +1,6 @@
 'use client';
 
+import { scrollToSmoothly } from '@/utils/commons';
 import {
   Box,
   Button,
@@ -54,6 +55,7 @@ export const Hero = () => {
               size="lg"
               colorScheme="blue"
               px={8}
+              onClick={() => scrollToSmoothly('affiliate-form', 300)}
             >
               Get Started
             </Button>
@@ -61,6 +63,7 @@ export const Hero = () => {
               size="lg"
               variant="outline"
               px={8}
+              onClick={() => scrollToSmoothly('prizes-section', 300)}
             >
               Learn More
             </Button>

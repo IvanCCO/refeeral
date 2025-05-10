@@ -52,7 +52,7 @@ export const Prizes = () => {
   const textAlign = useBreakpointValue({ base: 'center', md: 'left' }) as any;
 
   return (
-    <Box py={{ base: 12, md: 20 }} bg="gray.50">
+    <Box id="prizes-section" py={{ base: 12, md: 20 }} bg="gray.50">
       <Container maxW="container.xl">
         <VStack align="center" gap={8} mb={12}>
           <Heading
