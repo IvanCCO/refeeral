@@ -1,0 +1,104 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Guidelines for MongoDB schema design and Mongoose usage
+---
+
+# Next.js SEO Best Practices
+
+Applies best practices for SEO metadata and Open Graph setup in Next.js App Router projects.
+
+---
+
+## Structure
+Put the metadada always on a folder /src/seo
+
+## Ensure metadata includes title and description
+
+Ensure your `metadata` export includes at least `title` and `description`:
+
+```ts
+export const metadata = {
+  title: 'Page title here',
+  description: 'Brief and compelling page description',
+}
+```
+
+---
+
+## Include Open Graph and Twitter metadata
+
+To optimize social sharing previews, include Open Graph and Twitter fields:
+
+```ts
+export const metadata = {
+  openGraph: {
+    title: 'OG title',
+    description: 'OG description',
+    url: 'https://yourdomain.com/page',
+    images: [{ url: '/opengraph-image.jpg', width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Twitter title',
+    description: 'Twitter description',
+    images: ['/twitter-image.jpg'],
+  },
+}
+```
+
+---
+
+## Use generateMetadata for dynamic metadata
+
+If the page is dynamic (e.g., a blog post), use `generateMetadata`:
+
+```ts
+export async function generateMetadata({ params }) {
+  const post = await getPost(params.slug)
+  return {
+    title: post.title,
+    description: post.excerpt,
+    openGraph: {
+      images: [post.ogImage],
+    },
+  }
+}
+```
+
+---
+
+## Add robots.txt and sitemap.xml
+
+Include a `robots.txt` and `sitemap.xml` to guide search engine crawlers.
+You can generate them dynamically or statically using `next-sitemap`.
+
+Example `robots.txt`:
+
+```
+User-agent: *
+Allow: /
+Sitemap: https://yourdomain.com/sitemap.xml
+```
+
+---
+
+## Consider adding structured data (JSON-LD)
+
+For rich snippets on search engines, add structured data:
+
+```ts
+<script type="application/ld+json">
+{JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Your article title",
+  "author": "Author Name",
+})}
+</script>
+```
+
+
