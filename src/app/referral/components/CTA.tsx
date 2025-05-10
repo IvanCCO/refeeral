@@ -35,7 +35,7 @@ export const CTA = ({ referralCode }: CTAProps) => {
               Pronto para começar sua jornada?
             </Heading>
             <Text color="gray.600">
-              Registre-se agora e comece a aproveitar todos os benefícios do nosso programa.
+              Registre-se agora e comece a aproveitar todos os benefícios do nosso programa!!!
             </Text>
             
             {referralCode && (
