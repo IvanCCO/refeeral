@@ -5,9 +5,10 @@ import { Afiliado } from '@/models/Afiliado';
 import mongoose from 'mongoose';
 import { connectToDatabase } from '@/utils/mongodb';
 import { v4 as uuidv4 } from 'uuid';
+import { getBaseUrl } from '@/utils/commons';
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-const affiliateLink = (linkId: string) => `${baseUrl}/referral?ref=${linkId}`;
+const affiliateLink = (linkId: string) =>
+  `${getBaseUrl()}/referral?ref=${linkId}`;
 
 export async function POST(req: Request) {
   try {
