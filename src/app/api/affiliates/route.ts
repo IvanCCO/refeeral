@@ -7,7 +7,7 @@ import { connectToDatabase } from '@/utils/mongodb';
 import { v4 as uuidv4 } from 'uuid';
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
-const affiliateLink = (linkId: string) => `${baseUrl}?ref=${linkId}`;
+const affiliateLink = (linkId: string) => `${baseUrl}/referral?ref=${linkId}`;
 
 export async function POST(req: Request) {
   try {

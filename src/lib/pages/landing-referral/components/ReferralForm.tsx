@@ -1,53 +1,98 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box,
   Button,
   Container,
+  Field,
+  Fieldset,
   Heading,
   Input,
   Stack,
   Text,
-  Textarea,
   VStack,
   Icon,
+  Textarea,
+  Link,
 } from '@chakra-ui/react';
+import { toaster } from '@/components/ui/toaster';
 import { FaWhatsapp } from 'react-icons/fa';
+import { z } from 'zod';
+import { Affiliate } from './ReferralTracking';
 
-interface FormData {
-  referrerName: string;
-  userName: string;
-  interest: string;
-  knowledge: string;
-}
+const referralFormSchema = z.object({
+  referrerName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
+  userName: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
+  interest: z.string().min(2, 'Informe seu interesse'),
+  knowledge: z.string().optional(),
+});
+
+type ReferralFormInput = z.infer<typeof referralFormSchema>;
+
+type FormErrors = {
+  [K in keyof ReferralFormInput]?: string;
+};
 
 interface ReferralFormProps {
   referralCode: string | null;
+  affiliate: Affiliate | null;
 }
 
-export const ReferralForm = ({}: ReferralFormProps) => {
-  const [formData, setFormData] = useState<FormData>({
+export const ReferralForm = ({ referralCode, affiliate }: ReferralFormProps) => {
+  const [formData, setFormData] = useState<ReferralFormInput>({
     referrerName: '',
     userName: '',
     interest: '',
     knowledge: '',
   });
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // Set referrer name from affiliate data when it becomes available
+  useEffect(() => {
+    if (affiliate?.name) {
+      setFormData(prev => ({
+        ...prev,
+        referrerName: affiliate.name
+      }));
+    }
+  }, [affiliate]);
+
+  const validateForm = (): boolean => {
+    try {
+      referralFormSchema.parse(formData);
+      setErrors({});
+      return true;
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        const newErrors: FormErrors = {};
+        error.errors.forEach((err) => {
+          const field = err.path[0] as keyof ReferralFormInput;
+          newErrors[field] = err.message;
+        });
+        setErrors(newErrors);
+      }
+      return false;
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    setErrors({});
+
+    if (!validateForm()) {
+      toaster.error({
+        title: 'Erro de Validação',
+        description: 'Por favor, preencha todos os campos corretamente.',
+        duration: 5000,
+        meta: { closable: true },
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -66,17 +111,43 @@ export const ReferralForm = ({}: ReferralFormProps) => {
       // For now, we'll just simulate a successful submission
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setIsSubmitted(true);
+      toaster.success({
+        title: 'Sucesso!',
+        description: 'Formulário enviado com sucesso! Entraremos em contato em breve.',
+        duration: 5000,
+        meta: { closable: true },
+      });
     } catch (error) {
+      toaster.error({
+        title: 'Erro',
+        description: 'Erro ao enviar formulário. Tente novamente.',
+        duration: 5000,
+        meta: { closable: true },
+      });
       console.error('Error submitting form:', error);
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  const WHATSAPP_NUMBER = 'SEUNUMERODOWHATSAPP';
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
+
   return (
-    <Box py={{ base: 12, md: 16 }} bg="white">
-      <Container maxW="container.md">
-        <Stack gap={8} align="center">
+    <Box 
+      py={{ base: 12, md: 16 }} 
+      bg="white"
+      display="flex"
+      justifyContent="center"
+      width="100%"
+    >
+      <Container
+        maxW={{ base: '95%', sm: '85%', md: 'container.md' }}
+        display="flex"
+        flexDirection="column"
+        alignItems="center"
+      >
+        <Stack gap={8} width="100%" maxW="600px">
           <VStack gap={3} textAlign="center">
             <Heading
               as="h2"
@@ -91,23 +162,17 @@ export const ReferralForm = ({}: ReferralFormProps) => {
             </Text>
           </VStack>
 
-          <a
-            href="https://wa.me/SEUNUMERODOWHATSAPP"
+          <Link 
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            style={{
-              textDecoration: 'none',
-              width: '100%',
-              maxWidth: '100%',
-              display: 'block',
-              marginLeft: 'auto',
-              marginRight: 'auto',
-            }}
+            _hover={{ textDecoration: 'none' }}
+            w="full"
           >
             <Button
               colorScheme="green"
               size="lg"
-              w={{ base: 'full', md: 'auto' }}
+              w="full"
               fontWeight="bold"
               py={6}
               display="flex"
@@ -117,7 +182,7 @@ export const ReferralForm = ({}: ReferralFormProps) => {
               <Icon as={FaWhatsapp} />
               ENTRE EM CONTATO PELO WHATSAPP
             </Button>
-          </a>
+          </Link>
 
           <Box w="full" pt={6}>
             <Text fontSize="lg" fontWeight="medium" mb={6} textAlign="center">
@@ -140,98 +205,132 @@ export const ReferralForm = ({}: ReferralFormProps) => {
                   Recebemos seus dados e entraremos em contato em breve para
                   confirmar seu desconto de R$50.
                 </Text>
-                <Button
-                  colorScheme="green"
-                  onClick={() =>
-                    (window.location.href = 'https://wa.me/SEUNUMERODOWHATSAPP')
-                  }
-                  display="flex"
-                  alignItems="center"
-                  gap={2}
+                <Link 
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  _hover={{ textDecoration: 'none' }}
                 >
-                  <Icon as={FaWhatsapp} />
-                  Falar com um consultor
-                </Button>
+                  <Button
+                    colorScheme="green"
+                    display="flex"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    <Icon as={FaWhatsapp} />
+                    Falar com um consultor
+                  </Button>
+                </Link>
               </VStack>
             ) : (
               <form onSubmit={handleSubmit}>
-                <VStack gap={5} align="stretch">
-                  <Box>
-                    <Text as="label" display="block" mb={2} fontWeight="medium">
-                      Nome de quem indicou você
-                    </Text>
-                    <Input
-                      name="referrerName"
-                      value={formData.referrerName}
-                      onChange={handleChange}
-                      placeholder="Digite o nome completo"
-                      size="lg"
-                      bg="white"
-                      borderColor="gray.300"
-                      required
-                    />
-                  </Box>
+                <Fieldset.Root
+                  bg="white"
+                  p={{ base: 4, sm: 6, md: 8 }}
+                  rounded="xl"
+                  boxShadow="lg"
+                  width="100%"
+                >
+                  <Stack>
+                    <Fieldset.Legend>Formulário de Indicação</Fieldset.Legend>
+                    <Fieldset.HelperText>
+                      Preencha seus dados para garantir seu desconto de R$50.
+                    </Fieldset.HelperText>
+                  </Stack>
 
-                  <Box>
-                    <Text as="label" display="block" mb={2} fontWeight="medium">
-                      Seu nome
-                    </Text>
-                    <Input
-                      name="userName"
-                      value={formData.userName}
-                      onChange={handleChange}
-                      placeholder="Digite seu nome completo"
-                      size="lg"
-                      bg="white"
-                      borderColor="gray.300"
-                      required
-                    />
-                  </Box>
+                  <Fieldset.Content>
+                    <Stack gap={6}>
+                      <Field.Root invalid={!!errors.referrerName}>
+                        <Field.Label>Nome de quem indicou você</Field.Label>
+                        <Input
+                          name="referrerName"
+                          value={formData.referrerName}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              referrerName: e.target.value,
+                            }))
+                          }
+                          placeholder="Digite o nome completo"
+                          disabled={!!affiliate?.name}
+                          bg={affiliate?.name ? "gray.100" : "white"}
+                        />
+                        {errors.referrerName && (
+                          <Field.ErrorText>{errors.referrerName}</Field.ErrorText>
+                        )}
+                        {affiliate?.name && (
+                          <Field.HelperText>Você foi indicado por este afiliado</Field.HelperText>
+                        )}
+                      </Field.Root>
 
-                  <Box>
-                    <Text as="label" display="block" mb={2} fontWeight="medium">
-                      Qual é o seu interesse na Brio?
-                    </Text>
-                    <Input
-                      name="interest"
-                      value={formData.interest}
-                      onChange={handleChange}
-                      placeholder="Ex: Curso específico, área de estudo..."
-                      size="lg"
-                      bg="white"
-                      borderColor="gray.300"
-                      required
-                    />
-                  </Box>
+                      <Field.Root invalid={!!errors.userName}>
+                        <Field.Label>Seu nome</Field.Label>
+                        <Input
+                          name="userName"
+                          value={formData.userName}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              userName: e.target.value,
+                            }))
+                          }
+                          placeholder="Digite seu nome completo"
+                        />
+                        {errors.userName && (
+                          <Field.ErrorText>{errors.userName}</Field.ErrorText>
+                        )}
+                      </Field.Root>
 
-                  <Box>
-                    <Text as="label" display="block" mb={2} fontWeight="medium">
-                      O que você sabe sobre a Brio?
-                    </Text>
-                    <Textarea
-                      name="knowledge"
-                      value={formData.knowledge}
-                      onChange={handleChange}
-                      placeholder="Conte-nos o que você já conhece sobre a Brio Educação"
-                      size="lg"
-                      bg="white"
-                      borderColor="gray.300"
-                      minH="120px"
-                    />
-                  </Box>
+                      <Field.Root invalid={!!errors.interest}>
+                        <Field.Label>Qual é o seu interesse na Brio?</Field.Label>
+                        <Input
+                          name="interest"
+                          value={formData.interest}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              interest: e.target.value,
+                            }))
+                          }
+                          placeholder="Ex: Curso específico, área de estudo..."
+                        />
+                        {errors.interest && (
+                          <Field.ErrorText>{errors.interest}</Field.ErrorText>
+                        )}
+                      </Field.Root>
 
-                  <Button
-                    type="submit"
-                    colorScheme="blue"
-                    size="lg"
-                    loading={isSubmitting}
-                    loadingText="Enviando..."
-                    mt={4}
-                    fontWeight="bold"
-                  >
-                    ENVIAR
-                  </Button>
-                </VStack>
+                      <Field.Root invalid={!!errors.knowledge}>
+                        <Field.Label>O que você sabe sobre a Brio?</Field.Label>
+                        <Textarea
+                          name="knowledge"
+                          value={formData.knowledge}
+                          onChange={(e) =>
+                            setFormData((prev) => ({
+                              ...prev,
+                              knowledge: e.target.value,
+                            }))
+                          }
+                          placeholder="Conte-nos o que você já conhece sobre a Brio Educação"
+                          minH="120px"
+                        />
+                        {errors.knowledge && (
+                          <Field.ErrorText>{errors.knowledge}</Field.ErrorText>
+                        )}
+                      </Field.Root>
+
+                      <Button
+                        type="submit"
+                        colorScheme="blue"
+                        size="lg"
+                        width="full"
+                        loading={isSubmitting}
+                        loadingText="Enviando..."
+                      >
+                        ENVIAR
+                      </Button>
+                    </Stack>
+                  </Fieldset.Content>
+                </Fieldset.Root>
               </form>
             )}
           </Box>

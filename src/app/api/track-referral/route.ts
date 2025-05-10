@@ -3,11 +3,13 @@ import { connectToDatabase } from '@/utils/mongodb';
 import { Afiliado } from '@/models/Afiliado';
 import mongoose from 'mongoose';
 
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   try {
     await connectToDatabase();
 
-    const { referralCode } = await req.json();
+    // Get referralCode from URL search params
+    const url = new URL(req.url);
+    const referralCode = url.searchParams.get('code');
 
     if (!referralCode) {
       return NextResponse.json(
@@ -26,27 +28,16 @@ export async function POST(req: Request) {
       );
     }
 
-    // Here you could implement tracking logic:
-    // - Record the visit in a separate collection
-    // - Update visit count for the affiliate
-    // - Store information about the visitor if needed
-
-    /*
-    Example:
-    await ReferralVisit.create({
-      affiliateId: affiliate._id,
-      visitedAt: new Date(),
-      ipAddress: req.headers.get('x-forwarded-for') || 'unknown',
-      userAgent: req.headers.get('user-agent') || 'unknown',
-    });
-    */
-
     // For now, just logging the visit
     console.log(`Referral visit tracked for code: ${referralCode}`);
 
     return NextResponse.json({
       success: true,
-      message: 'Visita registrada com sucesso',
+      affiliate: {
+        name: affiliate.name,
+        email: affiliate.email,
+        linkId: affiliate.linkId
+      }
     });
   } catch (error) {
     console.error('Error tracking referral visit:', error);
