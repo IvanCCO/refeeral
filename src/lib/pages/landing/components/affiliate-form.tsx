@@ -11,6 +11,8 @@ import {
   Input,
   Stack,
   Text,
+  Clipboard,
+  HStack,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
 import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
@@ -238,15 +240,36 @@ export const AffiliateForm = () => {
                 <Text fontWeight="bold" color="green.700">
                   Seu link de afiliado está pronto!
                 </Text>
-                <Text
-                  p={3}
-                  bg="white"
-                  rounded="md"
-                  fontSize="sm"
-                  fontFamily="mono"
-                >
-                  {affiliateLink}
-                </Text>
+                <Clipboard.Root value={affiliateLink}>
+                  <HStack
+                    p={3}
+                    bg="white"
+                    rounded="md"
+                    justify="space-between"
+                    align="center"
+                  >
+                    <Text
+                      fontSize="sm"
+                      fontFamily="mono"
+                      flex="1"
+                    >
+                      {affiliateLink}
+                    </Text>
+                    <Clipboard.Trigger asChild>
+                      <Button
+                        colorScheme="blue"
+                        size="sm"
+                        px={6}
+                        _hover={{ transform: 'scale(1.05)' }}
+                        transition="all 0.2s"
+                      >
+                        <Clipboard.Indicator
+                          copied="Copiado!"
+                        />
+                      </Button>
+                    </Clipboard.Trigger>
+                  </HStack>
+                </Clipboard.Root>
               </Stack>
             </Box>
           )}
