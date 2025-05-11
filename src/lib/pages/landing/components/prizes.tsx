@@ -22,31 +22,29 @@ interface PrizeItem {
 const prizes: PrizeItem[] = [
   {
     id: 1,
-    title: 'First Place',
+    title: '1 Indicação',
     description:
-      'Win an all-expenses-paid trip to a tech conference of your choice, plus $10,000 in cash prizes.',
-    imageUrl: '/images/prizes/first-prize.jpg',
+      'Ganhe 1 Caneca personalizada Brio para você tomar café com a gente',
+    imageUrl: '/Canecas3.png',
   },
   {
     id: 2,
-    title: 'Second Place',
+    title: '2 Indicações',
     description:
-      'Take home the latest MacBook Pro and $5,000 in cash to fuel your next project.',
-    imageUrl: '/images/prizes/second-prize.jpg',
+      'Ganhe 1 Camiseta Brio (design exclusivo) + 1 Kit de canetas coloridas + 1 marcador de texto + 1 Adesivo de motivação',
+    imageUrl: '/indica2.png',
   },
   {
     id: 3,
-    title: 'Third Place',
+    title: '3 Indicações',
     description:
-      'Receive a complete developer setup including a high-end monitor and $2,500 in cash.',
-    imageUrl: '/images/prizes/third-prize.jpg',
+      'Ganhe 1 Headphone para estudo  + 1 Caderno de anotações da Brio com layout para planejamento de estudos + 1 Vale-presente Google Play ou Apple Store no valor de R$ 100,00',
+    imageUrl: '/indica3.png',
   },
 ];
 
 export const Prizes = () => {
-  const columns = useBreakpointValue({ base: 1, md: 2 });
   const spacing = useBreakpointValue({ base: 8, md: 12 });
-  const textAlign = useBreakpointValue({ base: 'center', md: 'left' });
 
   return (
     <Box id="prizes-section" py={{ base: 12, md: 20 }} bg="gray.50">
@@ -58,7 +56,7 @@ export const Prizes = () => {
             fontWeight="bold"
             color="gray.800"
           >
-            Amazing Prizes
+            Prêmios incríveis
           </Heading>
           <Text
             fontSize={{ base: 'lg', md: '2xl' }}
@@ -66,20 +64,20 @@ export const Prizes = () => {
             maxW="2xl"
             textAlign="center"
           >
-            Participate and win incredible rewards that will take your
-            development journey to the next level
+            Participe e ganhe prêmios incríveis que irão impulsionar sua
+            jornada de desenvolvimento para o próximo nível
           </Text>
         </VStack>
 
         <Grid
-          templateColumns={`repeat(${columns}, 1fr)`}
+          templateColumns={{ base: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
           gap={spacing}
-          alignItems="center"
+          alignItems="stretch"
         >
           {prizes.map((prize) => (
-            <GridItem key={prize.id}>
+            <GridItem key={prize.id} display="flex">
               <Grid
-                templateColumns={{ base: '1fr', md: '1fr 1fr' }}
+                templateColumns={'1fr'}
                 gap={6}
                 bg="white"
                 p={6}
@@ -89,26 +87,54 @@ export const Prizes = () => {
                   transform: 'translateY(-4px)',
                   transition: 'all 0.3s ease',
                 }}
+                flexGrow={1}
+                alignItems="start"
+                h="100%"
+                position="relative"
+                display="flex" // Add flex to the Grid
+                flexDirection="column" // Stack children vertically
               >
-                <Box>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  h={{ base: '180px', sm: '200px', md: '250px' }}
+                  flexShrink={0} 
+                  w="100%" // Add full width to ensure proper centering
+                >
                   <Image
                     src={prize.imageUrl}
                     alt={prize.title}
                     borderRadius="lg"
                     objectFit="cover"
-                    w="100%"
-                    h={{ base: '200px', md: '250px' }}
+                    width="100%"
+                    height="100%"
+                    mx="auto"
                   />
                 </Box>
-                <VStack align={textAlign} gap={4}>
+                <VStack
+                  align="center"
+                  gap={4}
+                  justifyContent="flex-start"
+                  w="100%"
+                  flex={1} // Allow the VStack to take remaining space
+                >
                   <Heading
                     as="h3"
                     fontSize={{ base: 'xl', md: '2xl' }}
                     color="gray.800"
+                    mb={1}
+                    textAlign="center"
                   >
                     {prize.title}
                   </Heading>
-                  <Text color="gray.600" fontSize={{ base: 'md', md: 'lg' }}>
+                  <Text
+                    color="gray.600"
+                    fontSize={{ base: 'md', md: 'lg' }}
+                    textAlign="center"
+                    w="100%"
+                    flex={1} // Allow the Text to take remaining space
+                  >
                     {prize.description}
                   </Text>
                 </VStack>
