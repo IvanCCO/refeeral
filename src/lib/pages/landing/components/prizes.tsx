@@ -61,14 +61,14 @@ export const Prizes = () => {
         <VStack align="center" gap={8} mb={12}>
           <Heading
             as="h2"
-            fontSize={{ base: '3xl', md: '4xl' }}
+            fontSize={{ base: '3xl', sm: '4xl', md: '5xl' }}
             fontWeight="bold"
             color="gray.800"
           >
             Amazing Prizes
           </Heading>
           <Text
-            fontSize={{ base: 'lg', md: 'xl' }}
+            fontSize={{ base: 'lg', md: '2xl', }}
             color="gray.600"
             maxW="2xl"
             textAlign="center"

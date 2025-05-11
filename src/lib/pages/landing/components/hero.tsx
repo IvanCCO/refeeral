@@ -15,54 +15,17 @@ export const Hero = () => {
   return (
     <Box
       position="relative"
-      width="100vw"
-      left="50%"
-      right="50%"
-      marginLeft="-50vw"
-      marginRight="-50vw"
-      overflow="hidden"
+      width="100%"
+      overflowX="hidden"
     >
       {/* Desktop View */}
       <Box
         display={{ base: 'none', md: 'block' }}
-        py={24}
+        pt={14}
+        pb={24}
         bg="white"
         position="relative"
       >
-        {/* Background Graphics */}
-        <Box position="absolute" top="50px" left="50px">
-          <Image
-            src="/graphics/chart.svg"
-            alt="Chart graphic"
-            width={150}
-            height={150}
-          />
-        </Box>
-        <Box position="absolute" bottom="50px" left="100px">
-          <Image
-            src="/graphics/light-bulb.svg"
-            alt="Light bulb"
-            width={120}
-            height={120}
-          />
-        </Box>
-        <Box position="absolute" top="100px" right="100px">
-          <Image
-            src="/graphics/checkmark.svg"
-            alt="Check mark"
-            width={100}
-            height={100}
-          />
-        </Box>
-        <Box position="absolute" bottom="80px" right="150px">
-          <Image
-            src="/graphics/beaker.svg"
-            alt="Science beaker"
-            width={120}
-            height={120}
-          />
-        </Box>
-
         {/* Main Content */}
         <Container maxW="4xl" position="relative" zIndex={1}>
           <Stack gap={8} align="center" textAlign="center">
@@ -74,9 +37,8 @@ export const Hero = () => {
               <Heading
                 lineHeight={1.2}
                 fontWeight={700}
-                fontSize={{ base: '4xl', lg: '7xl', xl: '8xl' }}
+                fontSize={{ base: '4xl', md: '6xl', lg: '7xl', xl: '8xl' }}
                 textAlign="center"
-                w="100%"
               >
                 <Text as="span">
                   Indique a Brio e ganhe{' '}
@@ -100,7 +62,7 @@ export const Hero = () => {
 
               <Text
                 color="gray.600"
-                fontSize={{ base: 'lg', lg: '2xl' }}
+                fontSize={{ base: 'lg', md: '2xl'}}
                 maxW="2xl"
                 mx="auto"
                 mt={6}
@@ -134,21 +96,23 @@ export const Hero = () => {
       </Box>
 
       {/* Mobile View */}
-      <Box display={{ base: 'block', md: 'none' }} py={12}>
+      <Box display={{ base: 'block', md: 'none' }} pb={12}>
         <Container>
           <Stack gap={8} align="center">
-            <Box position="relative" width="100%" height="280px">
-              <Image
-                src="/graphics/mobile-hero.png"
-                alt="Brio mobile illustration"
-                fill
-                style={{
-                  objectFit: 'contain',
-                  objectPosition: 'center',
-                }}
-                priority
-              />
-            </Box>
+            <Flex justify="center" align="center" width="90%">
+              <Box position="relative" width="90%" height="300px">
+                <Image
+                  src="/mobile-hero.png"
+                  alt="Brio mobile illustration"
+                  fill
+                  style={{
+                    objectFit: 'contain',
+                    objectPosition: 'center',
+                  }}
+                  priority
+                />
+              </Box>
+            </Flex>
 
             <Box
               maxW="sm"
@@ -159,14 +123,13 @@ export const Hero = () => {
               <Heading
                 lineHeight={1.2}
                 fontWeight={700}
-                fontSize="3xl"
+                fontSize="4xl"
                 textAlign="center"
               >
                 <Text as="span">
-                  Indique a Brio e{' '}
+                  Indique a Brio e ganhe{' '}
                 </Text>
                 <Box as="span" position="relative" display="inline-block">
-                  <Text as="span" color="blue.600">ganhe </Text>
                   <Text as="span" color="blue.600">
                     <ReactRotatingText items={rotatingItems} cursor={false} />
                   </Text>
@@ -184,7 +147,7 @@ export const Hero = () => {
 
               <Text
                 color="gray.600"
-                fontSize="md"
+                fontSize="xl"
                 mt={4}
               >
                 Ajude outras famílias a descobrirem a Brio e ganhe recompensas exclusivas.
