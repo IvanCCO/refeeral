@@ -163,15 +163,14 @@ export const AffiliateForm = () => {
               textAlign="center"
               color="gray.800"
             >
-              Torne-se um Afiliado
+              Pronto para indicar?
             </Heading>
             <Text
               fontSize={{ base: 'lg', md: '2xl' }}
               textAlign="center"
               color="gray.600"
             >
-              Preencha o formulário abaixo para receber seu link de afiliado
-              exclusivo
+              Preencha o formulário abaixo para receber seu link e compartilhar com seus amigos
             </Text>
           </Stack>
 
