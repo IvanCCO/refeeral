@@ -260,12 +260,15 @@ export const AffiliateForm = () => {
                     justify="space-between"
                     align="center"
                     gap={2}
+                    flexWrap="wrap"
                   >
                     <Text
-                      fontSize="sm"
+                      fontSize={{ base: 'xs', sm: 'sm' }}
                       fontFamily="mono"
                       flex="1"
-                      textWrap={'wrap'}
+                      textWrap="wrap"
+                      wordBreak="break-all"
+                      overflowWrap="break-word"
                     >
                       {affiliateLink}
                     </Text>
