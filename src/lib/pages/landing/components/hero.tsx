@@ -3,8 +3,15 @@
 import { scrollToSmoothly } from '@/utils/commons';
 import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const ReactRotatingText = dynamic(() => import('react-rotating-text'), {
+  ssr: false,
+}) as any; 
 
 export const Hero = () => {
+  const rotatingItems = ['canecas', 'camisas', 'gift cards', 'cadernos'];
+  
   return (
     <Container maxW="7xl" py={{ base: 16, md: 24 }}>
       <Stack
@@ -20,7 +27,19 @@ export const Hero = () => {
             fontSize={{ base: '3xl', sm: '4xl', lg: '6xl', xl: '7xl' }}
           >
             <Text as="span" position="relative" color="blue.600">
-              Indique a Brio e ganhe prêmios incríveis!
+              Indique a Brio e ganhe{' '}
+              <Box as="span" position="relative" display="inline-block">
+                <ReactRotatingText items={rotatingItems} />
+                <Box
+                  position="absolute"
+                  bottom="-4px"
+                  left="0"
+                  right="0"
+                  height="8px"
+                  className="rotating-text-marker"
+                  bgGradient="linear(to-r, blue.500, green.500, purple.500, orange.500)"
+                />
+              </Box>
             </Text>
           </Heading>
           <Text
@@ -86,6 +105,32 @@ export const Hero = () => {
           </Text>
         </Box>
       </Stack>
+      
+      {/* Add CSS for the blinking cursor from react-rotating-text */}
+      <style jsx global>{`
+        .react-rotating-text-cursor {
+          animation: blink 1s infinite;
+          margin-left: 2px;
+        }
+
+        @keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        
+        .rotating-text-marker {
+          animation: markerColorChange 8s infinite;
+        }
+        
+        @keyframes markerColorChange {
+          0% { background: var(--chakra-colors-blue-500); }
+          25% { background: var(--chakra-colors-green-500); }
+          50% { background: var(--chakra-colors-purple-500); }
+          75% { background: var(--chakra-colors-orange-500); }
+          100% { background: var(--chakra-colors-blue-500); }
+        }
+      `}</style>
     </Container>
   );
 };

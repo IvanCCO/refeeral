@@ -42,6 +42,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
+    "react-rotating-text": "^1.4.1",
     "uuid": "^11.1.0",
     "zod": "^3.24.4"
   },
