@@ -81,10 +81,9 @@ export const Hero = () => {
                 mx="auto"
                 mt={6}
               >
-                Ajude outras famílias a descobrirem a Brio e conhecerem o
-                reforço escolar on-line com acompanhamento personalizado. A cada
-                novo aluno matriculado, você recebe R$ 50 de desconto na
-                matrícula!
+                Ajude outras famílias a conhecerem o reforço escolar on-line mais querido do Brasil.
+                A cada novo aluno matriculado por sua indicação, você recebe um presente exclusivo,
+                e quem você indicar ainda ganha R$ 50 de desconto na matrícula!
               </Text>
               <HStack gap={4} justify="center">
                 <Button
