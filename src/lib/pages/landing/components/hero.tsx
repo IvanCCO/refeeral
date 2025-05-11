@@ -1,123 +1,224 @@
 'use client';
 
 import { scrollToSmoothly } from '@/utils/commons';
-import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Heading, HStack, Stack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const ReactRotatingText = dynamic(() => import('react-rotating-text'), {
   ssr: false,
-}) as any; 
+}) as any;
 
 export const Hero = () => {
+  const rotatingItems = ["vouchers", "canecas", "camisetas", "cadernos", "canetas", "prêmios", "brindes"];
 
-  const rotatingItems = ["vouchers", "canecas", "camisetas", "headphones", "cadernos", "canetas", "prêmios", "brindes"];
-  
   return (
-    <Container maxW="7xl" py={{ base: 16, md: 24 }}>
-      <Stack
-        direction={{ base: 'column', md: 'row' }}
-        gap={{ base: 8, md: 16 }}
-        align="center"
-        justify="space-between"
+    <Box
+      position="relative"
+      width="100vw"
+      left="50%"
+      right="50%"
+      marginLeft="-50vw"
+      marginRight="-50vw"
+      overflow="hidden"
+    >
+      {/* Desktop View */}
+      <Box
+        display={{ base: 'none', md: 'block' }}
+        py={24}
+        bg="white"
+        position="relative"
       >
-        <Box flex={1}>
-          <Heading
-            lineHeight={1.1}
-            fontWeight={600}
-            fontSize={{ base: '3xl', sm: '4xl', lg: '6xl', xl: '7xl' }}
-          >
-            <Text as="span" position="relative" color="blue.600">
-              Indique a Brio e ganhe{' '}
-              <Box as="span" position="relative" display="inline-block">
-                <ReactRotatingText items={rotatingItems} />
-                <Box
-                  position="absolute"
-                  bottom="-4px"
-                  left="0"
-                  right="0"
-                  height="8px"
-                  className="rotating-text-marker"
-                  bgGradient="linear(to-r, blue.500, green.500, purple.500, orange.500)"
-                />
-              </Box>
-            </Text>
-          </Heading>
-          <Text
-            color="gray.600"
-            fontSize={{ base: 'lg', lg: 'xl' }}
-            maxW="lg"
-            mt={6}
-          >
-            Ajude outras famílias a descobrirem a Brio a conheceream o reforço escolar on-line com acompanhamento personalizado.
-            A cada novo aluno matriculado, você recebe R$ 50 de desconto na matrícula! Além de ganhar prêmios exclusivos.
-          </Text>
-          <Stack direction={{ base: 'column', sm: 'row' }} gap={4} mt={8}>
-            <Button
-              size="lg"
-              colorPalette="blue"
-              px={8}
-              onClick={() => scrollToSmoothly('affiliate-form', 300)}
-            >
-              Quero ganhar!
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              px={8}
-              onClick={() => scrollToSmoothly('prizes-section', 300)}
-            >
-              Quais são os prêmios?
-            </Button>
-          </Stack>
-        </Box>
-        <Box
-          flex={1}
-          height={{ base: '240px', md: '500px' }}
-          rounded="2xl"
-          bg="blue.50"
-          position="relative"
-          overflow="hidden"
-          display="flex"
-          flexDirection="column"
-        >
+        {/* Background Graphics */}
+        <Box position="absolute" top="50px" left="50px">
           <Image
-            src="/image.png"
-            alt="Brio Educação Hero Image"
-            fill
-            style={{
-              objectFit: 'cover',
-              objectPosition: 'center',
-            }}
-            priority
+            src="/graphics/chart.svg"
+            alt="Chart graphic"
+            width={150}
+            height={150}
           />
-          <Text
-            position="absolute"
-            bottom="2"
-            right="2"
-            fontSize="xs"
-            color="gray.600"
-            bg="whiteAlpha.900"
-            px="2"
-            py="1"
-            borderRadius="md"
-          >
-            Imagens meramente ilustrativas
-          </Text>
         </Box>
-      </Stack>
-      
+        <Box position="absolute" bottom="50px" left="100px">
+          <Image
+            src="/graphics/light-bulb.svg"
+            alt="Light bulb"
+            width={120}
+            height={120}
+          />
+        </Box>
+        <Box position="absolute" top="100px" right="100px">
+          <Image
+            src="/graphics/checkmark.svg"
+            alt="Check mark"
+            width={100}
+            height={100}
+          />
+        </Box>
+        <Box position="absolute" bottom="80px" right="150px">
+          <Image
+            src="/graphics/beaker.svg"
+            alt="Science beaker"
+            width={120}
+            height={120}
+          />
+        </Box>
+
+        {/* Main Content */}
+        <Container maxW="4xl" position="relative" zIndex={1}>
+          <Stack gap={8} align="center" textAlign="center">
+            <Box
+              maxW="4xl"
+              mx="auto"
+              px={{ base: 4, md: 0 }}
+            >
+              <Heading
+                lineHeight={1.2}
+                fontWeight={700}
+                fontSize={{ base: '4xl', lg: '7xl', xl: '8xl' }}
+                textAlign="center"
+                w="100%"
+              >
+                <Text as="span">
+                  Indique a Brio e ganhe{' '}
+                </Text>
+                {/* <br /> */}
+                <Box as="span" position="relative" display="inline-block">
+                  <Text as="span" color="blue.600">
+                    <ReactRotatingText items={rotatingItems} cursor={false} emptyPause={300} pause={3000} />
+                  </Text>
+                  <Box
+                    position="absolute"
+                    bottom="0px"
+                    left="0"
+                    right="0"
+                    height="6px"
+                    className="rotating-text-marker"
+                    bgGradient="linear(to-r, blue.500, green.500, purple.500, orange.500)"
+                  />
+                </Box>
+              </Heading>
+
+              <Text
+                color="gray.600"
+                fontSize={{ base: 'lg', lg: '2xl' }}
+                maxW="2xl"
+                mx="auto"
+                mt={6}
+              >
+                Ajude outras famílias a descobrirem a Brio e conhecerem o reforço escolar on-line com acompanhamento personalizado.
+                A cada novo aluno matriculado, você recebe R$ 50 de desconto na matrícula!
+              </Text>
+              <HStack gap={4} justify="center">
+                <Button
+                  size="lg"
+                  colorPalette="blue"
+                  mt={10}
+                  px={8}
+                  onClick={() => scrollToSmoothly('affiliate-form', 300)}
+              >
+                Quero ganhar!
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                mt={10}
+                px={8}
+                onClick={() => scrollToSmoothly('prizes-section', 300)}
+                >
+                  Ver prêmios
+                </Button>
+              </HStack>
+            </Box>
+          </Stack>
+        </Container>
+      </Box>
+
+      {/* Mobile View */}
+      <Box display={{ base: 'block', md: 'none' }} py={12}>
+        <Container>
+          <Stack gap={8} align="center">
+            <Box position="relative" width="100%" height="280px">
+              <Image
+                src="/graphics/mobile-hero.png"
+                alt="Brio mobile illustration"
+                fill
+                style={{
+                  objectFit: 'contain',
+                  objectPosition: 'center',
+                }}
+                priority
+              />
+            </Box>
+
+            <Box
+              maxW="sm"
+              mx="auto"
+              px={4}
+              textAlign="center"
+            >
+              <Heading
+                lineHeight={1.2}
+                fontWeight={700}
+                fontSize="3xl"
+                textAlign="center"
+              >
+                <Text as="span">
+                  Indique a Brio e{' '}
+                </Text>
+                <Box as="span" position="relative" display="inline-block">
+                  <Text as="span" color="blue.600">ganhe </Text>
+                  <Text as="span" color="blue.600">
+                    <ReactRotatingText items={rotatingItems} cursor={false} />
+                  </Text>
+                  <Box
+                    position="absolute"
+                    bottom="0px"
+                    left="0"
+                    right="0"
+                    height="4px"
+                    className="rotating-text-marker"
+                    bgGradient="linear(to-r, blue.500, green.500, purple.500, orange.500)"
+                  />
+                </Box>
+              </Heading>
+
+              <Text
+                color="gray.600"
+                fontSize="md"
+                mt={4}
+              >
+                Ajude outras famílias a descobrirem a Brio e ganhe recompensas exclusivas.
+              </Text>
+
+              <Button
+                size="lg"
+                colorPalette="blue"
+                mt={6}
+                width="100%"
+                onClick={() => scrollToSmoothly('affiliate-form', 300)}
+              >
+                Quero ganhar!
+              </Button>
+
+              <Button
+                size="lg"
+                variant="outline"
+                mt={3}
+                width="100%"
+                onClick={() => scrollToSmoothly('prizes-section', 300)}
+              >
+                Ver prêmios
+              </Button>
+            </Box>
+          </Stack>
+        </Container>
+      </Box>
+
       {/* Add CSS for the blinking cursor from react-rotating-text */}
       <style jsx global>{`
         .react-rotating-text-cursor {
-          animation: blink 1s infinite;
-          margin-left: 2px;
-        }
-
-        @keyframes blink {
-          0% { opacity: 1; }
-          50% { opacity: 0; }
-          100% { opacity: 1; }
+          display: none !important;
+          opacity: 0;
         }
         
         .rotating-text-marker {
@@ -132,6 +233,6 @@ export const Hero = () => {
           100% { background: var(--chakra-colors-blue-500); }
         }
       `}</style>
-    </Container>
+    </Box>
   );
 };
