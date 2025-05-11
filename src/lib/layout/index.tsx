@@ -4,7 +4,7 @@ import { Box } from '@chakra-ui/react';
 import type { ReactNode } from 'react';
 
 import { Header } from './components/header';
-
+import { Footer } from '../pages/landing/components/footer';
 type LayoutProps = {
   children: ReactNode;
 };
@@ -17,6 +17,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <Box as="main" marginY={{ base: 8, md: 22 }}>
           {children}
         </Box>
+        <Footer />
       </Box>
     </Box>
   );

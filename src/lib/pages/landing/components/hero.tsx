@@ -151,13 +151,6 @@ export const Hero = () => {
                     Ver prêmios
                   </Button>
                 </HStack>
-                <Text 
-                  mt={4} 
-                  fontSize="sm" 
-                  color="gray.500"
-                >
-                  Ao participar, você concorda com nossos <Link href="/termos-condicoes" color="blue.500" textDecoration="underline">Termos e Condições</Link>
-                </Text>
               </Box>
             </Stack>
           </Container>
@@ -230,13 +223,6 @@ export const Hero = () => {
                 >
                   Ver prêmios
                 </Button>
-                <Text 
-                  mt={4} 
-                  fontSize="sm" 
-                  color="gray.500"
-                >
-                  Ao participar, você concorda com nossos <Link href="/termos-condicoes" color="blue.500" textDecoration="underline">Termos e Condições</Link>
-                </Text>
               </Box>
             </Stack>
           </Container>

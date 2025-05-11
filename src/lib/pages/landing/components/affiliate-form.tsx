@@ -14,6 +14,7 @@ import {
   Clipboard,
   HStack,
   Icon,
+  Link,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
 import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
@@ -102,14 +103,14 @@ export const AffiliateForm = () => {
       }
 
       setAffiliateLink(data.affiliateLink);
-      
+
       setTimeout(() => {
         const element = document.getElementById('affiliate-link');
         if (element) {
           element.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }, 100);
-      
+
       toaster.success({
         title: 'Sucesso!',
         description: 'Link de afiliado gerado com sucesso!',
@@ -247,6 +248,14 @@ export const AffiliateForm = () => {
               </Fieldset.Content>
             </Fieldset.Root>
           </form>
+          <Text
+            mt={4}
+            fontSize="sm"
+            color="gray.500"
+            textAlign="center"
+          >
+            Ao participar, você concorda com nossos <Link href="/docs/termos-condicoes" color="blue.500" textDecoration="underline">Termos e Condições</Link>
+          </Text>
 
           {affiliateLink && (
             <Box

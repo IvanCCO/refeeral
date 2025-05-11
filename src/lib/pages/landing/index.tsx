@@ -15,7 +15,6 @@ export const LandingPage = () => {
       <HowItWorks />
       <Prizes />
       <AffiliateForm />
-      <Footer />
     </Box>
   );
 };
