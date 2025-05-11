@@ -34,7 +34,7 @@ export const HowItWorks = () => {
     return (
         <Box 
             position="relative"
-            width="100%"
+            width="99vw"
             left="50%"
             transform="translateX(-50%)"
             overflowX="hidden"
