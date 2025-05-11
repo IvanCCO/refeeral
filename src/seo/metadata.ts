@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
-const APP_NAME = 'Refeeral';
+const APP_NAME = 'Brio Educação | Indicação';
 const APP_DESCRIPTION =
-  'O sistema de referral marketing inteligente para o seu negócio';
-const BASE_URL = 'https://refeeral.com.br';
+  'Indique amigos e ganhe recompensas exclusivas com nosso programa de indicações';
+const BASE_URL = 'https://www.brioeducaindica.com.br/referral';
 
 export const defaultMetadata: Metadata = {
   title: {
@@ -12,11 +12,11 @@ export const defaultMetadata: Metadata = {
   },
   description: APP_DESCRIPTION,
   applicationName: APP_NAME,
-  authors: [{ name: 'Refeeral Team' }],
+  authors: [{ name: 'Brio Educação' }],
   generator: 'Next.js',
   keywords: ['referral', 'marketing', 'afiliados', 'recompensas', 'indicações'],
-  creator: 'Refeeral Team',
-  publisher: 'Refeeral',
+  creator: 'Brio Educação',
+  publisher: 'Brio Educação',
   formatDetection: {
     telephone: false,
   },
