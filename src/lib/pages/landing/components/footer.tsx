@@ -28,36 +28,18 @@ export const Footer = () => {
           <Stack gap={6}>
             <Box>
               <Text fontSize="2xl" fontWeight="bold">
-                Brio Education
+                Brio Educação
               </Text>
             </Box>
             <Text fontSize="sm">
-              © {new Date().getFullYear()} Brio Education. All rights reserved
+              © {new Date().getFullYear()} Brio Educação. Todos os direitos reservados
             </Text>
           </Stack>
           <Stack align="flex-start">
-            <ListHeader>Company</ListHeader>
-            <Link href="#">About</Link>
-            <Link href="#">Blog</Link>
-            <Link href="#">Contact</Link>
-            <Link href="#">Pricing</Link>
-            <Link href="#">Testimonials</Link>
-          </Stack>
-          <Stack align="flex-start">
-            <ListHeader>Support</ListHeader>
-            <Link href="#">Help Center</Link>
-            <Link href="#">Terms of Service</Link>
-            <Link href="#">Legal</Link>
-            <Link href="#">Privacy Policy</Link>
-            <Link href="#">Status</Link>
-          </Stack>
-          <Stack align="flex-start">
-            <ListHeader>Follow Us</ListHeader>
-            <Link href="#">Facebook</Link>
-            <Link href="#">Twitter</Link>
-            <Link href="#">Instagram</Link>
-            <Link href="#">LinkedIn</Link>
-            <Link href="#">YouTube</Link>
+            <ListHeader>Nos siga nas redes sociais</ListHeader>
+            <Link href="https://www.linkedin.com/company/brioeducacao/">LinkedIn</Link>
+            <Link href="https://www.youtube.com/c/BRIOEDUCA%C3%87%C3%83O">YouTube</Link>
+            <Link href="https://www.instagram.com/brioeduca/">Instagram</Link>
           </Stack>
         </SimpleGrid>
       </Container>

@@ -24,13 +24,16 @@ export const Header = () => {
       px={{ base: 4, md: 6 }}
       bg="white"
       flexDir={{ base: 'column', md: 'row' }}
-      py={{ base: 4, md: 0 }}
     >
       <Flex
         width={{ base: '100%', md: 'auto' }}
         justify={{ base: 'center', md: 'flex-start' }}
       >
-        <Image src="/logo.png" alt="Company Logo" height="80px" />
+        <Image
+          src="/logo.png"
+          alt="Company Logo"
+          height={{ base: '40px', md: '80px' }}
+        />
       </Flex>
 
       <HStack
