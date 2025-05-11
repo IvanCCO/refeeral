@@ -47,6 +47,9 @@ importers:
       react-rotating-text:
         specifier: ^1.4.1
         version: 1.4.1(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      react-scroll-parallax:
+        specifier: ^3.4.5
+        version: 3.4.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       uuid:
         specifier: ^11.1.0
         version: 11.1.0
@@ -1331,6 +1334,9 @@ packages:
 
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
+
+  bezier-easing@2.1.0:
+    resolution: {integrity: sha512-gbIqZ/eslnUFC1tjEvtz0sgx+xTK20wDnYMIA27VA04R7w6xxXQPZDbibjA9DTWZRA2CXtwHykkVzlCaAJAZig==}
 
   binary-extensions@2.3.0:
     resolution: {integrity: sha512-Ceh+7ox5qe7LJuLHoY0feh3pHuUDHAcRUeyL2VYghZwfpkNIy/+8Ocg0a3UuSoYzavmylwuLWQOf3hl0jjMMIw==}
@@ -3044,6 +3050,10 @@ packages:
   package-manager-detector@0.1.2:
     resolution: {integrity: sha512-iePyefLTOm2gEzbaZKSW+eBMjg+UYsQvUKxmvGXAQ987K16efBg10MxIjZs08iyX+DY2/owKY9DIdu193kX33w==}
 
+  parallax-controller@1.7.1:
+    resolution: {integrity: sha512-facVMEBnUynzMN7hCSqyNpF6uyCpVIl4XAUyTR9D8q2JlhgyPY6bZtj/OkFk3+Cpka1TnYCppQb8BzDWHtSaZg==}
+    engines: {node: '>=12'}
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -3218,6 +3228,13 @@ packages:
     peerDependencies:
       react: '>= 15'
       react-dom: '>= 15'
+
+  react-scroll-parallax@3.4.5:
+    resolution: {integrity: sha512-4NLZQ8cZEUyxoA95DfrXWneOOUSFrFmpM0dZNzMErmuJ0LzY+CCw8Xw0hqB6xxHWxNknfs46AozyIPSWkZeucA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: ^16.8.0-0 || >=17.0.1 || ^18.0.0
+      react-dom: ^16.8.0-0 || >=17.0.1 || ^18.0.0
 
   react@19.1.0:
     resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
@@ -5448,6 +5465,8 @@ snapshots:
 
   base64-js@1.5.1: {}
 
+  bezier-easing@2.1.0: {}
+
   binary-extensions@2.3.0: {}
 
   bl@4.1.0:
@@ -7453,6 +7472,10 @@ snapshots:
 
   package-manager-detector@0.1.2: {}
 
+  parallax-controller@1.7.1:
+    dependencies:
+      bezier-easing: 2.1.0
+
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -7582,6 +7605,12 @@ snapshots:
       classnames: 2.5.1
       lodash.toarray: 4.4.0
       prop-types: 15.8.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+
+  react-scroll-parallax@3.4.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
+    dependencies:
+      parallax-controller: 1.7.1
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
