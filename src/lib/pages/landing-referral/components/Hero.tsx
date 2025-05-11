@@ -16,7 +16,6 @@ interface HeroProps {
 }
 
 export const Hero = ({ referralCode }: HeroProps) => {
-
   return (
     <Box
       bg="blue.600"

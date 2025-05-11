@@ -208,7 +208,7 @@ export const ReferralForm = ({
             w="full"
           >
             <Button
-              colorPalette="blue"
+              colorPalette="yellow"
               size="lg"
               w="full"
               fontWeight="bold"
@@ -368,7 +368,7 @@ export const ReferralForm = ({
 
                       <Button
                         type="submit"
-                        colorScheme="blue"
+                        colorPalette="blue"
                         size="lg"
                         width="full"
                         loading={isSubmitting}
