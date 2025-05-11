@@ -2,6 +2,7 @@
 
 import { scrollToSmoothly } from '@/utils/commons';
 import { Box, Button, Container, Heading, Stack, Text } from '@chakra-ui/react';
+import Image from 'next/image';
 
 export const Hero = () => {
   return (
@@ -19,11 +20,7 @@ export const Hero = () => {
             fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
           >
             <Text as="span" position="relative" color="blue.600">
-              Transform Your Learning
-            </Text>
-            <br />
-            <Text as="span" color="gray.900">
-              with Expert Guidance
+              Indique a Brio e ganhe prêmios incríveis!
             </Text>
           </Heading>
           <Text
@@ -32,17 +29,17 @@ export const Hero = () => {
             maxW="lg"
             mt={6}
           >
-            Join our community of learners and unlock your full potential with
-            personalized education that adapts to your unique needs.
+            Ajude outras famílias a descobrirem a Brio a conheceream o reforço escolar on-line com acompanhamento personalizado.
+            A cada novo aluno matriculado, você recebe R$ 50 de desconto na matrícula! Além de ganhar prêmios exclusivos.
           </Text>
           <Stack direction={{ base: 'column', sm: 'row' }} gap={4} mt={8}>
             <Button
               size="lg"
-              colorScheme="blue"
+              colorPalette="blue"
               px={8}
               onClick={() => scrollToSmoothly('affiliate-form', 300)}
             >
-              Get Started
+              Quero ganhar!
             </Button>
             <Button
               size="lg"
@@ -50,19 +47,43 @@ export const Hero = () => {
               px={8}
               onClick={() => scrollToSmoothly('prizes-section', 300)}
             >
-              Learn More
+              Quais são os prêmios?
             </Button>
           </Stack>
         </Box>
         <Box
           flex={1}
-          height={{ base: '240px', md: '400px' }}
+          height={{ base: '240px', md: '500px' }}
           rounded="2xl"
           bg="blue.50"
           position="relative"
           overflow="hidden"
+          display="flex"
+          flexDirection="column"
         >
-          {/* Add hero image or illustration here */}
+          <Image
+            src="/image.png"
+            alt="Brio Educação Hero Image"
+            fill
+            style={{
+              objectFit: 'cover',
+              objectPosition: 'center',
+            }}
+            priority
+          />
+          <Text
+            position="absolute"
+            bottom="2"
+            right="2"
+            fontSize="xs"
+            color="gray.600"
+            bg="whiteAlpha.900"
+            px="2"
+            py="1"
+            borderRadius="md"
+          >
+            Imagens meramente ilustrativas
+          </Text>
         </Box>
       </Stack>
     </Container>

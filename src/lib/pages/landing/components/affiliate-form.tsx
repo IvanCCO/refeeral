@@ -148,7 +148,7 @@ export const AffiliateForm = () => {
           <Stack gap={4} align="center">
             <Heading
               as="h2"
-              fontSize={{ base: '2xl', md: '3xl' }}
+              fontSize={{ base: '3xl', md: '4xl' }}
               textAlign="center"
               color="gray.800"
             >
@@ -233,7 +233,7 @@ export const AffiliateForm = () => {
 
                   <Button
                     type="submit"
-                    colorScheme="blue"
+                    colorPalette="blue"
                     size="lg"
                     width="full"
                     loading={isLoading}
