@@ -10,10 +10,19 @@ export const Header = () => {
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
     id: string
   ) => {
-    e.preventDefault();
-    scrollToSmoothly(id, 300);
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.getElementById(id);
+      if (element) {
+        scrollToSmoothly(id, 300);
+      } else {
+        // If the element doesn't exist on the current page, go to home page
+        window.location.href = '/';
+      }
+    }
   };
 
   return (
@@ -54,7 +63,12 @@ export const Header = () => {
               textDecoration: 'none',
               color: 'blue.500',
             }}
-            onClick={(e) => handleNavClick(e, item.id)}
+            _focus={{
+              outline: 'none',
+              boxShadow: 'none',
+              textDecoration: 'none',
+            }}
+            onClick={(e) => handleNavClick(e, item.href, item.id)}
           >
             {item.name}
           </Link>
