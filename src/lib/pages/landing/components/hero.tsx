@@ -10,7 +10,8 @@ const ReactRotatingText = dynamic(() => import('react-rotating-text'), {
 }) as any; 
 
 export const Hero = () => {
-  const rotatingItems = ['canecas', 'camisas', 'gift cards', 'cadernos'];
+
+  const rotatingItems = ["vouchers", "canecas", "camisetas", "headphones", "cadernos", "canetas", "prêmios", "brindes"];
   
   return (
     <Container maxW="7xl" py={{ base: 16, md: 24 }}>
