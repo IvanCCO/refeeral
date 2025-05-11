@@ -10,6 +10,7 @@ import {
   ReferralTracking,
   ReferralForm,
   Affiliate,
+  FAQ,
 } from './components';
 
 export const dynamic = 'force-dynamic';
@@ -60,6 +61,9 @@ export const ReferralLandingPage = () => {
 
       {/* CTA Section */}
       <CTA referralCode={referralCode} />
+
+      {/* FAQ Section */}
+      <FAQ />
     </Box>
   );
 };
