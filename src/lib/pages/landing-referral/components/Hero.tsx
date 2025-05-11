@@ -1,5 +1,6 @@
 'use client';
 
+import { scrollToSmoothly } from '@/utils/commons';
 import {
   Box,
   Container,
@@ -80,6 +81,9 @@ export const Hero = ({ referralCode }: HeroProps) => {
                 px={8}
                 rounded="full"
                 fontWeight="bold"
+                onClick={() => {
+                  scrollToSmoothly('referral-form', 5000);
+                }}
               >
                 Comece Agora
               </Button>
@@ -91,6 +95,9 @@ export const Hero = ({ referralCode }: HeroProps) => {
                 rounded="full"
                 fontWeight="bold"
                 _hover={{ color: 'black' }}
+                onClick={() => {
+                  scrollToSmoothly('features', 500);
+                }}
               >
                 O que é a Brio?
               </Button>

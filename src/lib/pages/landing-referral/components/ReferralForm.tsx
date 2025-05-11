@@ -173,6 +173,7 @@ export const ReferralForm = ({
 
   return (
     <Box
+      id="referral-form"
       py={{ base: 12, md: 16 }}
       bg="white"
       display="flex"

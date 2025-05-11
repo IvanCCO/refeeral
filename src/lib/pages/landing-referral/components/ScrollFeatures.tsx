@@ -109,7 +109,7 @@ const FeatureCard = ({ title, description, icon, index }: FeatureCardProps) => {
       ref={ref}
       opacity={isInView ? 1 : 0}
       transform={isInView ? 'translateY(0)' : 'translateY(40px)'}
-      transition="all 0.8s ease-out"
+      transition="all 0.6s ease-out"
       transitionDelay={`${index * 0.2}s`}
       py={12}
     >
@@ -179,7 +179,7 @@ export const ScrollFeatures = () => {
   });
 
   return (
-    <Box py={{ base: 16, md: 24 }} bg="gray.50">
+    <Box id="features" py={{ base: 16, md: 24 }} bg="gray.50" >
       <Container maxW="container.xl">
         <Stack gap={16}>
           <Stack
