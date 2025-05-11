@@ -10,35 +10,12 @@ import {
   Badge,
   AspectRatio,
 } from '@chakra-ui/react';
-import { useEffect, useRef, useState } from 'react';
 
 interface HeroProps {
   referralCode: string | null;
 }
 
 export const Hero = ({ referralCode }: HeroProps) => {
-  const videoRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (videoRef.current) {
-      observer.observe(videoRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, []);
 
   return (
     <Box
@@ -127,7 +104,6 @@ export const Hero = ({ referralCode }: HeroProps) => {
             display="flex"
             justifyContent="center"
             order={{ base: 2, lg: 1 }}
-            ref={videoRef}
           >
             <AspectRatio
               w="full"
@@ -138,7 +114,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
               boxShadow="2xl"
             >
               <iframe
-                src={`https://www.youtube.com/embed/mCOssrhOuGM${isVisible ? '?autoplay=1&mute=1' : ''}`}
+                src={`https://www.youtube.com/embed/mCOssrhOuGM`}
                 title="Brio Educação Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
