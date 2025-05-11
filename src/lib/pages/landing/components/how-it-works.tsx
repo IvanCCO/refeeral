@@ -2,28 +2,35 @@
 
 import {
   Box,
+  Flex,
+  Grid,
   Heading,
+  Icon,
   Stack,
-  Steps,
   Text,
 } from '@chakra-ui/react';
+import { FaUserPlus, FaLink, FaGraduationCap, FaGift } from 'react-icons/fa';
 
 const steps = [
   {
     title: 'Cadastre-se no programa',
-    description: 'Preencha seus dados no formulário de cadastro para começar a indicar amigos e familiares.'
+    description: 'Preencha seus dados no formulário de cadastro para começar a indicar amigos e familiares.',
+    icon: FaUserPlus
   },
   {
     title: 'Compartilhe seu link único',
-    description: 'Receba um link exclusivo e compartilhe com seus amigos através de redes sociais, WhatsApp ou email.'
+    description: 'Receba um link exclusivo e compartilhe com seus amigos através de redes sociais, WhatsApp ou email.',
+    icon: FaLink
   },
   {
     title: 'Amigo realiza a matrícula',
-    description: 'Quando seu amigo se matricular usando seu link, ele ganha R$ 50 de desconto na matrícula.'
+    description: 'Quando seu amigo se matricular usando seu link, ele ganha R$ 50 de desconto na matrícula.',
+    icon: FaGraduationCap
   },
   {
     title: 'Receba sua recompensa',
-    description: 'Para cada matrícula realizada através do seu link, você ganha R$ 50 de desconto em sua mensalidade e pontos para trocar por prêmios.'
+    description: 'Para cada matrícula realizada através do seu link, você ganha R$ 50 de desconto em sua mensalidade e pontos para trocar por prêmios.',
+    icon: FaGift
   }
 ];
 
@@ -65,36 +72,81 @@ export const HowItWorks = () => {
       </Stack>
 
       <Box 
-        maxW="3xl" 
+        maxW="6xl" 
         mx="auto"
         px={{ base: 4, md: 8 }}
       >
-        <Steps.Root 
-          orientation="vertical" 
-          height="auto" 
-          gap={10}
-          count={steps.length}
-          size="lg"
+        <Grid 
+          templateColumns={{ base: "1fr", md: "repeat(2, 1fr)" }}
+          gap={{ base: 6, md: 8 }}
         >
-          <Steps.List>
-            {steps.map((step, index) => (
-              <Steps.Item key={index} index={index}>
-                <Steps.Indicator 
-                  bg={index % 2 === 1 ? "white" : "yellow.400"} 
-                  color={"gray.800"}
-                  borderColor={index % 2 === 1 ? "white" : "yellow.400"}
-                  borderWidth={2}
-                  fontWeight={800}
-                />
-                <Box ml={5} mb={10}>
-                  <Steps.Title color="white" fontWeight={600} fontSize={{ base: 'xl', md: '2xl' }} mb={3}>{step.title}</Steps.Title>
-                  <Text color="gray.300" fontSize={{ base: 'md', md: 'lg' }}>{step.description}</Text>
-                </Box>
-                <Steps.Separator />
-              </Steps.Item>
-            ))}
-          </Steps.List>
-        </Steps.Root>
+          {steps.map((step, index) => (
+            <Box
+              key={index}
+              bg="blue.600"
+              borderRadius="lg"
+              boxShadow="lg"
+              overflow="hidden"
+              position="relative"
+              transition="transform 0.3s ease, box-shadow 0.3s ease"
+              _hover={{
+                transform: "translateY(-5px)",
+                boxShadow: "xl"
+              }}
+            >
+              {/* Number indicator */}
+              <Flex 
+                position="absolute" 
+                top="3" 
+                left="3" 
+                w="36px" 
+                h="36px" 
+                bg={index % 2 === 1 ? "white" : "yellow.400"}
+                color="blue.700"
+                borderRadius="full" 
+                align="center" 
+                justify="center"
+                fontWeight="bold"
+                fontSize="lg"
+              >
+                {index + 1}
+              </Flex>
+              
+              <Box p={6} pt={16}>
+                {/* Icon */}
+                <Flex 
+                  justify="center" 
+                  align="center"
+                  mb={4}
+                >
+                  <Icon 
+                    as={step.icon} 
+                    boxSize={12} 
+                    color={index % 2 === 1 ? "white" : "yellow.400"} 
+                  />
+                </Flex>
+                
+                {/* Title and Description */}
+                <Stack gap={3} textAlign="center">
+                  <Heading 
+                    as="h3" 
+                    fontSize={{ base: "xl", md: "2xl" }} 
+                    fontWeight="600"
+                    color="white"
+                  >
+                    {step.title}
+                  </Heading>
+                  <Text 
+                    color="gray.300"
+                    fontSize={{ base: "md", md: "lg" }}
+                  >
+                    {step.description}
+                  </Text>
+                </Stack>
+              </Box>
+            </Box>
+          ))}
+        </Grid>
       </Box>
     </Box>
   );

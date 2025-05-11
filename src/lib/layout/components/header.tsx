@@ -1,11 +1,17 @@
 import { Box, Flex, HStack, Link, Image } from '@chakra-ui/react';
+import { scrollToSmoothly } from '../../../utils/commons';
 
 export const Header = () => {
   const navItems = [
-    { name: 'Como funciona', href: '#how-it-works' },
-    { name: 'Prêmios', href: '#prizes-section' },
-    { name: 'Indique', href: '#affiliate-form' },
+    { name: 'Como funciona', href: '#how-it-works', id: 'how-it-works' },
+    { name: 'Prêmios', href: '#prizes-section', id: 'prizes-section' },
+    { name: 'Indique', href: '#affiliate-form', id: 'affiliate-form' },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    scrollToSmoothly(id, 300);
+  };
 
   return (
     <Flex 
@@ -17,9 +23,9 @@ export const Header = () => {
     >
       <Box>
         <Image 
-          src="/logo-placeholder.svg" 
+          src="/logo.png" 
           alt="Company Logo"
-          height="40px"
+          height="80px"
         />
       </Box>
 
@@ -41,6 +47,7 @@ export const Header = () => {
               textDecoration: 'none',
               color: 'blue.500',
             }}
+            onClick={(e) => handleNavClick(e, item.id)}
           >
             {item.name}
           </Link>
