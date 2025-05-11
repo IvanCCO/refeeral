@@ -31,35 +31,28 @@ const FEATURE_ITEMS: FeatureItem[] = [
   {
     title: 'Aulas de qualidade',
     description:
-      'Compartilhe seu código de referência com amigos e familiares e ganhe recompensas para cada nova pessoa que se cadastrar.',
+      'Vídeo-aulas personalizadas em Matemática, Português, Ciências e mais — selecionadas conforme a necessidade de cada aluno, sem distrações e no ritmo ideal para avançar.',
     icon: FaGift,
-    image: '/feature-rewards.png', // Replace with actual image path
-  },
-  {
-    title: 'Lista de exercícios',
-    description:
-      'Visualize estatísticas em tempo real de quantas pessoas usaram seu código e quais recompensas você já ganhou.',
-    icon: FaChartLine,
-    image: '/feature-stats.png', // Replace with actual image path
+    image: '/feature-rewards.png',
   },
   {
     title: 'Apostila de conteúdos',
     description:
-      'A Brio Educação oferece uma apostila de conteúdos para os alunos, com exercícios e questões para o aluno se exercitar.',
+      'Conteúdos organizados conforme a BNCC, com teoria clara e atividades práticas. Ideal para revisar, reforçar e se preparar melhor para as provas.',
     icon: FaBook,
     image: '/feature-stats.png',
   },
   {
     title: 'Acompanhamento pedagógico',
     description:
-      'Quanto mais amigos se cadastrarem usando seu código, mais recompensas você acumula. Sem limites!',
+      'Relatórios de desempenho e chat de dúvidas direto com professores. Pais e responsáveis acompanham de perto o progresso do aluno em cada matéria.',
     icon: FaMedal,
     image: '/feature-multiply.png',
   },
   {
     title: 'Cronograma de estudos personalizado',
     description:
-      'Participe de nosso programa de parceiros e tenha acesso a benefícios exclusivos e oportunidades especiais.',
+      'Plano de estudos semanal atualizado conforme o avanço do aluno, incluindo revisão especial na semana de provas — para estudar com foco, rotina e mais tranquilidade.',
     icon: FaHandshake,
     image: '/feature-exclusive.png',
   },
