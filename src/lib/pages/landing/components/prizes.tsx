@@ -10,36 +10,46 @@ import {
   Text,
   VStack,
   useBreakpointValue,
+  Circle,
+  Flex,
 } from '@chakra-ui/react';
 
 interface PrizeItem {
   id: number;
+  indicacao: string;
   title: string;
   description: string;
   imageUrl: string;
+  referrals: number;
 }
 
 const prizes: PrizeItem[] = [
   {
     id: 1,
-    title: '1 Indicação',
+    indicacao: 'Indicação',
+    title: 'Caneca Brio',
     description:
       'Ganhe 1 Caneca personalizada Brio para você tomar café com a gente',
     imageUrl: '/Canecas3.png',
+    referrals: 1,
   },
   {
     id: 2,
-    title: '2 Indicações',
+    indicacao: 'Indicações',
+    title: 'Camiseta Brio',
     description:
       'Ganhe 1 Camiseta Brio (design exclusivo) + 1 Kit de canetas coloridas + 1 marcador de texto + 1 Adesivo de motivação',
     imageUrl: '/indica2.png',
+    referrals: 2,
   },
   {
     id: 3,
-    title: '3 Indicações',
+    indicacao: 'Indicações',
+    title: 'Headphone',
     description:
       'Ganhe 1 Headphone para estudo  + 1 Caderno de anotações da Brio com layout para planejamento de estudos + 1 Vale-presente Google Play ou Apple Store no valor de R$ 100,00',
     imageUrl: '/indica3.png',
+    referrals: 3,
   },
 ];
 
@@ -64,8 +74,8 @@ export const Prizes = () => {
             maxW="2xl"
             textAlign="center"
           >
-            Participe e ganhe prêmios incríveis que irão impulsionar sua
-            jornada de desenvolvimento para o próximo nível
+            Participe e ganhe prêmios incríveis que irão impulsionar sua jornada
+            de desenvolvimento para o próximo nível
           </Text>
         </VStack>
 
@@ -91,33 +101,77 @@ export const Prizes = () => {
                 alignItems="start"
                 h="100%"
                 position="relative"
-                display="flex" // Add flex to the Grid
-                flexDirection="column" // Stack children vertically
+                display="flex"
+                flexDirection="column"
               >
+                <Circle
+                  size={{ base: '70px', md: '80px', lg: '90px' }}
+                  bg="blue.500"
+                  color="white"
+                  position="absolute"
+                  top="-3"
+                  right="-3"
+                  zIndex="1"
+                  boxShadow="md"
+                >
+                  <Flex direction="column" align="center" justify="center">
+                    <Text
+                      fontWeight="bold"
+                      fontSize={{ base: '2xl', md: '3xl' }}
+                      lineHeight="shorter"
+                    >
+                      {prize.referrals}
+                    </Text>
+                    <Text
+                      fontSize={{ base: 'xs', md: 'sm' }}
+                      fontWeight="medium"
+                      lineHeight="tight"
+                      mt="-1"
+                    >
+                      {prize.referrals === 1 ? 'Indicação' : 'Indicações'}
+                    </Text>
+                  </Flex>
+                </Circle>
+
                 <Box
                   display="flex"
                   justifyContent="center"
                   alignItems="center"
                   h={{ base: '180px', sm: '200px', md: '250px' }}
-                  flexShrink={0} 
-                  w="100%" // Add full width to ensure proper centering
+                  flexShrink={0}
+                  w="100%"
+                  position="relative"
                 >
                   <Image
                     src={prize.imageUrl}
-                    alt={prize.title}
+                    alt={`Prêmio para ${prize.referrals} ${prize.indicacao}`}
                     borderRadius="lg"
                     objectFit="cover"
                     width="100%"
                     height="100%"
                     mx="auto"
                   />
+                  <Box
+                    position="absolute"
+                    bottom="0"
+                    width="100%"
+                    bg="rgba(255, 255, 255, 0.8)"
+                    py={1}
+                    textAlign="center"
+                    fontSize={{ base: 'xs', md: 'sm' }}
+                    fontWeight="medium"
+                    color="gray.600"
+                    borderBottomRadius="lg"
+                  >
+                    Imagem ilustrativa
+                  </Box>
                 </Box>
                 <VStack
                   align="center"
                   gap={4}
                   justifyContent="flex-start"
                   w="100%"
-                  flex={1} // Allow the VStack to take remaining space
+                  flex={1}
                 >
                   <Heading
                     as="h3"
@@ -133,7 +187,7 @@ export const Prizes = () => {
                     fontSize={{ base: 'md', md: 'lg' }}
                     textAlign="center"
                     w="100%"
-                    flex={1} // Allow the Text to take remaining space
+                    flex={1}
                   >
                     {prize.description}
                   </Text>
