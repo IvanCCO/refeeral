@@ -20,6 +20,8 @@ import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
 import { ZodError } from 'zod';
 import { FaWhatsapp } from 'react-icons/fa';
 
+const WHATSAPP_SHARE_MESSAGE = 'Confira meu link de afiliado:';
+
 type FormErrors = {
   [K in keyof AffiliateInput]?: string;
 };
@@ -284,8 +286,11 @@ export const AffiliateForm = () => {
                 </Clipboard.Root>
                 <Button
                   onClick={() =>
+                    // TODO: add whatsapp share message
                     window.open(
-                      `https://wa.me/?text=${encodeURIComponent('Confira meu link de afiliado: ' + affiliateLink)}`,
+                      `https://wa.me/?text=${encodeURIComponent(
+                        WHATSAPP_SHARE_MESSAGE + affiliateLink
+                      )}`,
                       '_blank',
                       'noopener,noreferrer'
                     )
