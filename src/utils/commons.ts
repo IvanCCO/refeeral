@@ -45,11 +45,17 @@ export function scrollToSmoothly(
 }
 
 export function getBaseUrl() {
-  if (typeof window !== 'undefined')
-    return '';
+  // Browser - use the current window location
+  if (typeof window !== 'undefined') {
+    const { protocol, host } = window.location;
+    return `${protocol}//${host}`;
+  }
   
-  if (process.env.VERCEL_URL)
+  // Server - use environment variables
+  if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
-    
-  return `http://localhost:3000`;
+  }
+  
+  // Fallback for development
+  return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 }

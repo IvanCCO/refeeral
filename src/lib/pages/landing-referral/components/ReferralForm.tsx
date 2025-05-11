@@ -201,7 +201,7 @@ export const ReferralForm = ({
           </VStack>
 
           <Link
-            href={whatsappUrl}
+            href="https://www.brioeduca.com/anosletivosplanodiamante"
             target="_blank"
             rel="noopener noreferrer"
             _hover={{ textDecoration: 'none' }}
