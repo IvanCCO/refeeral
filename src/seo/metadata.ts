@@ -32,10 +32,10 @@ export const defaultMetadata: Metadata = {
     url: BASE_URL,
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: 'https://kindle2notion.s3.us-east-2.amazonaws.com/defaults/brio-link-preview.png',
         width: 1200,
         height: 630,
-        alt: 'Refeeral - Sistema de referral marketing',
+        alt: 'Brio Educação | Indicação',
       },
     ],
     locale: 'pt_BR',
