@@ -222,10 +222,13 @@ export const ReferralForm = ({
             </Button>
           </Link>
 
+          
           <Box w="full" pt={6}>
-            <Text fontSize="lg" fontWeight="medium" mb={6} textAlign="center">
-              Preencha o formulário abaixo para garantir o desconto:
-            </Text>
+            {!isSubmitted && (
+              <Text fontSize="lg" fontWeight="medium" mb={6} textAlign="center">
+                Preencha o formulário abaixo para garantir o desconto:
+              </Text>
+            )}
 
             {isSubmitted ? (
               <VStack
@@ -236,13 +239,37 @@ export const ReferralForm = ({
                 borderWidth={1}
                 borderColor="green.200"
               >
-                <Heading size="md" color="green.700">
+                <Heading size="xl" color="green.700">
                   Obrigado por se cadastrar!
                 </Heading>
-                <Text textAlign="center">
-                  Recebemos seus dados e entraremos em contato em breve para
-                  confirmar seu desconto de R$50.
+                
+                <Box 
+                  py={4} 
+                  px={6} 
+                  bg="white" 
+                  borderWidth={2} 
+                  borderStyle="dashed" 
+                  borderColor="blue.500" 
+                  rounded="lg" 
+                  textAlign="center"
+                  boxShadow="md"
+                  width="100%"
+                >
+                  <Text fontSize="sm" fontWeight="medium" color="gray.600" mb={1}>
+                    SEU CUPOM DE DESCONTO
+                  </Text>
+                  <Heading fontSize="4xl" letterSpacing="wider" color="blue.600">
+                    INDICA50
+                  </Heading>
+                  <Text fontSize="sm" mt={2} color="gray.600">
+                    Use este código ao finalizar sua matrícula
+                  </Text>
+                </Box>
+                
+                <Text textAlign="center" fontSize="md">
+                  Ainda está com dúvidas?
                 </Text>
+                
                 <Link
                   href={whatsappUrl}
                   target="_blank"
