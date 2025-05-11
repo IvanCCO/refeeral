@@ -32,13 +32,15 @@ const steps = [
 
 export const HowItWorks = () => {
     return (
-        <Box
-            py={{ base: 8, md: 16 }}
-            bg="blue.700"
-            id="how-it-works"
+        <Box 
+            position="relative"
             width="100%"
+            left="50%"
+            transform="translateX(-50%)"
             overflowX="hidden"
-            borderRadius="2xl"
+            bg="yellow.400"
+            py={{ base: 8, md: 16 }}
+            id="how-it-works"
         >
             <Stack
                 gap={4}
@@ -111,8 +113,8 @@ export const HowItWorks = () => {
                                     >
                                         {step.title}
                                     </Heading>
-                                    <Text
-                                        color="gray.300"
+                                    <Text 
+                                        color="gray.300" 
                                         fontSize={{ base: 'xs', md: 'md' }}
                                         display={{ base: 'none', sm: 'block' }}
                                     >
