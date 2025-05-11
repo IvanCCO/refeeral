@@ -10,10 +10,10 @@ export interface BackButtonProps extends Omit<ButtonProps, 'onClick'> {
   fallbackPath?: string;
 }
 
-export const BackButton = ({ 
-  fallbackPath = '/', 
-  children = 'Back', 
-  ...rest 
+export const BackButton = ({
+  fallbackPath = '/',
+  children = 'Back',
+  ...rest
 }: BackButtonProps) => {
   const router = useRouter();
   const [canGoBack, setCanGoBack] = useState(false);
@@ -34,14 +34,11 @@ export const BackButton = ({
   };
 
   return (
-    <Button
-      onClick={handleClick}
-      {...rest}
-    >
+    <Button onClick={handleClick} {...rest}>
       <Box display="inline-flex" alignItems="center" gap={2}>
         <IoArrowBack />
         {children}
       </Box>
     </Button>
   );
-}; 
+};

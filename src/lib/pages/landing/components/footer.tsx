@@ -32,13 +32,18 @@ export const Footer = () => {
               </Text>
             </Box>
             <Text fontSize="sm">
-              © {new Date().getFullYear()} Brio Educação. Todos os direitos reservados
+              © {new Date().getFullYear()} Brio Educação. Todos os direitos
+              reservados
             </Text>
           </Stack>
           <Stack align="flex-start">
             <ListHeader>Nos siga nas redes sociais</ListHeader>
-            <Link href="https://www.linkedin.com/company/brioeducacao/">LinkedIn</Link>
-            <Link href="https://www.youtube.com/c/BRIOEDUCA%C3%87%C3%83O">YouTube</Link>
+            <Link href="https://www.linkedin.com/company/brioeducacao/">
+              LinkedIn
+            </Link>
+            <Link href="https://www.youtube.com/c/BRIOEDUCA%C3%87%C3%83O">
+              YouTube
+            </Link>
             <Link href="https://www.instagram.com/brioeduca/">Instagram</Link>
           </Stack>
         </SimpleGrid>

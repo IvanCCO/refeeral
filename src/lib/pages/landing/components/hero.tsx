@@ -10,7 +10,6 @@ import {
   HStack,
   Stack,
   Text,
-  Link,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';

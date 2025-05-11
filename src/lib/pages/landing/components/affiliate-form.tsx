@@ -20,7 +20,6 @@ import { toaster } from '@/components/ui/toaster';
 import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
 import { ZodError } from 'zod';
 import { FaWhatsapp } from 'react-icons/fa';
-import { scrollToSmoothly } from '@/utils/commons';
 
 const WHATSAPP_SHARE_MESSAGE = 'Confira meu link de afiliado:';
 
@@ -170,7 +169,8 @@ export const AffiliateForm = () => {
               textAlign="center"
               color="gray.600"
             >
-              Preencha o formulário abaixo para receber seu link e compartilhar com seus amigos
+              Preencha o formulário abaixo para receber seu link e compartilhar
+              com seus amigos
             </Text>
           </Stack>
 
@@ -247,13 +247,15 @@ export const AffiliateForm = () => {
               </Fieldset.Content>
             </Fieldset.Root>
           </form>
-          <Text
-            mt={4}
-            fontSize="sm"
-            color="gray.500"
-            textAlign="center"
-          >
-            Ao participar, você concorda com nossos <Link href="/docs/termos-condicoes" color="blue.500" textDecoration="underline">Termos e Condições</Link>
+          <Text mt={4} fontSize="sm" color="gray.500" textAlign="center">
+            Ao participar, você concorda com nossos{' '}
+            <Link
+              href="/docs/termos-condicoes"
+              color="blue.500"
+              textDecoration="underline"
+            >
+              Termos e Condições
+            </Link>
           </Text>
 
           {affiliateLink && (
