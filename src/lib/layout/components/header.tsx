@@ -1,4 +1,4 @@
-import { Box, Flex, HStack, Link, Image } from '@chakra-ui/react';
+import { Flex, HStack, Link, Image } from '@chakra-ui/react';
 import { scrollToSmoothly } from '../../../utils/commons';
 
 export const Header = () => {
@@ -8,34 +8,33 @@ export const Header = () => {
     { name: 'Indique', href: '#affiliate-form', id: 'affiliate-form' },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
     e.preventDefault();
     scrollToSmoothly(id, 300);
   };
 
   return (
-    <Flex 
-      as="header" 
-      width="full" 
+    <Flex
+      as="header"
+      width="full"
       align="center"
       px={{ base: 4, md: 6 }}
       bg="white"
-      flexDir={{ base: "column", md: "row" }}
+      flexDir={{ base: 'column', md: 'row' }}
       py={{ base: 4, md: 0 }}
     >
-      <Flex 
-        width={{ base: "100%", md: "auto" }}
-        justify={{ base: "center", md: "flex-start" }}
+      <Flex
+        width={{ base: '100%', md: 'auto' }}
+        justify={{ base: 'center', md: 'flex-start' }}
       >
-        <Image 
-          src="/logo.png" 
-          alt="Company Logo"
-          height="80px"
-        />
+        <Image src="/logo.png" alt="Company Logo" height="80px" />
       </Flex>
 
-      <HStack 
-        as="nav" 
+      <HStack
+        as="nav"
         gap={{ base: 4, md: 6 }}
         display={{ base: 'none', md: 'flex' }}
         mx="auto"

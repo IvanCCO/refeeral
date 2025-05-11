@@ -50,12 +50,12 @@ export function getBaseUrl() {
     const { protocol, host } = window.location;
     return `${protocol}//${host}`;
   }
-  
+
   // Server - use environment variables
   if (process.env.VERCEL_URL) {
     return `https://${process.env.VERCEL_URL}`;
   }
-  
+
   // Fallback for development
   return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 }

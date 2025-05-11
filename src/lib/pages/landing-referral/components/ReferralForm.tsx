@@ -18,7 +18,7 @@ import {
   Badge,
 } from '@chakra-ui/react';
 import { toaster } from '@/components/ui/toaster';
-import { FaWhatsapp, FaShoppingCart  } from 'react-icons/fa';
+import { FaWhatsapp, FaShoppingCart } from 'react-icons/fa';
 import { referralFormSchema, ReferralFormInput } from '@/utils/validations';
 import { Affiliate } from './ReferralTracking';
 import { z } from 'zod';

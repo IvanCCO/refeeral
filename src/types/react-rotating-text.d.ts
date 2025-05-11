@@ -10,7 +10,7 @@ declare module 'react-rotating-text' {
     deletingInterval?: number;
     className?: string;
   }
-  
+
   const ReactRotatingText: React.FC<ReactRotatingTextProps>;
   export default ReactRotatingText;
-} 
+}

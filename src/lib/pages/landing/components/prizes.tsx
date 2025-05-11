@@ -68,7 +68,7 @@ export const Prizes = () => {
             Amazing Prizes
           </Heading>
           <Text
-            fontSize={{ base: 'lg', md: '2xl', }}
+            fontSize={{ base: 'lg', md: '2xl' }}
             color="gray.600"
             maxW="2xl"
             textAlign="center"

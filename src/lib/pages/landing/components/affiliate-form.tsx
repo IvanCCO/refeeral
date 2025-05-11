@@ -155,7 +155,7 @@ export const AffiliateForm = () => {
               Torne-se um Afiliado
             </Heading>
             <Text
-              fontSize={{ base: 'lg', md: '2xl', }}
+              fontSize={{ base: 'lg', md: '2xl' }}
               textAlign="center"
               color="gray.600"
             >
@@ -173,8 +173,10 @@ export const AffiliateForm = () => {
               width="100%"
             >
               <Stack pb={4}>
-                <Fieldset.Legend fontSize={{ base: 'md', md: 'xl', }}>Dados de Contato</Fieldset.Legend>
-                <Fieldset.HelperText fontSize={{ base: 'sm', md: 'lg', }}>
+                <Fieldset.Legend fontSize={{ base: 'md', md: 'xl' }}>
+                  Dados de Contato
+                </Fieldset.Legend>
+                <Fieldset.HelperText fontSize={{ base: 'sm', md: 'lg' }}>
                   Preencha seus dados para receber seu link de afiliado.
                 </Fieldset.HelperText>
               </Stack>
@@ -182,7 +184,9 @@ export const AffiliateForm = () => {
               <Fieldset.Content>
                 <Stack gap={8}>
                   <Field.Root invalid={!!errors.name}>
-                    <Field.Label fontSize={{ base: 'sm', md: 'lg', }}>Nome</Field.Label>
+                    <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
+                      Nome
+                    </Field.Label>
                     <Input
                       name="name"
                       value={formData.name}
@@ -195,12 +199,16 @@ export const AffiliateForm = () => {
                       placeholder="Seu nome completo"
                     />
                     {errors.name && (
-                      <Field.ErrorText fontSize={{base: 'sm', md: 'lg', }}>{errors.name}</Field.ErrorText>
+                      <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
+                        {errors.name}
+                      </Field.ErrorText>
                     )}
                   </Field.Root>
 
                   <Field.Root invalid={!!errors.email}>
-                    <Field.Label fontSize={{ base: 'sm', md: 'lg', }}>Email</Field.Label>
+                    <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
+                      Email
+                    </Field.Label>
                     <Input
                       name="email"
                       type="email"
@@ -214,12 +222,16 @@ export const AffiliateForm = () => {
                       placeholder="seu@email.com"
                     />
                     {errors.email && (
-                      <Field.ErrorText fontSize={{ base: 'sm', md: 'lg', }}>{errors.email}</Field.ErrorText>
+                      <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
+                        {errors.email}
+                      </Field.ErrorText>
                     )}
                   </Field.Root>
 
                   <Field.Root invalid={!!errors.phone}>
-                    <Field.Label fontSize={{ base: 'sm', md: 'lg', }}>Telefone</Field.Label>
+                    <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
+                      Telefone
+                    </Field.Label>
                     <Input
                       name="phone"
                       value={formData.phone}
@@ -227,7 +239,9 @@ export const AffiliateForm = () => {
                       placeholder="(99) 99999-9999"
                     />
                     {errors.phone && (
-                      <Field.ErrorText fontSize={{ base: 'sm', md: 'lg', }}>{errors.phone}</Field.ErrorText>
+                      <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
+                        {errors.phone}
+                      </Field.ErrorText>
                     )}
                   </Field.Root>
 
@@ -238,7 +252,7 @@ export const AffiliateForm = () => {
                     width="full"
                     loading={isLoading}
                     loadingText="Gerando link..."
-                    fontSize={{ base: 'sm', md: 'lg', }}
+                    fontSize={{ base: 'sm', md: 'lg' }}
                   >
                     Gerar Link de Afiliado
                   </Button>

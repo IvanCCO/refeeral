@@ -23,7 +23,7 @@ export const ReferralLandingPage = () => {
   useEffect(() => {
     // Skip during SSR
     if (typeof window === 'undefined') return;
-    
+
     const ref = searchParams.get('ref');
 
     if (ref) {
