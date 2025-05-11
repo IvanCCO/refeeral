@@ -53,7 +53,7 @@ export function getBaseUrl() {
 
   // Server - use environment variables
   if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
+    return `https://www.brioeducaindica.com.br`;
   }
 
   // Fallback for development
