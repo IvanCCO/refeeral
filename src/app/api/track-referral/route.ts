@@ -35,7 +35,6 @@ export async function GET(req: Request) {
       success: true,
       affiliate: {
         name: affiliate.name,
-        email: affiliate.email,
         linkId: affiliate.linkId,
       },
     });
