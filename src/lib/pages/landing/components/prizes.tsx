@@ -40,7 +40,7 @@ const prizes: PrizeItem[] = [
     description:
       'Receive a complete developer setup including a high-end monitor and $2,500 in cash.',
     imageUrl: '/images/prizes/third-prize.jpg',
-  }
+  },
 ];
 
 export const Prizes = () => {
