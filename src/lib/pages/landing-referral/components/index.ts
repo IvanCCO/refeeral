@@ -5,3 +5,15 @@ export * from './CTA';
 export * from './ReferralTracking';
 export * from './ReferralForm';
 export * from './FAQ';
+export * from './ScrollFeatures';
+
+// Type Exports
+export interface Affiliate {
+  name: string;
+  email: string;
+  linkId: string;
+  id?: string;
+  customLogo?: string;
+  customBanner?: string;
+  customTheme?: string;
+}

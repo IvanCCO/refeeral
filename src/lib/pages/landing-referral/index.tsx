@@ -11,6 +11,7 @@ import {
   ReferralForm,
   Affiliate,
   FAQ,
+  ScrollFeatures,
 } from './components';
 
 export const dynamic = 'force-dynamic';
@@ -53,8 +54,8 @@ export const ReferralLandingPage = () => {
       {/* Hero Section */}
       <Hero referralCode={referralCode} />
 
-      {/* Features Section */}
-      <Features />
+      {/* Scroll Features Section */}
+      <ScrollFeatures />
 
       {/* Referral Form */}
       <ReferralForm referralCode={referralCode} affiliate={affiliate} />
