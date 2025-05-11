@@ -27,7 +27,6 @@ type FormErrors = {
 export const AffiliateForm = () => {
   const [formData, setFormData] = useState<AffiliateInput>({
     name: '',
-    email: '',
     phone: '',
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -201,29 +200,6 @@ export const AffiliateForm = () => {
                     {errors.name && (
                       <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
                         {errors.name}
-                      </Field.ErrorText>
-                    )}
-                  </Field.Root>
-
-                  <Field.Root invalid={!!errors.email}>
-                    <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
-                      Email
-                    </Field.Label>
-                    <Input
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData((prev) => ({
-                          ...prev,
-                          email: e.target.value,
-                        }))
-                      }
-                      placeholder="seu@email.com"
-                    />
-                    {errors.email && (
-                      <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
-                        {errors.email}
                       </Field.ErrorText>
                     )}
                   </Field.Root>

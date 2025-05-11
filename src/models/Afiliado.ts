@@ -3,7 +3,6 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 // Interface for the Afiliado document
 export interface IAfiliado extends Document {
   name: string;
-  email: string;
   phone: string;
   linkId: string;
   createdAt: Date;
@@ -14,10 +13,6 @@ export interface IAfiliado extends Document {
 const AfiliadoSchema = new Schema<IAfiliado>(
   {
     name: {
-      type: String,
-      required: true,
-    },
-    email: {
       type: String,
       required: true,
     },
@@ -37,7 +32,6 @@ const AfiliadoSchema = new Schema<IAfiliado>(
 );
 
 // Add indexes
-AfiliadoSchema.index({ email: 1 }, { unique: true });
 AfiliadoSchema.index({ phone: 1 }, { unique: true });
 AfiliadoSchema.index({ linkId: 1 }, { unique: true });
 

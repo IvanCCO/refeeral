@@ -19,20 +19,15 @@ export async function POST(req: Request) {
     // Validate input using Zod schema
     const validatedData = affiliateSchema.parse(body);
 
-    // Check if email or phone already exists using Mongoose
+    // Check if phone already exists using Mongoose
     const existingAffiliate = await Afiliado.findOne({
-      $or: [{ email: validatedData.email }, { phone: validatedData.phone }],
+      phone: validatedData.phone,
     });
 
     if (existingAffiliate) {
-      const field =
-        existingAffiliate.email === validatedData.email ? 'email' : 'phone';
-      const message =
-        field === 'email'
-          ? 'Este email já está cadastrado como afiliado'
-          : 'Este telefone já está cadastrado como afiliado';
-
-      return NextResponse.json({ message, field }, { status: 400 });
+      return NextResponse.json({
+        affiliateLink: affiliateLink(existingAffiliate.linkId),
+      });
     }
 
     // Generate a UUID for the affiliate link
@@ -41,7 +36,6 @@ export async function POST(req: Request) {
     // Create new affiliate using Mongoose
     await Afiliado.create({
       name: validatedData.name,
-      email: validatedData.email,
       phone: validatedData.phone,
       linkId: linkId,
     });
