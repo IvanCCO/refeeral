@@ -19,6 +19,7 @@ import { toaster } from '@/components/ui/toaster';
 import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
 import { ZodError } from 'zod';
 import { FaWhatsapp } from 'react-icons/fa';
+import { scrollToSmoothly } from '@/utils/commons';
 
 const WHATSAPP_SHARE_MESSAGE = 'Confira meu link de afiliado:';
 
@@ -101,6 +102,14 @@ export const AffiliateForm = () => {
       }
 
       setAffiliateLink(data.affiliateLink);
+      
+      setTimeout(() => {
+        const element = document.getElementById('affiliate-link');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }, 100);
+      
       toaster.success({
         title: 'Sucesso!',
         description: 'Link de afiliado gerado com sucesso!',
@@ -247,6 +256,7 @@ export const AffiliateForm = () => {
               borderWidth={1}
               borderColor="green.200"
               width="100%"
+              id="affiliate-link"
             >
               <Stack gap={3}>
                 <Text fontWeight="bold" color="green.700">
