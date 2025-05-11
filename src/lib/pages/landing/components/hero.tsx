@@ -17,7 +17,7 @@ export const Hero = () => {
           <Heading
             lineHeight={1.1}
             fontWeight={600}
-            fontSize={{ base: '3xl', sm: '4xl', lg: '6xl' }}
+            fontSize={{ base: '3xl', sm: '4xl', lg: '6xl', xl: '7xl' }}
           >
             <Text as="span" position="relative" color="blue.600">
               Indique a Brio e ganhe prêmios incríveis!
