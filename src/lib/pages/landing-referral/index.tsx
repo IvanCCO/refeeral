@@ -5,7 +5,6 @@ import { useSearchParams } from 'next/navigation';
 import { Box } from '@chakra-ui/react';
 import {
   Hero,
-  Features,
   CTA,
   ReferralTracking,
   ReferralForm,
