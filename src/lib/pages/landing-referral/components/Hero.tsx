@@ -10,12 +10,36 @@ import {
   Badge,
   AspectRatio,
 } from '@chakra-ui/react';
+import { useEffect, useRef, useState } from 'react';
 
 interface HeroProps {
   referralCode: string | null;
 }
 
 export const Hero = ({ referralCode }: HeroProps) => {
+  const videoRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <Box
       bg="blue.600"
@@ -45,7 +69,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
           <Stack gap={6} maxW={{ base: 'full', lg: '50%' }}>
             {referralCode && (
               <Badge
-                colorScheme="green"
+                colorPalette="yellow"
                 alignSelf="flex-start"
                 fontSize="sm"
                 px={3}
@@ -86,7 +110,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
               <Button
                 size="lg"
                 variant="outline"
-                colorScheme="white"
+                color="white"
                 px={8}
                 rounded="full"
                 fontWeight="bold"
@@ -102,6 +126,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
             display="flex"
             justifyContent="center"
             order={{ base: 2, lg: 1 }}
+            ref={videoRef}
           >
             <AspectRatio
               w="full"
@@ -112,7 +137,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
               boxShadow="2xl"
             >
               <iframe
-                src="https://www.youtube.com/embed/mCOssrhOuGM"
+                src={`https://www.youtube.com/embed/mCOssrhOuGM${isVisible ? '?autoplay=1&mute=1' : ''}`}
                 title="Brio Educação Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
