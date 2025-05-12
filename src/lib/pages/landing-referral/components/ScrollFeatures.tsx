@@ -8,6 +8,7 @@ import {
   Text,
   Flex,
   Icon,
+  AspectRatio,
 } from '@chakra-ui/react';
 import { useRef, useEffect, useState, RefObject } from 'react';
 import {
@@ -36,11 +37,11 @@ const FEATURE_ITEMS: FeatureItem[] = [
     image: '/feature-rewards.png',
   },
   {
-    title: 'Apostila de conteúdos',
+    title: 'Diversos cursos disponíveis',
     description:
-      'Conteúdos organizados conforme a BNCC, com teoria clara e atividades práticas. Ideal para revisar, reforçar e se preparar melhor para as provas.',
+      'Conteúdos organizados conforme a BNCC, com teoria clara e atividades práticas. Ideal para revisar, reforçar e se preparar melhor para as provas. Com apostila de conteúdos para cada aula.',
     icon: FaBook,
-    image: '/feature-stats.png',
+    image: '/aulas.png',
   },
   {
     title: 'Acompanhamento pedagógico',
@@ -54,7 +55,7 @@ const FEATURE_ITEMS: FeatureItem[] = [
     description:
       'Plano de estudos semanal atualizado conforme o avanço do aluno, incluindo revisão especial na semana de provas — para estudar com foco, rotina e mais tranquilidade.',
     icon: FaHandshake,
-    image: '/feature-exclusive.png',
+    image: '/cronograma.png',
   },
 ];
 
@@ -93,7 +94,7 @@ interface FeatureCardProps {
 }
 
 // Feature card component
-const FeatureCard = ({ title, description, icon, index }: FeatureCardProps) => {
+const FeatureCard = ({ title, description, icon, image, index }: FeatureCardProps) => {
   const [ref, isInView] = useInView({ threshold: 0.1, triggerOnce: true });
   const isEven = index % 2 === 0;
 
@@ -137,28 +138,54 @@ const FeatureCard = ({ title, description, icon, index }: FeatureCardProps) => {
         <Box
           flex="1"
           position="relative"
-          height={{ base: '200px', md: '300px' }}
           width="100%"
           borderRadius="xl"
           overflow="hidden"
           boxShadow="lg"
+          height={index === 0 ? "auto" : { base: '200px', md: '300px' }}
         >
-          {/* Replace with actual image or mockup */}
-          <Box
-            bg="linear-gradient(45deg, #EBF8FF, #BEE3F8)"
-            position="absolute"
-            top={0}
-            left={0}
-            right={0}
-            bottom={0}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Text fontSize="lg" fontWeight="bold" color="blue.500">
-              Feature Image {index + 1}
-            </Text>
-          </Box>
+          {index === 0 ? (
+            <AspectRatio ratio={16/9} width="100%">
+              <iframe 
+                title="Aulas de qualidade" 
+                src="https://player.vimeo.com/video/1074450668?h=022b96956d" 
+                width="100%" 
+                height="100%" 
+                allowFullScreen
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  border: 0
+                }}
+              />
+            </AspectRatio>
+          ) : (
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              right={0}
+              bottom={0}
+              backgroundImage={`url(${image})`}
+              backgroundSize="cover"
+              backgroundPosition="center"
+            >
+              {/* Fallback if image fails to load */}
+              <Box
+                position="absolute"
+                top={0}
+                left={0}
+                right={0}
+                bottom={0}
+                bg="linear-gradient(45deg, #EBF8FF, #BEE3F8)"
+                opacity={0.2}
+                zIndex={-1}
+              />
+            </Box>
+          )}
         </Box>
       </Flex>
     </Box>
