@@ -47,7 +47,7 @@ const prizes: PrizeItem[] = [
     indicacao: 'Indicações',
     title: 'Headphone',
     description:
-      'Ganhe 1 Headphone para estudo  + 1 Caderno de anotações da Brio com layout para planejamento de estudos + 1 Vale-presente Google Play ou Apple Store no valor de R$ 100,00',
+      'Ganhe 1 Headphone para estudo  + 1 Caderno de anotações da Brio + 1 Vale-presente Google Play ou Apple Store no valor de R$ 100,00',
     imageUrl: '/indica3.png',
     referrals: 3,
   },
