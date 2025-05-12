@@ -29,7 +29,7 @@ const prizes: PrizeItem[] = [
     indicacao: 'Indicação',
     title: 'Caneca Brio',
     description:
-      'Ganhe 1 Caneca personalizada Brio para você tomar café com a gente',
+      'Ganhe 1 Caneca personalizada Brio',
     imageUrl: '/Canecas3.png',
     referrals: 1,
   },
