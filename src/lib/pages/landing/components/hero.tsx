@@ -170,7 +170,7 @@ export const Hero = () => {
           <Container>
             <Stack gap={8} align="center">
               <Flex justify="center" align="center" width="90%">
-                <Box position="relative" width="90%" height="300px">
+                <Box position="relative" width="100%" height="300px">
                   <Image
                     src="/mobile-hero.png"
                     alt="Brio mobile illustration"
@@ -214,7 +214,7 @@ export const Hero = () => {
                 </Text>
 
                 <Button
-                  size="lg"
+                  size="2xl"
                   colorPalette="blue"
                   mt={6}
                   width="100%"

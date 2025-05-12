@@ -175,7 +175,7 @@ export const Testimonials = () => {
 
     carousel.addEventListener('scroll', handleScroll);
     return () => carousel.removeEventListener('scroll', handleScroll);
-  }, [currentIndex, isMobile, TESTIMONIALS.length]);
+  }, [currentIndex, isMobile]);
 
   return (
     <Box py={16}>

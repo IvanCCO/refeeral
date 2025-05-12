@@ -1,4 +1,4 @@
-import { Flex, HStack, Link, Image } from '@chakra-ui/react';
+import { Flex, HStack, Link, Image, Button } from '@chakra-ui/react';
 import { scrollToSmoothly } from '../../../utils/commons';
 import { usePathname } from 'next/navigation';
 
@@ -8,23 +8,23 @@ export const Header = () => {
 
   const navItems = isReferralPage
     ? [
-        {
-          name: 'O que é a Brio?',
-          href: '#features-section',
-          id: 'features-section',
-        },
-        {
-          name: 'Depoimentos',
-          href: '#testimonials-section',
-          id: 'testimonials-section',
-        },
-        { name: 'FAQ', href: '#faq-section', id: 'faq-section' },
-      ]
+      {
+        name: 'O que é a Brio?',
+        href: '#features-section',
+        id: 'features-section',
+      },
+      {
+        name: 'Depoimentos',
+        href: '#testimonials-section',
+        id: 'testimonials-section',
+      },
+      { name: 'FAQ', href: '#faq-section', id: 'faq-section' },
+    ]
     : [
-        { name: 'Como funciona', href: '#how-it-works', id: 'how-it-works' },
-        { name: 'Prêmios', href: '#prizes-section', id: 'prizes-section' },
-        { name: 'Indique', href: '#affiliate-form', id: 'affiliate-form' },
-      ];
+      { name: 'Como funciona', href: '#how-it-works', id: 'how-it-works' },
+      { name: 'Prêmios', href: '#prizes-section', id: 'prizes-section' },
+      { name: 'Indique', href: '#affiliate-form', id: 'affiliate-form' },
+    ];
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -54,13 +54,31 @@ export const Header = () => {
     >
       <Flex
         width={{ base: '100%', md: 'auto' }}
-        justify={{ base: 'center', md: 'flex-start' }}
+        justify={'space-between'}
+        alignItems={'center'}
       >
         <Image
           src="/logo.png"
           alt="Company Logo"
           height={{ base: '40px', md: '80px' }}
         />
+        <Button
+          display={{ base: 'flex', md: 'none' }}
+          colorPalette="blue"
+          size="md"
+          fontWeight="semibold"
+          borderRadius="sm"
+          onClick={() => {
+            const element = document.getElementById('affiliate-form');
+            if (element) {
+              scrollToSmoothly('affiliate-form', 300);
+            } else {
+              window.location.href = '/#affiliate-form';
+            }
+          }}
+        >
+          Indicar agora
+        </Button>
       </Flex>
 
       <HStack
