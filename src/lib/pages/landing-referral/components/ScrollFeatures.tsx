@@ -11,7 +11,7 @@ import {
   AspectRatio,
 } from '@chakra-ui/react';
 import { useRef, useEffect, useState, RefObject } from 'react';
-import { FaBook, FaGift, FaHandshake, FaMedal } from 'react-icons/fa';
+import { FaBook, FaGift, FaHandshake } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 // Define the feature content structure
@@ -37,13 +37,13 @@ const FEATURE_ITEMS: FeatureItem[] = [
     icon: FaBook,
     image: '/aulas.png',
   },
-  {
-    title: 'Acompanhamento pedagógico',
-    description:
-      'Relatórios de desempenho e chat de dúvidas direto com professores. Pais e responsáveis acompanham de perto o progresso do aluno em cada matéria.',
-    icon: FaMedal,
-    image: '/feature-multiply.png',
-  },
+  // {
+  //   title: 'Acompanhamento pedagógico',
+  //   description:
+  //     'Relatórios de desempenho e chat de dúvidas direto com professores. Pais e responsáveis acompanham de perto o progresso do aluno em cada matéria.',
+  //   icon: FaMedal,
+  //   image: '/feature-multiply.png',
+  // },
   {
     title: 'Cronograma de estudos personalizado',
     description:
@@ -106,14 +106,20 @@ const FeatureCard = ({
       transition="all 0.6s ease-out"
       transitionDelay={`${index * 0.2}s`}
       py={12}
+      width="100%"
     >
       <Flex
         direction={{ base: 'column', md: isEven ? 'row' : 'row-reverse' }}
         align="center"
         justify="space-between"
         gap={10}
+        width="100%"
       >
-        <Box flex="1" textAlign={{ base: 'center', md: 'start' }}>
+        <Box
+          flex="1"
+          textAlign={{ base: 'center', md: 'start' }}
+          width={{ base: '100%', md: '50%' }}
+        >
           <Flex
             w={16}
             h={16}
@@ -138,14 +144,20 @@ const FeatureCard = ({
         <Box
           flex="1"
           position="relative"
-          width="100%"
+          width={{ base: '100%', md: '50%' }}
           borderRadius="xl"
           overflow="hidden"
           boxShadow="lg"
-          height={index === 0 ? 'auto' : { base: '200px', md: '300px' }}
+          height={
+            index === 0
+              ? { base: '250px', md: 'auto' }
+              : { base: '250px', md: '300px' }
+          }
+          minHeight={{ base: '250px' }}
+          mb={{ base: 4, md: 0 }}
         >
           {index === 0 ? (
-            <AspectRatio ratio={16 / 9} width="100%">
+            <AspectRatio ratio={16 / 9} width="100%" height="100%">
               <iframe
                 title="Aulas de qualidade"
                 src="https://player.vimeo.com/video/1074450668?h=022b96956d"
@@ -172,6 +184,8 @@ const FeatureCard = ({
               backgroundImage={`url(${image})`}
               backgroundSize="cover"
               backgroundPosition="center"
+              height="100%"
+              width="100%"
             >
               {/* Fallback if image fails to load */}
               <Box
@@ -221,7 +235,7 @@ export const ScrollFeatures = () => {
             </Text>
           </Stack>
 
-          <Stack gap={6}>
+          <Stack gap={6} width="100%">
             {FEATURE_ITEMS.map((feature, index) => (
               <FeatureCard
                 key={index}

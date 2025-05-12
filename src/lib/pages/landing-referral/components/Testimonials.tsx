@@ -25,24 +25,24 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    name: 'Sarah',
-    role: 'Parent',
+    name: 'Vitor Gabriel',
+    role: 'Aluno',
     content:
-      'Safe space for open talks about mental health with my teen. Resources helped us understand, meditations became a calming family activity.',
+      'Estou na semana de prova e a BRIO está me ajudando muito! Estou tirando notas muito boas! A menor foi 8,8!',
   },
   {
     id: 2,
-    name: 'Darlene',
-    role: 'Office Going Mom',
+    name: 'Márcia',
+    role: 'Tia de aluna do aluna do 6º ano',
     content:
-      'Anonymous chat saved me during work overwhelm. Talked to someone who understood, gained perspective.',
+      'Em 4 semanas ela melhorou muito com o reforço da BRIO! Agora ela anda com as próprias pernas! Até o momento só tenho a agradecer, vocês não fazem ideia como estão me ajudando!',
   },
   {
     id: 3,
-    name: 'Maria',
-    role: 'Senior Citizen',
+    name: 'Carla',
+    role: 'Mãe de aluna do 7º ano',
     content:
-      'Easy interface perfect for beginners! Variety of resources kept me engaged, felt mentally sharp & connected.',
+      'Gostamos muito do reforço da BRIO! Foi fundamental para o aprendizado da Alice!',
   },
 ];
 
@@ -116,7 +116,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
       {/* Footer with name and role */}
       <Box mt="auto" textAlign="left">
         <Text fontWeight="bold" fontSize="md" display="block">
-          ~ {testimonial.name}
+          {testimonial.name}
         </Text>
         <Text color="gray.600" fontSize="sm">
           {testimonial.role}

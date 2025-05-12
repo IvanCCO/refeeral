@@ -193,7 +193,7 @@ export const ReferralForm = ({
               fontSize={{ base: '2xl', md: '3xl' }}
               color="gray.800"
             >
-              Preencha o form e ganhe R$50 de desconto
+              Preencha o formulário e ganhe R$50 de desconto
             </Heading>
             <Text fontSize={{ base: 'md', md: 'lg' }} color="gray.600">
               Realize sua matrícula com a gente e aproveite um desconto especial
@@ -202,12 +202,6 @@ export const ReferralForm = ({
           </VStack>
 
           <Box w="full" pt={6}>
-            {!isSubmitted && (
-              <Text fontSize="lg" fontWeight="medium" mb={6} textAlign="center">
-                Preencha o formulário abaixo para garantir o desconto:
-              </Text>
-            )}
-
             {isSubmitted ? (
               <VStack
                 gap={6}
@@ -307,8 +301,10 @@ export const ReferralForm = ({
                   width="100%"
                 >
                   <Stack>
-                    <Fieldset.Legend>Formulário de Indicação</Fieldset.Legend>
-                    <Fieldset.HelperText>
+                    <Fieldset.Legend fontSize={{ base: 'md', md: 'xl' }}>
+                      Formulário de Indicação
+                    </Fieldset.Legend>
+                    <Fieldset.HelperText fontSize={{ base: 'sm', md: 'lg' }}>
                       Preencha seus dados para garantir seu desconto de R$50.
                     </Fieldset.HelperText>
                   </Stack>
@@ -316,7 +312,9 @@ export const ReferralForm = ({
                   <Fieldset.Content>
                     <Stack gap={6}>
                       <Field.Root invalid={!!errors.referrerName}>
-                        <Field.Label>Nome de quem indicou você</Field.Label>
+                        <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
+                          Nome de quem indicou você
+                        </Field.Label>
                         <Input
                           name="referrerName"
                           value={formData.referrerName}
@@ -331,19 +329,21 @@ export const ReferralForm = ({
                           bg={affiliate?.name ? 'gray.100' : 'white'}
                         />
                         {errors.referrerName && (
-                          <Field.ErrorText>
+                          <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
                             {errors.referrerName}
                           </Field.ErrorText>
                         )}
                         {affiliate?.name && (
-                          <Field.HelperText>
+                          <Field.HelperText fontSize={{ base: 'sm', md: 'lg' }}>
                             Você foi indicado por este afiliado
                           </Field.HelperText>
                         )}
                       </Field.Root>
 
                       <Field.Root invalid={!!errors.userName}>
-                        <Field.Label>Seu nome</Field.Label>
+                        <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
+                          Seu nome
+                        </Field.Label>
                         <Input
                           name="userName"
                           value={formData.userName}
@@ -356,12 +356,16 @@ export const ReferralForm = ({
                           placeholder="Digite seu nome completo"
                         />
                         {errors.userName && (
-                          <Field.ErrorText>{errors.userName}</Field.ErrorText>
+                          <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
+                            {errors.userName}
+                          </Field.ErrorText>
                         )}
                       </Field.Root>
 
                       <Field.Root invalid={!!errors.phone}>
-                        <Field.Label>Telefone</Field.Label>
+                        <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
+                          Telefone
+                        </Field.Label>
                         <Input
                           name="phone"
                           value={formData.phone}
@@ -369,12 +373,14 @@ export const ReferralForm = ({
                           placeholder="(99) 99999-9999"
                         />
                         {errors.phone && (
-                          <Field.ErrorText>{errors.phone}</Field.ErrorText>
+                          <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
+                            {errors.phone}
+                          </Field.ErrorText>
                         )}
                       </Field.Root>
 
                       <Field.Root invalid={!!errors.knowledge}>
-                        <Field.Label>
+                        <Field.Label fontSize={{ base: 'sm', md: 'lg' }}>
                           O que você sabe sobre a Brio?
                           <Badge
                             ml={2}
@@ -398,7 +404,9 @@ export const ReferralForm = ({
                           minH="120px"
                         />
                         {errors.knowledge && (
-                          <Field.ErrorText>{errors.knowledge}</Field.ErrorText>
+                          <Field.ErrorText fontSize={{ base: 'sm', md: 'lg' }}>
+                            {errors.knowledge}
+                          </Field.ErrorText>
                         )}
                       </Field.Root>
 
