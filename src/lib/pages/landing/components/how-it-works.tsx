@@ -25,7 +25,7 @@ const steps = [
   {
     title: 'Receba sua recompensa',
     description:
-      'Para cada matrícula realizada através do seu link, você ganha R$ 50 de desconto em sua mensalidade e pontos para trocar por prêmios.',
+      'Para cada matrícula feita pelo seu link, você e seu filho ganham presentes exclusivos da Brio – um agradecimento especial por espalhar educação de qualidade!',
     icon: FaGift,
   },
 ];
