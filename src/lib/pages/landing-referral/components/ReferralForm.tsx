@@ -170,7 +170,7 @@ export const ReferralForm = ({
   };
 
   const defaultMessage =
-    'Olá, vim pelo site e gostaria de tirar algumas dúvidas sobre o Reforço On-line da Brio!';
+    'Olá! Fui indicado para a Brio e recebi um cupom de R$ 50. Quero saber mais!';
   const whatsappUrl = generateWhatsAppLink(defaultMessage);
 
   return (

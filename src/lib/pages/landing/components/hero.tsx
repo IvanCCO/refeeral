@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
   HStack,
+  Mark,
   Stack,
   Text,
 } from '@chakra-ui/react';
@@ -124,11 +125,20 @@ export const Hero = () => {
                   maxW="2xl"
                   mx="auto"
                   mt={6}
+                  position="relative"
                 >
                   Ajude outras famílias a conhecerem o reforço escolar on-line
                   mais querido do Brasil. A cada novo aluno matriculado por sua
-                  indicação, você recebe um presente exclusivo, e quem você
-                  indicar ainda ganha R$ 50 de desconto na matrícula!
+                  indicação, você recebe um{' '}
+                  <Mark
+                    position="relative"
+                    zIndex={1}
+                    className="pen-highlight"
+                  >
+                    presente exclusivo
+                  </Mark>
+                  , e quem você indicar ainda ganha R$ 50 de desconto na
+                  matrícula!
                 </Text>
                 <HStack gap={4} justify="center">
                   <Button
@@ -236,6 +246,42 @@ export const Hero = () => {
 
           .rotating-text-marker {
             animation: markerColorChange 8s infinite;
+          }
+
+          .pen-highlight {
+            background: transparent !important;
+          }
+
+          .pen-highlight::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            background-color: var(--chakra-colors-yellow-400);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: highlightText 3s infinite;
+          }
+
+          @keyframes highlightText {
+            0% {
+              transform: scaleX(0);
+              transform-origin: left;
+            }
+            50% {
+              transform: scaleX(1);
+              transform-origin: left;
+            }
+            50.1% {
+              transform-origin: right;
+            }
+            100% {
+              transform: scaleX(0);
+              transform-origin: right;
+            }
           }
 
           @keyframes markerColorChange {
