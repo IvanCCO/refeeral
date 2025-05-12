@@ -11,20 +11,19 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { FaCheck, FaWhatsapp } from 'react-icons/fa';
+import { generateWhatsAppLink } from '@/utils/commons';
 
 interface CTAProps {
   referralCode: string | null;
 }
 
 export const CTA = ({ referralCode }: CTAProps) => {
+  const defaultMessage =
+    'Olá, vim pelo site e gostaria de tirar algumas dúvidas sobre o Reforço On-line da Brio!';
+
   const handleWhatsAppClick = () => {
-    window.open(
-      `https://wa.me/?text=${encodeURIComponent(
-        'Olá! Gostaria de saber mais sobre o serviço.'
-      )}`,
-      '_blank',
-      'noopener,noreferrer'
-    );
+    const whatsappUrl = generateWhatsAppLink(defaultMessage);
+    window.open(whatsappUrl, '_blank');
   };
 
   return (

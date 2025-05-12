@@ -21,7 +21,7 @@ import { affiliateSchema, type AffiliateInput } from '@/utils/validations';
 import { ZodError } from 'zod';
 import { FaWhatsapp } from 'react-icons/fa';
 
-const WHATSAPP_SHARE_MESSAGE = 'Confira meu link de afiliado:';
+const WHATSAPP_SHARE_MESSAGE = 'Confira meu link de parceiro:';
 
 type FormErrors = {
   [K in keyof AffiliateInput]?: string;
@@ -98,7 +98,7 @@ export const AffiliateForm = () => {
           });
           return;
         }
-        throw new Error(data.message || 'Erro ao gerar link de afiliado');
+        throw new Error(data.message || 'Erro ao gerar link de parceiro');
       }
 
       setAffiliateLink(data.affiliateLink);
@@ -112,7 +112,7 @@ export const AffiliateForm = () => {
 
       toaster.success({
         title: 'Sucesso!',
-        description: 'Link de afiliado gerado com sucesso!',
+        description: 'Link de parceiro gerado com sucesso!',
         duration: 5000,
         meta: { closable: true },
       });
@@ -122,7 +122,7 @@ export const AffiliateForm = () => {
         description:
           error instanceof Error
             ? error.message
-            : 'Erro ao gerar link de afiliado',
+            : 'Erro ao gerar link de parceiro',
         duration: 5000,
         meta: { closable: true },
       });
@@ -187,7 +187,7 @@ export const AffiliateForm = () => {
                   Dados de Contato
                 </Fieldset.Legend>
                 <Fieldset.HelperText fontSize={{ base: 'sm', md: 'lg' }}>
-                  Preencha seus dados para receber seu link de afiliado.
+                  Preencha seus dados para receber seu link de parceiro.
                 </Fieldset.HelperText>
               </Stack>
 
@@ -241,7 +241,7 @@ export const AffiliateForm = () => {
                     loadingText="Gerando link..."
                     fontSize={{ base: 'sm', md: 'lg' }}
                   >
-                    Gerar Link de Afiliado
+                    Gerar Link de Parceiro
                   </Button>
                 </Stack>
               </Fieldset.Content>
@@ -270,7 +270,7 @@ export const AffiliateForm = () => {
             >
               <Stack gap={3}>
                 <Text fontWeight="bold" color="green.700">
-                  Seu link de afiliado está pronto!
+                  Seu link de parceiro está pronto!
                 </Text>
                 <Clipboard.Root value={affiliateLink}>
                   <HStack

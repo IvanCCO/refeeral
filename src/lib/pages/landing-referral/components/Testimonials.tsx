@@ -25,24 +25,24 @@ interface Testimonial {
 const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    name: 'Vitor Gabriel',
-    role: 'Aluno',
+    name: 'Layla',
+    role: 'Mãe do Miguel (8º ano)',
     content:
-      'Estou na semana de prova e a BRIO está me ajudando muito! Estou tirando notas muito boas! A menor foi 8,8!',
+      'A Brio tem importância fundamental para pais como eu. O Miguel criou autonomia e eu fico tranquila porque não preciso mais sair do trabalho para levá-lo a aulas presenciais. É uma ferramenta maravilhosa!',
   },
   {
     id: 2,
     name: 'Márcia',
-    role: 'Tia de aluna do aluna do 6º ano',
+    role: 'Tia de aluna do (6º ano)',
     content:
       'Em 4 semanas ela melhorou muito com o reforço da BRIO! Agora ela anda com as próprias pernas! Até o momento só tenho a agradecer, vocês não fazem ideia como estão me ajudando!',
   },
   {
     id: 3,
-    name: 'Carla',
-    role: 'Mãe de aluna do 7º ano',
+    name: 'Elizângela',
+    role: 'Mãe da Eliza (5º ano)',
     content:
-      'Gostamos muito do reforço da BRIO! Foi fundamental para o aprendizado da Alice!',
+      'Um suporte completo e humanizado. A Brio despertou na Eliza o gosto pelos estudos com uma didática que valoriza também o emocional e o sentido dos estudos na vida.',
   },
 ];
 

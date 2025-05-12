@@ -59,3 +59,13 @@ export function getBaseUrl() {
   // Fallback for development
   return process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
 }
+
+/**
+ * Generates a WhatsApp URL with the Brio contact number and custom message
+ * @param message The message to send via WhatsApp
+ * @returns Formatted WhatsApp URL
+ */
+export function generateWhatsAppLink(message: string): string {
+  const WHATSAPP_NUMBER = '5511954602091';
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}

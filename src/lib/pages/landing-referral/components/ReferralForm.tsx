@@ -22,6 +22,7 @@ import { FaWhatsapp, FaShoppingCart } from 'react-icons/fa';
 import { referralFormSchema, ReferralFormInput } from '@/utils/validations';
 import { Affiliate } from './ReferralTracking';
 import { z } from 'zod';
+import { generateWhatsAppLink } from '@/utils/commons';
 
 type FormErrors = {
   [K in keyof ReferralFormInput]?: string;
@@ -168,8 +169,9 @@ export const ReferralForm = ({
     }
   };
 
-  const WHATSAPP_NUMBER = 'SEUNUMERODOWHATSAPP';
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}`;
+  const defaultMessage =
+    'Olá, vim pelo site e gostaria de tirar algumas dúvidas sobre o Reforço On-line da Brio!';
+  const whatsappUrl = generateWhatsAppLink(defaultMessage);
 
   return (
     <Box
@@ -335,7 +337,7 @@ export const ReferralForm = ({
                         )}
                         {affiliate?.name && (
                           <Field.HelperText fontSize={{ base: 'sm', md: 'lg' }}>
-                            Você foi indicado por este afiliado
+                            Você foi indicado por este parceiro
                           </Field.HelperText>
                         )}
                       </Field.Root>

@@ -1,12 +1,30 @@
 import { Flex, HStack, Link, Image } from '@chakra-ui/react';
 import { scrollToSmoothly } from '../../../utils/commons';
+import { usePathname } from 'next/navigation';
 
 export const Header = () => {
-  const navItems = [
-    { name: 'Como funciona', href: '#how-it-works', id: 'how-it-works' },
-    { name: 'Prêmios', href: '#prizes-section', id: 'prizes-section' },
-    { name: 'Indique', href: '#affiliate-form', id: 'affiliate-form' },
-  ];
+  const pathname = usePathname();
+  const isReferralPage = pathname?.includes('/referral');
+
+  const navItems = isReferralPage
+    ? [
+        {
+          name: 'O que é a Brio?',
+          href: '#features-section',
+          id: 'features-section',
+        },
+        {
+          name: 'Depoimentos',
+          href: '#testimonials-section',
+          id: 'testimonials-section',
+        },
+        { name: 'FAQ', href: '#faq-section', id: 'faq-section' },
+      ]
+    : [
+        { name: 'Como funciona', href: '#how-it-works', id: 'how-it-works' },
+        { name: 'Prêmios', href: '#prizes-section', id: 'prizes-section' },
+        { name: 'Indique', href: '#affiliate-form', id: 'affiliate-form' },
+      ];
 
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,

@@ -52,20 +52,28 @@ export const ReferralLandingPage = () => {
       {/* Hero Section */}
       <Hero referralCode={referralCode} />
 
-      {/* Scroll Features Section */}
-      <ScrollFeatures />
+      {/* Scroll Features Section with ID for navigation */}
+      <Box id="features-section">
+        <ScrollFeatures />
+      </Box>
 
-      {/* Testimonials Section */}
-      <Testimonials />
+      {/* Testimonials Section with ID for navigation */}
+      <Box id="testimonials-section">
+        <Testimonials />
+      </Box>
 
-      {/* Referral Form */}
-      <ReferralForm referralCode={referralCode} affiliate={affiliate} />
+      {/* Referral Form with ID for navigation */}
+      <Box id="referral-form-section">
+        <ReferralForm referralCode={referralCode} affiliate={affiliate} />
+      </Box>
 
       {/* CTA Section */}
       <CTA referralCode={referralCode} />
 
       {/* FAQ Section */}
-      <FAQ />
+      <Box id="faq-section">
+        <FAQ />
+      </Box>
     </Box>
   );
 };

@@ -24,6 +24,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
       py={{ base: 16, md: 24 }}
       position="relative"
       overflow="hidden"
+      borderRadius="2xl"
     >
       {/* Background pattern */}
       <Box
