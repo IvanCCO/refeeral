@@ -11,13 +11,7 @@ import {
   AspectRatio,
 } from '@chakra-ui/react';
 import { useRef, useEffect, useState, RefObject } from 'react';
-import {
-  FaBook,
-  FaChartLine,
-  FaGift,
-  FaHandshake,
-  FaMedal,
-} from 'react-icons/fa';
+import { FaBook, FaGift, FaHandshake, FaMedal } from 'react-icons/fa';
 import { IconType } from 'react-icons';
 
 // Define the feature content structure
@@ -94,7 +88,13 @@ interface FeatureCardProps {
 }
 
 // Feature card component
-const FeatureCard = ({ title, description, icon, image, index }: FeatureCardProps) => {
+const FeatureCard = ({
+  title,
+  description,
+  icon,
+  image,
+  index,
+}: FeatureCardProps) => {
   const [ref, isInView] = useInView({ threshold: 0.1, triggerOnce: true });
   const isEven = index % 2 === 0;
 
@@ -142,15 +142,15 @@ const FeatureCard = ({ title, description, icon, image, index }: FeatureCardProp
           borderRadius="xl"
           overflow="hidden"
           boxShadow="lg"
-          height={index === 0 ? "auto" : { base: '200px', md: '300px' }}
+          height={index === 0 ? 'auto' : { base: '200px', md: '300px' }}
         >
           {index === 0 ? (
-            <AspectRatio ratio={16/9} width="100%">
-              <iframe 
-                title="Aulas de qualidade" 
-                src="https://player.vimeo.com/video/1074450668?h=022b96956d" 
-                width="100%" 
-                height="100%" 
+            <AspectRatio ratio={16 / 9} width="100%">
+              <iframe
+                title="Aulas de qualidade"
+                src="https://player.vimeo.com/video/1074450668?h=022b96956d"
+                width="100%"
+                height="100%"
                 allowFullScreen
                 style={{
                   position: 'absolute',
@@ -158,7 +158,7 @@ const FeatureCard = ({ title, description, icon, image, index }: FeatureCardProp
                   left: 0,
                   width: '100%',
                   height: '100%',
-                  border: 0
+                  border: 0,
                 }}
               />
             </AspectRatio>
@@ -199,7 +199,7 @@ export const ScrollFeatures = () => {
   });
 
   return (
-    <Box id="features" py={{ base: 16, md: 24 }} bg="gray.50" >
+    <Box id="features" py={{ base: 16, md: 24 }}>
       <Container maxW="container.xl">
         <Stack gap={16}>
           <Stack

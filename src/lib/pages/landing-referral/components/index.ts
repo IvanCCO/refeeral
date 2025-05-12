@@ -6,6 +6,7 @@ export * from './ReferralTracking';
 export * from './ReferralForm';
 export * from './FAQ';
 export * from './ScrollFeatures';
+export * from './Testimonials';
 
 // Type Exports
 export interface Affiliate {

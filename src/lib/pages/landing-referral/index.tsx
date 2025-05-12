@@ -11,6 +11,7 @@ import {
   Affiliate,
   FAQ,
   ScrollFeatures,
+  Testimonials,
 } from './components';
 
 export const dynamic = 'force-dynamic';
@@ -40,10 +41,8 @@ export const ReferralLandingPage = () => {
     []
   );
 
-  const bgColor = 'var(--chakra-colors-gray-50)';
-
   return (
-    <Box bg={bgColor} minH="100vh">
+    <Box minH="100vh">
       {/* Invisible component that handles tracking */}
       <ReferralTracking
         referralCode={referralCode}
@@ -55,6 +54,9 @@ export const ReferralLandingPage = () => {
 
       {/* Scroll Features Section */}
       <ScrollFeatures />
+
+      {/* Testimonials Section */}
+      <Testimonials />
 
       {/* Referral Form */}
       <ReferralForm referralCode={referralCode} affiliate={affiliate} />
