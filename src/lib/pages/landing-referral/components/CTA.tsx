@@ -19,7 +19,7 @@ interface CTAProps {
 
 export const CTA = ({ referralCode }: CTAProps) => {
   const defaultMessage =
-    'Olá, vim pelo site e gostaria de tirar algumas dúvidas sobre o Reforço On-line da Brio!';
+    'Olá, vim pelo site por indicação e gostaria de tirar algumas dúvidas sobre o Reforço On-line da Brio!';
 
   const handleWhatsAppClick = () => {
     const whatsappUrl = generateWhatsAppLink(defaultMessage);
