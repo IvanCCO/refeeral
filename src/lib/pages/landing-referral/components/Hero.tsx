@@ -121,7 +121,7 @@ export const Hero = ({ referralCode }: HeroProps) => {
               boxShadow="2xl"
             >
               <iframe
-                src={`https://www.youtube.com/watch?v=_4olxbr86Jc`}
+                src={`https://www.youtube.com/embed/_4olxbr86Jc?si=2ZSf63fhnKgPquP4`}
                 title="Brio Educação Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
