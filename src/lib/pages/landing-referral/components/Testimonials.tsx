@@ -7,49 +7,46 @@ import {
   Heading,
   Text,
   Flex,
-  IconButton,
-  Image,
+  SimpleGrid,
   Stack,
+  Icon,
+  useBreakpointValue,
 } from '@chakra-ui/react';
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { FaQuoteLeft } from 'react-icons/fa';
 
 interface Testimonial {
   id: number;
   name: string;
   role: string;
-  image: string;
   content: string;
 }
 
-// Sample testimonials data - replace with real data when available
+// Expanded testimonials data
 const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
-    name: 'Ana Silva',
-    role: 'Mãe de aluno do 8º ano',
-    image: '/testimonial1.jpg',
+    name: 'Sarah',
+    role: 'Parent',
     content:
-      'Com o programa de estudos personalizado, meu filho melhorou suas notas em mais de 40% em apenas 3 meses. O suporte dos professores fez toda a diferença!',
+      'Safe space for open talks about mental health with my teen. Resources helped us understand, meditations became a calming family activity.',
   },
   {
     id: 2,
-    name: 'Carlos Mendes',
-    role: 'Pai de aluno do 5º ano',
-    image: '/testimonial2.jpg',
+    name: 'Darlene',
+    role: 'Office Going Mom',
     content:
-      'Minha filha estava com dificuldades em matemática, e as aulas personalizadas ajudaram a superar isso. Ela agora ama resolver problemas matemáticos!',
+      'Anonymous chat saved me during work overwhelm. Talked to someone who understood, gained perspective.',
   },
   {
     id: 3,
-    name: 'Mariana Costa',
-    role: 'Mãe de aluna do 7º ano',
-    image: '/testimonial3.jpg',
+    name: 'Maria',
+    role: 'Senior Citizen',
     content:
-      'O cronograma de estudos foi essencial para organizar a rotina da minha filha. Ela consegue estudar para as provas sem estresse de última hora.',
+      'Easy interface perfect for beginners! Variety of resources kept me engaged, felt mentally sharp & connected.',
   },
 ];
 
-// Custom hook for intersection observer (similar to the one in ScrollFeatures)
+// Custom hook for intersection observer
 const useInView = (options = {}): [RefObject<HTMLDivElement>, boolean] => {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
@@ -76,69 +73,51 @@ const useInView = (options = {}): [RefObject<HTMLDivElement>, boolean] => {
 };
 
 // Testimonial Card Component
-const TestimonialCard = ({
-  testimonial,
-  isActive = false,
-}: {
-  testimonial: Testimonial;
-  isActive?: boolean;
-}) => {
-  // Random height between 200px and 300px for the image
-  const imageHeight = useRef(Math.floor(Math.random() * (300 - 200 + 1)) + 200);
-
+const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
   return (
     <Box
       bg="white"
       borderRadius="lg"
-      boxShadow={isActive ? 'xl' : 'md'}
-      maxW="550px"
-      mx="auto"
-      overflow="hidden"
-      position="relative"
-      transform={isActive ? 'scale(1)' : 'scale(0.85)'}
-      transition="all 0.4s ease"
-      opacity={isActive ? 1 : 0.8}
+      boxShadow="md"
+      p={6}
       height="100%"
+      display="flex"
+      flexDirection="column"
+      position="relative"
+      overflow="hidden"
+      minW={{ base: '75vw', md: 'auto' }}
+      mx={{ base: 2, md: 0 }}
+      flex={{ base: '0 0 auto', md: '1 1 auto' }}
     >
-      {/* Dark overlay for non-active cards */}
-      {!isActive && (
-        <Box
-          position="absolute"
-          top="0"
-          left="0"
-          right="0"
-          bottom="0"
-          bg="rgba(0, 0, 0, 0.5)"
-          backdropFilter="blur(3px)"
-          zIndex={2}
-          transition="all 0.3s ease"
-        />
-      )}
+      {/* Quote icon */}
+      <Icon
+        as={FaQuoteLeft}
+        color="blue.100"
+        boxSize={8}
+        position="absolute"
+        top={2}
+        left={4}
+        zIndex={0}
+      />
 
-      {/* Full-width image */}
-      <Box
-        width="100%"
-        height={`${imageHeight.current}px`}
+      {/* Testimonial content */}
+      <Text
+        fontSize="md"
+        color="gray.700"
+        mb={4}
+        fontStyle="italic"
         position="relative"
-        overflow="hidden"
+        zIndex={1}
+        pt={6}
       >
-        <Image
-          src={testimonial.image}
-          alt={testimonial.name}
-          objectFit="cover"
-          width="100%"
-          height="100%"
-        />
-      </Box>
+        {testimonial.content}
+      </Text>
 
-      {/* Content */}
-      <Box p={6} textAlign="left">
-        <Text fontSize="md" color="gray.700" mb={4} fontStyle="italic">
-          &quot;{testimonial.content}&quot;
+      {/* Footer with name and role */}
+      <Box mt="auto" textAlign="left">
+        <Text fontWeight="bold" fontSize="md" display="block">
+          ~ {testimonial.name}
         </Text>
-        <Heading as="h3" fontSize="lg" mb={1}>
-          {testimonial.name}
-        </Heading>
         <Text color="gray.600" fontSize="sm">
           {testimonial.role}
         </Text>
@@ -148,33 +127,59 @@ const TestimonialCard = ({
 };
 
 export const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [headerRef, headerInView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const isMobile = useBreakpointValue({ base: true, md: false });
 
-  const nextTestimonial = () => {
-    setCurrentIndex((prev) =>
-      prev === TESTIMONIALS.length - 1 ? 0 : prev + 1
-    );
-  };
+  // Update scroll position when currentIndex changes
+  useEffect(() => {
+    if (!isMobile || !carouselRef.current) return;
 
-  const prevTestimonial = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? TESTIMONIALS.length - 1 : prev - 1
-    );
-  };
+    const scrollToIndex = () => {
+      const cardWidth =
+        carouselRef.current?.querySelector('div')?.offsetWidth || 0;
+      const scrollPosition = currentIndex * (cardWidth + 16); // 16px is the gap
 
-  // Calculate previous and next indices
-  const prevIndex =
-    currentIndex === 0 ? TESTIMONIALS.length - 1 : currentIndex - 1;
-  const nextIndex =
-    currentIndex === TESTIMONIALS.length - 1 ? 0 : currentIndex + 1;
+      carouselRef.current?.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth',
+      });
+    };
+
+    scrollToIndex();
+  }, [currentIndex, isMobile]);
+
+  // Update currentIndex when scrolling manually
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel || !isMobile) return;
+
+    const handleScroll = () => {
+      const cardWidth = carousel.querySelector('div')?.offsetWidth || 0;
+      const totalWidth = cardWidth + 16; // 16px is the gap
+      const scrollPosition = carousel.scrollLeft;
+
+      const newIndex = Math.round(scrollPosition / totalWidth);
+      if (
+        newIndex !== currentIndex &&
+        newIndex >= 0 &&
+        newIndex < TESTIMONIALS.length
+      ) {
+        setCurrentIndex(newIndex);
+      }
+    };
+
+    carousel.addEventListener('scroll', handleScroll);
+    return () => carousel.removeEventListener('scroll', handleScroll);
+  }, [currentIndex, isMobile, TESTIMONIALS.length]);
 
   return (
     <Box py={16}>
-      <Container maxW="container.xl" position="relative">
+      <Container maxW="container.xl">
         <Stack
           gap={4}
           textAlign="center"
@@ -189,122 +194,62 @@ export const Testimonials = () => {
             fontSize={{ base: '3xl', md: '4xl' }}
             fontWeight="bold"
           >
-            O que nossos clientes dizem
+            O que os pais estão falando
           </Heading>
-          <Text
-            fontSize={{ base: 'md', md: 'lg' }}
-            color="gray.600"
-            maxW="800px"
-            mx="auto"
-          >
-            Confira os depoimentos de pais e responsáveis que viram seus filhos
-            evoluírem com nossa plataforma
-          </Text>
         </Stack>
 
-        <Flex
-          align="center"
-          justify="center"
-          position="relative"
-          width="100%"
-          py={8}
-          minH="500px"
-        >
-          <IconButton
-            aria-label="Anterior"
-            onClick={prevTestimonial}
-            position="absolute"
-            left={{ base: 0, md: '5%' }}
-            zIndex={5}
-            borderRadius="full"
-            size="lg"
-            colorScheme="blue"
-            variant="solid"
-          >
-            <FaChevronLeft />
-          </IconButton>
+        {/* Desktop view: Grid layout for testimonials */}
+        {!isMobile && (
+          <SimpleGrid columns={3} gap={8}>
+            {TESTIMONIALS.map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+            ))}
+          </SimpleGrid>
+        )}
 
-          {/* Carousel with preview of adjacent cards */}
-          <Flex
-            width="100%"
-            justifyContent="center"
-            alignItems="center"
-            overflow="hidden"
-            position="relative"
-            px={{ base: 4, md: '10%' }}
-          >
-            {/* Previous Card (Preview) */}
-            <Box
-              position="absolute"
-              left={{ base: '10%', md: '30%' }}
-              width={{ base: '60%', md: '30%' }}
-              zIndex={1}
-              transform="translateX(-50%)"
-              opacity={{ base: 0, md: 1 }}
-              display={{ base: 'none', md: 'block' }}
+        {/* Mobile view: Horizontal scrolling carousel */}
+        {isMobile && (
+          <Box position="relative" mb={10} mt={4}>
+            <Flex
+              ref={carouselRef}
+              overflowX="auto"
+              gap={4}
+              pb={10}
+              scrollSnapType="x mandatory"
+              scrollBehavior="smooth"
+              css={{
+                scrollbarWidth: 'none',
+                '::-webkit-scrollbar': { display: 'none' },
+              }}
             >
-              <TestimonialCard
-                testimonial={TESTIMONIALS[prevIndex]}
-                isActive={false}
-              />
-            </Box>
+              {TESTIMONIALS.map((testimonial) => (
+                <Box
+                  key={testimonial.id}
+                  scrollSnapAlign="center"
+                  height="auto"
+                >
+                  <TestimonialCard testimonial={testimonial} />
+                </Box>
+              ))}
+            </Flex>
 
-            {/* Current Card */}
-            <Box width={{ base: '100%', md: '40%' }} zIndex={3} mx="auto">
-              <TestimonialCard
-                testimonial={TESTIMONIALS[currentIndex]}
-                isActive={true}
-              />
-            </Box>
-
-            {/* Next Card (Preview) */}
-            <Box
-              position="absolute"
-              right={{ base: '10%', md: '30%' }}
-              width={{ base: '60%', md: '30%' }}
-              zIndex={1}
-              transform="translateX(50%)"
-              opacity={{ base: 0, md: 1 }}
-              display={{ base: 'none', md: 'block' }}
-            >
-              <TestimonialCard
-                testimonial={TESTIMONIALS[nextIndex]}
-                isActive={false}
-              />
-            </Box>
-          </Flex>
-
-          <IconButton
-            aria-label="Próximo"
-            onClick={nextTestimonial}
-            position="absolute"
-            right={{ base: 0, md: '5%' }}
-            zIndex={5}
-            borderRadius="full"
-            size="lg"
-            colorScheme="blue"
-            variant="solid"
-          >
-            <FaChevronRight />
-          </IconButton>
-        </Flex>
-
-        {/* Dots indicator */}
-        <Flex justify="center" mt={6}>
-          {TESTIMONIALS.map((_, index) => (
-            <Box
-              key={index}
-              w={2}
-              h={2}
-              mx={1}
-              borderRadius="full"
-              bg={currentIndex === index ? 'blue.500' : 'gray.300'}
-              cursor="pointer"
-              onClick={() => setCurrentIndex(index)}
-              transition="all 0.2s"
-            />
-          ))}
-        </Flex>
+            {/* Dots indicator */}
+            <Flex justify="center" mt={4}>
+              {TESTIMONIALS.map((_, index) => (
+                <Box
+                  key={index}
+                  w={2}
+                  h={2}
+                  mx={1}
+                  borderRadius="full"
+                  bg={currentIndex === index ? 'blue.500' : 'gray.300'}
+                  cursor="pointer"
+                  onClick={() => setCurrentIndex(index)}
+                />
+              ))}
+            </Flex>
+          </Box>
+        )}
       </Container>
     </Box>
   );

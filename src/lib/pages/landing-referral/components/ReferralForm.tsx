@@ -181,7 +181,7 @@ export const ReferralForm = ({
       width="100%"
     >
       <Container
-        maxW={{ base: '95%', sm: '85%', md: 'container.md' }}
+        maxW={{ base: '100%', sm: '85%', md: 'container.md' }}
         display="flex"
         flexDirection="column"
         alignItems="center"
@@ -200,28 +200,6 @@ export const ReferralForm = ({
               de R$50 na primeira mensalidade.
             </Text>
           </VStack>
-
-          <Link
-            href="https://www.brioeduca.com/anosletivosplanodiamante"
-            target="_blank"
-            rel="noopener noreferrer"
-            _hover={{ textDecoration: 'none' }}
-            w="full"
-          >
-            <Button
-              colorPalette="yellow"
-              size="lg"
-              w="full"
-              fontWeight="bold"
-              py={6}
-              display="flex"
-              alignItems="center"
-              gap={2}
-            >
-              <Icon as={FaShoppingCart} />
-              Matricule-se agora
-            </Button>
-          </Link>
 
           <Box w="full" pt={6}>
             {!isSubmitted && (
@@ -274,6 +252,28 @@ export const ReferralForm = ({
                     Use este código ao finalizar sua matrícula
                   </Text>
                 </Box>
+
+                <Link
+                  href="https://www.brioeduca.com/anosletivosplanodiamante"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  _hover={{ textDecoration: 'none' }}
+                  w="full"
+                >
+                  <Button
+                    colorPalette="yellow"
+                    size="lg"
+                    w="full"
+                    fontWeight="bold"
+                    py={6}
+                    display="flex"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    <Icon as={FaShoppingCart} />
+                    Matricule-se agora
+                  </Button>
+                </Link>
 
                 <Text textAlign="center" fontSize="md">
                   Ainda está com dúvidas?

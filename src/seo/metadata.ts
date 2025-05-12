@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 const APP_NAME = 'Brio Educação | Indicação';
 const APP_DESCRIPTION =
   'Indique amigos e ganhe recompensas exclusivas com nosso programa de indicações';
-const BASE_URL = 'https://www.brioeducaindica.com.br/referral';
+const BASE_URL = 'https://www.brioeducaindica.com.br';
 
 export const defaultMetadata: Metadata = {
   title: {
@@ -45,7 +45,9 @@ export const defaultMetadata: Metadata = {
     title: APP_NAME,
     description: APP_DESCRIPTION,
     creator: '@refeeral',
-    images: ['/images/twitter-image.jpg'],
+    images: [
+      'https://kindle2notion.s3.us-east-2.amazonaws.com/defaults/brio-link-preview.png',
+    ],
   },
   robots: {
     index: true,
