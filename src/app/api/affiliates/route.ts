@@ -37,6 +37,7 @@ export async function POST(req: Request) {
     await Afiliado.create({
       name: validatedData.name,
       phone: validatedData.phone,
+      from: validatedData.from,
       linkId: linkId,
     });
 

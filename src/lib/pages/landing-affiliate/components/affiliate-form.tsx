@@ -32,7 +32,7 @@ export const AffiliateForm = () => {
   const [formData, setFormData] = useState<AffiliateInput>({
     name: '',
     phone: '',
-    from: 'landing-partner',
+    from: 'landing-affiliate',
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [isLoading, setIsLoading] = useState(false);

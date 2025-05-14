@@ -9,6 +9,7 @@ export const affiliateSchema = z.object({
     .string()
     .min(1, 'Telefone é obrigatório')
     .regex(phoneRegex, 'Formato de telefone inválido'),
+  from: z.string().min(1, 'Origem é obrigatório'),
 });
 
 export type AffiliateInput = z.infer<typeof affiliateSchema>;

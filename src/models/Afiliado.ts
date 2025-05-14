@@ -5,6 +5,7 @@ export interface IAfiliado extends Document {
   name: string;
   phone: string;
   linkId: string;
+  from: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -21,6 +22,10 @@ const AfiliadoSchema = new Schema<IAfiliado>(
       required: true,
     },
     linkId: {
+      type: String,
+      required: true,
+    },
+    from: {
       type: String,
       required: true,
     },
