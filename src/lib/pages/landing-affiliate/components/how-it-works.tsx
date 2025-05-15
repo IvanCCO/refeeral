@@ -25,7 +25,7 @@ const steps = [
   {
     title: 'Receba sua recompensa',
     description:
-      'Para cada matrícula feita pelo seu link, você e seu filho ganham presentes exclusivos da Brio – um agradecimento especial por espalhar educação de qualidade!',
+      'Para cada matrícula feita pelo seu link, você e seu filho ganham recompensas da Brio – um agradecimento especial por espalhar educação de qualidade!',
     icon: FaGift,
   },
 ];
