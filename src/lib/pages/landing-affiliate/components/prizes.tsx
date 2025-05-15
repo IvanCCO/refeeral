@@ -27,26 +27,26 @@ const prizes: PrizeItem[] = [
   {
     id: 1,
     indicacao: 'Indicação',
-    title: 'Caneca Brio',
-    description: 'Ganhe 1 Caneca personalizada Brio',
+    title: 'Desconto Brio',
+    description: 'Você ganha R$ 150,00 de desconto na matrícula.',
     imageUrl: '/Canecas3.png',
     referrals: 1,
   },
   {
     id: 2,
     indicacao: 'Indicações',
-    title: 'Camiseta Brio',
+    title: 'Desconto Brio ou Dinheiro',
     description:
-      'Ganhe 1 Camiseta Brio (design exclusivo) + 1 Kit de canetas coloridas + 1 marcador de texto + 1 Adesivo de motivação',
+      'Você pode escolher entre R$ 300,00 de desconto na matrícula ou R$ 100,00 em dinheiro.',
     imageUrl: '/indica2.png',
     referrals: 2,
   },
   {
     id: 3,
     indicacao: 'Indicações',
-    title: 'Headphone',
+    title: 'Desconto Brio ou Dinheiro',
     description:
-      'Ganhe 1 Headphone para estudo  + 1 Caderno de anotações da Brio + 1 Vale-presente Google Play ou Apple Store no valor de R$ 100,00',
+      'Você escolhe entre R$ 400,00 de desconto na matrícula ou R$ 200,00 em dinheiro.',
     imageUrl: '/indica3.png',
     referrals: 3,
   },
