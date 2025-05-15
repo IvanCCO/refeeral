@@ -81,7 +81,9 @@ export const Hero = () => {
                 >
                   Isso mesmo: mesmo que o seu filho ainda não esteja matriculado, você pode indicar a Brio e receber recompensas de verdade.
                   A cada nova matrícula feita or sua indicação, você escolhe:
+
                   💸 Dinheiro direto no PIX ou até R$ 400,00 de desconto na matrícula do seu filho.
+                  
                   👉 Quanto mais você indica, mais você ganha. Comece agora!{' '}
                   <Mark
                     position="relative"
