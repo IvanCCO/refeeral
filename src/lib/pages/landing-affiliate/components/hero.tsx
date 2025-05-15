@@ -79,9 +79,10 @@ export const Hero = () => {
                   mt={6}
                   position="relative"
                 >
-                  Ajude outras famílias a conhecerem o reforço escolar on-line
-                  mais querido do Brasil. A cada novo aluno matriculado por sua
-                  indicação, você recebe um{' '}
+                  Isso mesmo: mesmo que o seu filho ainda não esteja matriculado, você pode indicar a Brio e receber recompensas de verdade.
+                  A cada nova matrícula feita or sua indicação, você escolhe:
+                  💸 Dinheiro direto no PIX ou até R$ 400,00 de desconto na matrícula do seu filho.
+                  👉 Quanto mais você indica, mais você ganha. Comece agora!{' '}
                   <Mark
                     position="relative"
                     zIndex={1}
