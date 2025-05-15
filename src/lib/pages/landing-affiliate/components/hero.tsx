@@ -22,9 +22,9 @@ const ReactRotatingText = dynamic(() => import('react-rotating-text'), {
 
 export const Hero = () => {
   const rotatingItems = [
-    '— Mesmo Sem Ser da Família Brio',
-    '— Mesmo Sem Ser da Família Brio',
-    '— Mesmo Sem Ser da Família Brio',
+    ' Mesmo Sem Ser da Família Brio',
+    ' Mesmo Sem Ser da Família Brio',
+    ' Mesmo Sem Ser da Família Brio',
   ];
 
   return (
@@ -48,7 +48,7 @@ export const Hero = () => {
                   fontSize={{ base: '3xl', md: '5xl', lg: '6xl', xl: '7xl' }}
                   textAlign="center"
                 >
-                  <Text as="span">💥 Indique a Brio e Ganhe  </Text>
+                  <Text as="span">💥 Indique a Brio e Ganhe -</Text>
                   {/* <br /> */}
                   <Box as="span" position="relative" display="inline-block">
                     <Text as="span" color="blue.600">
@@ -59,15 +59,6 @@ export const Hero = () => {
                         pause={3000}
                       />
                     </Text>
-                    <Box
-                      position="absolute"
-                      bottom="0px"
-                      left="0"
-                      right="0"
-                      height="6px"
-                      className="rotating-text-marker"
-                      bgGradient="linear(to-r, blue.500, green.500, purple.500, orange.500)"
-                    />
                   </Box>
                 </Heading>
 
@@ -79,16 +70,17 @@ export const Hero = () => {
                   mt={6}
                   position="relative"
                 >
-                  Isso mesmo: mesmo que o seu filho ainda não esteja matriculado, você pode indicar a Brio e receber recompensas de verdade.
-                  A cada nova matrícula feita or sua indicação, você escolhe:
-                  
-                  {' '}
+                  Isso mesmo: mesmo que o seu filho ainda não esteja
+                  matriculado, você pode indicar a Brio e receber recompensas de
+                  verdade. A cada nova matrícula feita or sua indicação, você
+                  escolhe:{' '}
                   <Mark
                     position="relative"
                     zIndex={1}
                     className="pen-highlight"
                   >
-                    💸 Dinheiro direto no PIX ou até R$ 400,00 de desconto na matrícula do seu filho.
+                    💸 Dinheiro direto no PIX ou até R$ 400,00 de desconto na
+                    matrícula do seu filho.
                   </Mark>
                   👉 Quanto mais você indica, mais você ganha. Comece agora!
                 </Text>
