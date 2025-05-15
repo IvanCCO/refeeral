@@ -22,13 +22,9 @@ const ReactRotatingText = dynamic(() => import('react-rotating-text'), {
 
 export const Hero = () => {
   const rotatingItems = [
-    'prêmios',
-    'vouchers',
-    'canecas',
-    'camisetas',
-    'cadernos',
-    'canetas',
-    'brindes',
+    'descontos',
+    'dinheiro',
+    'e muito mais',
   ];
 
   return (
