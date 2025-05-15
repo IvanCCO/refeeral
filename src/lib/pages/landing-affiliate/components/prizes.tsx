@@ -6,20 +6,22 @@ import {
   Grid,
   GridItem,
   Heading,
-  Image,
   Text,
   VStack,
   useBreakpointValue,
   Circle,
   Flex,
+  Icon,
 } from '@chakra-ui/react';
+import { FaPercent, FaWallet, FaMoneyBillWave } from 'react-icons/fa';
+import { IconType } from 'react-icons';
 
 interface PrizeItem {
   id: number;
   indicacao: string;
   title: string;
   description: string;
-  imageUrl: string;
+  icon: IconType;
   referrals: number;
 }
 
@@ -29,7 +31,7 @@ const prizes: PrizeItem[] = [
     indicacao: 'Indicação',
     title: 'Desconto',
     description: 'Você ganha R$ 150,00 de desconto na matrícula.',
-    imageUrl: '/Canecas3.png',
+    icon: FaPercent,
     referrals: 1,
   },
   {
@@ -38,7 +40,7 @@ const prizes: PrizeItem[] = [
     title: 'Desconto ou Dinheiro',
     description:
       'Você pode escolher entre R$ 300,00 de desconto na matrícula ou R$ 100,00 em dinheiro.',
-    imageUrl: '/indica2.png',
+    icon: FaWallet,
     referrals: 2,
   },
   {
@@ -47,7 +49,7 @@ const prizes: PrizeItem[] = [
     title: 'Desconto ou Dinheiro',
     description:
       'Você escolhe entre R$ 400,00 de desconto na matrícula ou R$ 200,00 em dinheiro.',
-    imageUrl: '/indica3.png',
+    icon: FaMoneyBillWave,
     referrals: 3,
   },
 ];
@@ -140,30 +142,14 @@ export const Prizes = () => {
                   flexShrink={0}
                   w="100%"
                   position="relative"
+                  bg="blue.50"
+                  borderRadius="lg"
                 >
-                  <Image
-                    src={prize.imageUrl}
-                    alt={`Prêmio para ${prize.referrals} ${prize.indicacao}`}
-                    borderRadius="lg"
-                    objectFit="cover"
-                    width="100%"
-                    height="100%"
-                    mx="auto"
+                  <Icon
+                    as={prize.icon}
+                    boxSize={{ base: '100px', sm: '120px', md: '150px' }}
+                    color="blue.500"
                   />
-                  <Box
-                    position="absolute"
-                    bottom="0"
-                    width="100%"
-                    bg="rgba(255, 255, 255, 0.8)"
-                    py={1}
-                    textAlign="center"
-                    fontSize={{ base: 'xs', md: 'sm' }}
-                    fontWeight="medium"
-                    color="gray.600"
-                    borderBottomRadius="lg"
-                  >
-                    Imagem ilustrativa
-                  </Box>
                 </Box>
                 <VStack
                   align="center"
