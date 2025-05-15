@@ -27,7 +27,7 @@ const prizes: PrizeItem[] = [
   {
     id: 1,
     indicacao: 'Indicação',
-    title: 'Desconto Brio',
+    title: 'Desconto',
     description: 'Você ganha R$ 150,00 de desconto na matrícula.',
     imageUrl: '/Canecas3.png',
     referrals: 1,
@@ -35,7 +35,7 @@ const prizes: PrizeItem[] = [
   {
     id: 2,
     indicacao: 'Indicações',
-    title: 'Desconto Brio ou Dinheiro',
+    title: 'Desconto ou Dinheiro',
     description:
       'Você pode escolher entre R$ 300,00 de desconto na matrícula ou R$ 100,00 em dinheiro.',
     imageUrl: '/indica2.png',
@@ -44,7 +44,7 @@ const prizes: PrizeItem[] = [
   {
     id: 3,
     indicacao: 'Indicações',
-    title: 'Desconto Brio ou Dinheiro',
+    title: 'Desconto ou Dinheiro',
     description:
       'Você escolhe entre R$ 400,00 de desconto na matrícula ou R$ 200,00 em dinheiro.',
     imageUrl: '/indica3.png',
