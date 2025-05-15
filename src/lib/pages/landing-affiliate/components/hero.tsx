@@ -22,9 +22,9 @@ const ReactRotatingText = dynamic(() => import('react-rotating-text'), {
 
 export const Hero = () => {
   const rotatingItems = [
-    '!',
-    '!',
-    '!',
+    '— Mesmo Sem Ser da Família Brio',
+    '— Mesmo Sem Ser da Família Brio',
+    '— Mesmo Sem Ser da Família Brio',
   ];
 
   return (
@@ -48,7 +48,7 @@ export const Hero = () => {
                   fontSize={{ base: '4xl', md: '6xl', lg: '7xl', xl: '8xl' }}
                   textAlign="center"
                 >
-                  <Text as="span">💥 Indique a Brio e Ganhe — Mesmo Sem Ser da Família Brio </Text>
+                  <Text as="span">💥 Indique a Brio e Ganhe  </Text>
                   {/* <br /> */}
                   <Box as="span" position="relative" display="inline-block">
                     <Text as="span" color="blue.600">
