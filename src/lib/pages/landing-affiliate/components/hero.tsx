@@ -45,7 +45,7 @@ export const Hero = () => {
                 <Heading
                   lineHeight={1.2}
                   fontWeight={700}
-                  fontSize={{ base: '4xl', md: '6xl', lg: '7xl', xl: '8xl' }}
+                  fontSize={{ base: '3xl', md: '5xl', lg: '6xl', xl: '7xl' }}
                   textAlign="center"
                 >
                   <Text as="span">💥 Indique a Brio e Ganhe  </Text>
@@ -125,7 +125,7 @@ export const Hero = () => {
                 <Heading
                   lineHeight={1.2}
                   fontWeight={700}
-                  fontSize="4xl"
+                  fontSize="3xl"
                   textAlign="center"
                 >
                   <Text as="span">Indique a Brio e ganhe </Text>
