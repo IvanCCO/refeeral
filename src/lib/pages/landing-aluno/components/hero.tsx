@@ -127,7 +127,7 @@ export const Hero = () => {
                   mt={6}
                   position="relative"
                 >
-                  Ajude outras famílias a conhecerem o reforço escolar on-line
+                  Ajude outros alunos a conhecerem o reforço escolar on-line
                   mais querido do Brasil. A cada novo aluno matriculado por sua
                   indicação, você recebe um{' '}
                   <Mark
